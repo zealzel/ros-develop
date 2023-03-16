@@ -7,14 +7,14 @@ echo Install turtlebot4
 echo ===========================
 sudo apt install ros-galactic-turtlebot4-desktop
 sudo apt install ros-galactic-turtlebot4-base \
-                 ros-galactic-turtlebot4-bringup \
-                 ros-galactic-turtlebot4-description \
-                 ros-galactic-turtlebot4-diagnostics \
-                 ros-galactic-turtlebot4-msgs \
-                 ros-galactic-turtlebot4-navigation \
-                 ros-galactic-turtlebot4-node \
-                 ros-galactic-turtlebot4-robot \
-                 ros-galactic-turtlebot4-tests
+  ros-galactic-turtlebot4-bringup \
+  ros-galactic-turtlebot4-description \
+  ros-galactic-turtlebot4-diagnostics \
+  ros-galactic-turtlebot4-msgs \
+  ros-galactic-turtlebot4-navigation \
+  ros-galactic-turtlebot4-node \
+  ros-galactic-turtlebot4-robot \
+  ros-galactic-turtlebot4-tests
 
 echo ===========================
 echo "Install gazebo (ignition)"

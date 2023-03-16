@@ -1,15 +1,10 @@
 #!/usr/bin/bash
 # Offical ROS2 Documentation: https://docs.ros.org/en/galactic/Installation/Ubuntu-Install-Debians.html
-# source utils.sh
+source utils.sh
 
 UBUNTU_CODENAME="focal"
 
-if [[ $(dpkg -L sudo) ]]; then
-  echo "sudo is installed"
-else
-  echo "sudo is not installed"
-  apt-get update; apt-get install -y sudo
-fi
+ensure_sudo
 sudo apt-get update && sudo apt-get install -y curl gnupg
 
 echo =======================
