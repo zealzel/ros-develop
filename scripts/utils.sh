@@ -10,7 +10,6 @@ idpt-append-sudo() {
   line="$1"
   file="$2"
   if ! grep -Fxq "$line" "$file"; then
-    # echo "$line" >>"$file"
     echo "$line" | sudo tee -a "$file"
   fi
 }
