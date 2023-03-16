@@ -1,16 +1,9 @@
 #!/bin/bash
 source utils.sh
 echo '================================'
-echo '        Install toolchains      '
+echo '          apt update            '
 echo '================================'
-
-if [[ $(dpkg -L sudo) ]]; then
-  echo "sudo is installed"
-else
-  echo "sudo is not installed"
-  apt-get update; apt-get install -y sudo
-fi
-sudo apt update && sudo apt install -y curl wget git unzip
+ensure_sudo && sudo apt update && sudo apt install -y curl wget git unzip
 
 echo '================================'
 echo '       Install neovim           '
