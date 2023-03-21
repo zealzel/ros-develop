@@ -34,8 +34,10 @@ echo ====================================================================
 echo Build additional ROS packages from source
 echo ====================================================================
 source1="https://github.com/ros/ros_tutorials"
-git clone "$source1" -b "$ROS_DISTRO-devel" "~/$WORKSPACE/src/ros_tutorials"
+package1_location="~/$WORKSPACE/src/ros_tutorials"
+git clone "$source1" -b "$ROS_DISTRO-devel" "$package1_location"
 cd "~/$WORKSPACE"
+# find $package1_location -type f -name "COLCON_IGNORE" -exec rm {} \;
 colcon build --symlink-install
 
 echo
