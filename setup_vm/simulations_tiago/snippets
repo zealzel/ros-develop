@@ -1,0 +1,22 @@
+
+# === Launch simluation with world models ===
+ros2 launch tiago_gazebo tiago_gazebo.launch.py world_name:=home arm:=no-arm
+ros2 launch tiago_gazebo tiago_gazebo.launch.py world_name:=factory arm:=no-arm
+ros2 launch tiago_gazebo tiago_gazebo.launch.py
+
+world models are in pal_gazebo_worlds/worlds
+-----
+aruco.world             dock_and_aruco.world     hit_table.world         pal_office.world             pick.world                        small_office.world           voronoi_graph.world
+ball.world              docker_chair.world       home.world              pal_textured_object.world    reemc_indoor.world                small_textured_office.world  willow_garage.world
+cabinet_grasping.world  dock_station.world       hospital_flat.world     passage_110cm.world          reemc.world                       socmcs.world                 world_wall_REEM_photo.world
+calibration_room.world  door_obstacle.world      hospital.world          passage_60cm.world           simple_office_with_people.world   stairs.world
+chairs.world            empty_room.world         look_to_point.world     passage_70cm.world           simple_office.world               stamping_demo.world
+corridor_110cm.world    empty.world              low_sun_empty.world     pg_demo.world                simple_ramp.world                 tabletop_cube.world
+corridor_60cm.world     factory.world            memmo_simple.world      pick_place_cabinet.world     small_factory.world               tabletop_cylinder.world
+corridor_70cm.world     featured.world           narrow_passage.world    pick_place_close_demo.world  small_office_door_obstacle.world  t_shaped.world
+corridor_85cm.world     footstep_obstacle.world  objects_on_table.world  pick_place_demo.world        small_office_inventory.world      tutorial_office.world
+
+# === teleop with remapping topic ===
+ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r cmd_vel:=key_vel
+
+
