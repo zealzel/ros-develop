@@ -14,4 +14,4 @@ ros_packages=(
   "ros-$ROS_DISTRO-gazebo-ros2-control"
 )
 
-install_ubuntu_packages "${catkin_packages[@]}"
+install_ubuntu_packages "${ros_packages[@]}"
