@@ -13,7 +13,13 @@ echo ====================================================================
 # package1_location="~/$WORKSPACE/src/ros_tutorials"
 # git clone "$source1" -b "$ROS_DISTRO-devel" "$package1_location"
 # cd "~/$WORKSPACE"
-cd $WORKSPACE || exit
+cd ~/$WORKSPACE || exit_code=$?
+if [ $exit_code -ne 0 ]; then
+  echo "ERROR: $WORKSPACE does not exist"
+  exit 1
+else
+  cp tiago_public-galactic.rosinstall ~/$WORKSPACE
+fi
 vcs import src < tiago_public-galactic.rosinstall
 
 # find $package1_location -type f -name "COLCON_IGNORE" -exec rm {} \;
