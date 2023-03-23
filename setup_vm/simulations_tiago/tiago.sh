@@ -9,25 +9,13 @@ ROS_DISTRO="${ROS_DISTRO-galactic}"
 
 echo
 echo ====================================================================
-echo Install ROS packages for ROS_DISTRO $ROS_DISTRO
+echo Basic check
 echo ====================================================================
-../ros2/scripts/install_ros2_packages.sh $ROS_DISTRO
-
-echo
-echo ====================================================================
-echo Build tiago from source
-echo ====================================================================
-# rosinstall/repos files are modified from https://github.com/pal-robotics/tiago_tutorials
-
 if [ "$ROS_DISTRO" = "humble" ]; then
   vcs_source=tiago_public-"$ROS_DISTRO".repos
 else
   vcs_source=tiago_public-"$ROS_DISTRO".rosinstall
 fi
-
-echo "ROS_DISTRO: $ROS_DISTRO"
-echo "WORKSPACE: $WORKSPACE"
-echo "vcs_source: $vcs_source"
 
 if [ -d ~/$WORKSPACE ]; then
   cp $vcs_source ~/"$WORKSPACE" > /dev/null 2>&1
@@ -36,6 +24,22 @@ else
   echo "ERROR: $WORKSPACE does not exist"
   exit 1
 fi
+
+echo "ROS_DISTRO: $ROS_DISTRO"
+echo "WORKSPACE: $WORKSPACE"
+echo "vcs_source: $vcs_source"
+
+echo
+echo ====================================================================
+echo Install ROS packages for ROS_DISTRO $ROS_DISTRO
+echo ====================================================================
+../../ros2/scripts/install_ros2_packages.sh $ROS_DISTRO
+
+echo
+echo ====================================================================
+echo Build tiago from source
+echo ====================================================================
+# rosinstall/repos files are modified from https://github.com/pal-robotics/tiago_tutorials
 vcs import src < $vcs_source
 rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install
