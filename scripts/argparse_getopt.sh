@@ -5,12 +5,12 @@ OPTIONS=u:r:i:a
 LONGOPTIONS=UBUNTU_CODENAME:,ROSDISTRO:,ROS_INSTALL_TYPE:,APPEND_SOURCE_SCRIPT_TO_BASHRC
 
 echo
-echo "========== usage ==========="
-echo "./my_script.sh --UBUNTU_CODENAME=focal (long option, equal sign)"
-echo "./my_script.sh --UBUNTU_CODENAME focal (long option, space separator)"
-echo "./my_script.sh -u=focal (short option, equal sign)"
-echo "./my_script.sh -u focal (short option,)"
-echo "./my_script.sh -a (--APPEND_SOURCE_SCRIPT_TO_BASHRC) (argument as a boolean flag)"
+echo "========== Usage ==========="
+echo "$0 --UBUNTU_CODENAME=focal (long option, equal sign)"
+echo "$0 --UBUNTU_CODENAME focal (long option, space separator)"
+echo "$0 -u=focal (short option, equal sign)"
+echo "$0 -u focal (short option,)"
+echo "$0 -a (--APPEND_SOURCE_SCRIPT_TO_BASHRC) (argument as a boolean flag)"
 echo
 
 # Parse command line arguments
