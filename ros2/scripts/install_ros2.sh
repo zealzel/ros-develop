@@ -13,6 +13,7 @@ source ../../scripts/utils.sh
 UBUNTU_CODENAME="${1-focal}"
 ROS_DISTRO="${2-galactic}" # galactic | foxy | humble
 ROS_INSTALL_TYPE="${3-desktop}" # desktop | ros-base
+APPEND_SOURCE_SCRIPT_TO_BASHRC="${4-true}"
 
 ensure_sudo
 sudo apt-get update && sudo apt-get install -y curl gnupg
@@ -51,4 +52,6 @@ echo
 echo ====================================================================
 echo Sourcing the setup script
 echo ====================================================================
-append_bashrc "source /opt/ros/${ROS_DISTRO}/setup.bash"
+if [ "$APPEND_SOURCE_SCRIPT_TO_BASHRC" = true ] ; then
+  append_bashrc "source /opt/ros/${ROS_DISTRO}/setup.bash"
+fi
