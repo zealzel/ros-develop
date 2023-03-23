@@ -7,11 +7,6 @@
 source ../../scripts/utils.sh
 source ../../scripts/argparse_ros.sh
 
-echo "UBUNTU_CODENAME options: focal"
-echo "ROS_DISTRO options: galactic (default) | foxy | humble"
-echo "ROS_INSTALL_TYPE options: desktop (default) | ros-base"
-# APPEND_SOURCE_SCRIPT_TO_BASHRC="${4-true}"
-
 parse_args "$@"
 
 echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
@@ -22,6 +17,7 @@ echo "APPEND_SOURCE_SCRIPT_TO_BASHRC=$APPEND_SOURCE_SCRIPT_TO_BASHRC"
 ensure_sudo
 sudo apt-get update && sudo apt-get install -y curl gnupg
 
+echo
 echo =======================
 echo set locale
 echo =======================
@@ -36,6 +32,7 @@ export DEBIAN_FRONTEND=noninteractive
 ln -fs /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 dpkg-reconfigure -f noninteractive tzdata
 
+echo
 echo =============================
 echo Setup Sources
 echo =============================
@@ -44,6 +41,7 @@ sudo add-apt-repository universe
 sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 
+echo
 echo =============================
 echo Install ROS 2 packages
 echo =============================

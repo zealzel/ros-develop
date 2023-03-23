@@ -1,21 +1,28 @@
 #!/bin/bash
 
-# Define usage
-usage() {
-  echo "Usage: $0 [-u|--UBUNTU_CODENAME <ubuntu-codename>] [-r|--ROSDISTRO <ros-distro>] [-i|--ROS_INSTALL_TYPE <ros-install-type>] [-a|--APPEND_SOURCE_SCRIPT_TO_BASHRC]"
-  exit 1
+function print_usage {
+  echo "Usage: $0 [OPTIONS]"
+  echo ""
+  echo "OPTIONS:"
+  echo "  -u, --UBUNTU_CODENAME  the codename of Ubuntu LTS (default: focal)"
+  echo "  -r, --ROSDISTRO        the ROS distribution to install (galactic|foxy|humble) (default: galactic)"
+  echo "  -i, --ROS_INSTALL_TYPE the type of ROS installation (desktop|ros-base) (default: desktop)"
+  echo "  -a, --APPEND_SOURCE_SCRIPT_TO_BASHRC"
+  echo "                         whether to append the setup script to ~/.bashrc (default: false)"
+  echo "  -h, --help             print this help message and exit"
 }
 
 function parse_args {
   # 将命令行参数转换为短选项和长选项
-  OPTIONS=u:r:i:a
-  LONGOPTIONS=UBUNTU_CODENAME:,ROSDISTRO:,ROS_INSTALL_TYPE:,APPEND_SOURCE_SCRIPT_TO_BASHRC
+  OPTIONS=u:r:i:ah
+  LONGOPTIONS=UBUNTU_CODENAME:,ROSDISTRO:,ROS_INSTALL_TYPE:,APPEND_SOURCE_SCRIPT_TO_BASHRC,help
 
   # 解析命令行参数
   PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTIONS --name "$0" -- "$@")
 
   if [[ $? -ne 0 ]]; then
     # 解析失败，输出错误信息并退出
+    print_usage
     exit 1
   fi
 
@@ -38,6 +45,10 @@ function parse_args {
       -a|--APPEND_SOURCE_SCRIPT_TO_BASHRC)
         APPEND_SOURCE_SCRIPT_TO_BASHRC=true
         shift
+        ;;
+      -h|--help)
+        print_usage
+        exit 0
         ;;
       --)
         shift
