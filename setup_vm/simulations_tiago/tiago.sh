@@ -19,7 +19,6 @@ fi
 
 if [ -d ~/$WORKSPACE ]; then
   cp $vcs_source ~/"$WORKSPACE" > /dev/null 2>&1
-  cd ~/$WORKSPACE
 else
   echo "ERROR: $WORKSPACE does not exist"
   exit 1
@@ -40,6 +39,7 @@ echo ====================================================================
 echo Build tiago from source
 echo ====================================================================
 # rosinstall/repos files are modified from https://github.com/pal-robotics/tiago_tutorials
+cd ~/$WORKSPACE
 vcs import src < $vcs_source
 rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install
