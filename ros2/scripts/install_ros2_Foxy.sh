@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 # Offical ROS2 Documentation: https://docs.ros.org/en/foxy/Installation/Alternatives/Ubuntu-Development-Setup.html#add-the-ros-2-apt-repository
-source utils.sh
+source ../../scripts/utils.sh
 
 UBUNTU_CODENAME="focal"
 

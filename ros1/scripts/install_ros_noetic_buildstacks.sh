@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-source utils.sh
+source ../../scripts/utils.sh
 echo ================================
 echo install additional ros stack
 echo ================================

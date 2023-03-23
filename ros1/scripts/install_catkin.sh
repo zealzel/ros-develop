@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-source utils.sh
+source ../../scripts/utils.sh
 echo ====================
 echo Install catkin_tools
 echo ====================

@@ -1,7 +1,6 @@
 #!/bin/bash
 source env.sh
-source utils.sh
-
+source ../../scripts/utils.sh
 echo ===============================================
 echo Append start_x=1 into /boot/firmware/config.txt
 echo ===============================================

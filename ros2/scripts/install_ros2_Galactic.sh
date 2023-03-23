@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 # Offical ROS2 Documentation: https://docs.ros.org/en/galactic/Installation/Ubuntu-Install-Debians.html
-source utils.sh
+source ../../scripts/utils.sh
 
 UBUNTU_CODENAME="focal"
 
