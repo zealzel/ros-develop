@@ -1,5 +1,6 @@
 #!/bin/bash
-source ../../scripts/utils.sh
+# source ../../scripts/utils.sh
+source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
 
 ROS_DISTRO="${1-galactic}"
 

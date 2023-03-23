@@ -48,9 +48,14 @@ ros_packages=(
   "turtlebot4-tests"
   "turtlebot4-simulator"
   "irobot-create-nodes"
-  "turtlesim"
 )
 ../../scripts/install_ros_packages.sh "$ROS_DISTRO" "${ros_packages[@]}"
+
+echo
+echo ====================================================================
+echo Install ROS packages for ROS_DISTRO $ROS_DISTRO
+echo ====================================================================
+../../ros2/scripts/install_ros2_packages.sh $ROS_DISTRO
 
 # echo
 # echo ====================================================================
