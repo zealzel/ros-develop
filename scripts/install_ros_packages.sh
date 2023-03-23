@@ -1,8 +1,13 @@
 #!/bin/bash
-source ../scripts/utils.sh
+#
+# source utils.sh
+source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/utils.sh"
 
+# ROS_DISTRO="${1-galactic}"
+# ROS_PACKAGES=$2
 ROS_DISTRO="${1-galactic}"
-ROS_PACKAGES=$2
+shift
+ROS_PACKAGES=("${@}")
 
 # ex:
 # ros_packages=(

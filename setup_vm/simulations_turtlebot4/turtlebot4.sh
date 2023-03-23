@@ -1,25 +1,14 @@
 #!/bin/bash
-source ../scripts/utils.sh
+# source ../../scripts/utils.sh
+source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
 
-ORIGINAL_IMAGE="ubuntu-20.04.4-desktop-amd64.iso"
-IMAGE_DOWNLOAD_SITE=
 ROSDISTRO="galactic"
 WORKSPACE="colcon_ws"
-
-echo "The original image: $ORIGINAL_IMAGE"
-echo "The original image donwload site: $IMAGE_DOWNLOAD_SITE"
-
-# echo
-# echo ====================================================================
-# echo Install ROS2
-# echo ====================================================================
-# ./install_ros2.sh --ROSDISTRO="$ROSDISTRO"
 
 echo
 echo ====================================================================
 echo Install turtlebot4 ros2 packages
 echo ====================================================================
-# ./install_tb4.sh
 ros_packages=(
   "turtlebot4-desktop"
   "turtlebot4-base"
@@ -35,7 +24,7 @@ ros_packages=(
   "irobot-create-nodes"
   "turtlesim"
 )
-../scripts/install_ros_packages.sh "$ROSDISTRO" "${ros_packages[@]}"
+../../scripts/install_ros_packages.sh "$ROSDISTRO" "${ros_packages[@]}"
 
 # echo
 # echo ====================================================================
