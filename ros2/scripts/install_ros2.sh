@@ -39,7 +39,7 @@ echo =============================
 sudo apt install -y software-properties-common
 sudo add-apt-repository universe
 sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo "$UBUNTU_CODENAME") main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 
 echo
 echo =============================
@@ -47,13 +47,14 @@ echo Install ROS 2 packages
 echo =============================
 sudo apt update
 sudo apt upgrade -y
-sudo apt install -y ros-${ROS_DISTRO}-${ROS_INSTALL_TYPE}
+sudo apt install -y ros-"$ROS_DISTRO-$ROS_INSTALL_TYPE"
 sudo apt install -y ros-dev-tools
 
-echo
-echo ====================================================================
-echo Sourcing the setup script
-echo ====================================================================
-if [ "$APPEND_SOURCE_SCRIPT_TO_BASHRC" = true ] ; then
+if [ "$APPEND_SOURCE_SCRIPT_TO_BASHRC" = true ]; then
+  echo
+  echo ====================================================================
+  echo Sourcing the setup script
+  echo ====================================================================
+  source "/opt/ros/${ROS_DISTRO}/setup.bash"
   append_bashrc "source /opt/ros/${ROS_DISTRO}/setup.bash"
 fi
