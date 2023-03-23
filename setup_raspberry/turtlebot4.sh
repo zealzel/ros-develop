@@ -1,4 +1,5 @@
 #!/bin/bash
+source ../scripts/utils.sh
 
 ORIGINAL_IMAGE="[488d07354c8b92592c3c0e759b0f4730dce21dce]ubuntu-20.04.5-preinstalled-server-arm64+raspi.img.xz"
 IMAGE_DOWNLOAD_SITE=

@@ -1,4 +1,5 @@
 #!/bin/bash
+source ../scripts/utils.sh
 
 ORIGINAL_IMAGE="ubuntu-20.04.4-desktop-amd64.iso"
 IMAGE_DOWNLOAD_SITE=
@@ -12,7 +13,7 @@ echo
 echo ====================================================================
 echo Install ROS2
 echo ====================================================================
-./install_ros2_Galactic.sh
+./install_ros2.sh --ROSDISTRO=$ROS_DISTRO
 
 echo
 echo ====================================================================
