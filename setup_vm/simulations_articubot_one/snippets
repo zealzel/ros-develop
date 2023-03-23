@@ -1,0 +1,7 @@
+
+# === Launch simluation with world models ===
+ros2 launch articubot_one launch_sim.launch.py
+
+
+# === teleop with remapping topic ===
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
