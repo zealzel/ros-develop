@@ -4,10 +4,6 @@
 # foxy: https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html
 # humble: https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
 
-# write a simple help message with examples
-echo "Usage: ./install_ros2.sh [UBUNTU_CODENAME] [ROS_DISTRO]"
-echo "default: UBUNTU_CODENAME=focal, ROS_DISTRO=galactic"
-
 source ../../scripts/utils.sh
 source ../../scripts/argparse_ros.sh
 
