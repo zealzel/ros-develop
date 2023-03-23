@@ -51,4 +51,4 @@ echo
 echo ====================================================================
 echo Sourcing the setup script
 echo ====================================================================
-append_bashrc source /opt/ros/${ROS_DISTRO}/setup.bash
+append_bashrc "source /opt/ros/${ROS_DISTRO}/setup.bash"
