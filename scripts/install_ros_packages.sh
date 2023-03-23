@@ -23,7 +23,7 @@ ROS_PACKAGES=("${@}")
 # )
 
 apt_packages=()
-for ros_package in "${ros_packages[@]}"; do
+for ros_package in "${ROS_PACKAGES[@]}"; do
   apt_packages+=("ros-$ROS_DISTRO-$ros_package")
 done
 install_ubuntu_packages "${apt_packages[@]}"
