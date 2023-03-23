@@ -52,15 +52,15 @@ ros_packages=(
 )
 ../../scripts/install_ros_packages.sh "$ROS_DISTRO" "${ros_packages[@]}"
 
-echo
-echo ====================================================================
-echo Build turtlebot4 from source
-echo ====================================================================
-# rosinstall/repos files are modified from https://github.com/pal-robotics/tiago_tutorials
-cd ~/"$WORKSPACE"
-vcs import src < "$vcs_source"
-rosdep install --from-paths src --ignore-src -r -y
-colcon build --symlink-install
+# echo
+# echo ====================================================================
+# echo Build turtlebot4 from source
+# echo ====================================================================
+# # rosinstall/repos files are modified from https://github.com/pal-robotics/tiago_tutorials
+# cd ~/"$WORKSPACE"
+# vcs import src < "$vcs_source"
+# rosdep install --from-paths src --ignore-src -r -y
+# colcon build --symlink-install
 
 echo
 echo ====================================================================
