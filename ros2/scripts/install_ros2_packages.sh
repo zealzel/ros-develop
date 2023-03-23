@@ -1,7 +1,7 @@
 #!/bin/bash
 source ../../scripts/utils.sh
 
-ROS_DISTRO="galactic"
+ROS_DISTRO="${1-galactic}"
 
 ros_packages=(
   # basic
