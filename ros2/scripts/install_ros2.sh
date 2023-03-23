@@ -9,11 +9,19 @@ echo "Usage: ./install_ros2.sh [UBUNTU_CODENAME] [ROS_DISTRO]"
 echo "default: UBUNTU_CODENAME=focal, ROS_DISTRO=galactic"
 
 source ../../scripts/utils.sh
+source ../../scripts/argparse_ros.sh
 
-UBUNTU_CODENAME="${1-focal}"
-ROS_DISTRO="${2-galactic}" # galactic | foxy | humble
-ROS_INSTALL_TYPE="${3-desktop}" # desktop | ros-base
-APPEND_SOURCE_SCRIPT_TO_BASHRC="${4-true}"
+echo "UBUNTU_CODENAME options: focal"
+echo "ROS_DISTRO options: galactic (default) | foxy | humble"
+echo "ROS_INSTALL_TYPE options: desktop (default) | ros-base"
+# APPEND_SOURCE_SCRIPT_TO_BASHRC="${4-true}"
+
+parse_args "$@"
+
+echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
+echo "ROSDISTRO=$ROSDISTRO"
+echo "ROS_INSTALL_TYPE=$ROS_INSTALL_TYPE"
+echo "APPEND_SOURCE_SCRIPT_TO_BASHRC=$APPEND_SOURCE_SCRIPT_TO_BASHRC"
 
 ensure_sudo
 sudo apt-get update && sudo apt-get install -y curl gnupg
