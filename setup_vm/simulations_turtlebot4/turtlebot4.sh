@@ -29,7 +29,7 @@ echo ====================================================================
 sudo apt-get install wget
 sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
 wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
-sudo apt-get update && sudo apt-get install ignition-edifice
+sudo apt-get update && sudo apt-get install ignition-edifice -y
 
 echo
 echo ====================================================================
@@ -50,7 +50,7 @@ ros_packages=(
   "irobot-create-nodes"
   "turtlesim"
 )
-../../scripts/install_ros_packages.sh "$ROSDISTRO" "${ros_packages[@]}"
+../../scripts/install_ros_packages.sh "$ROS_DISTRO" "${ros_packages[@]}"
 
 echo
 echo ====================================================================
@@ -66,6 +66,11 @@ echo
 echo ====================================================================
 echo Append bashrc file
 echo ====================================================================
-append_bashrc 'source /opt/ros/galactic/setup.bash'
-append_bashrc 'export LIBGL_ALWAYS_SOFTWARE=1'
-append_bashrc 'export OGRE_RTT_MODE=Copy'
+append_bashrc "source /opt/ros/${ROS_DISTRO}/setup.bash"
+
+append_bashrc "export LIBGL_ALWAYS_SOFTWARE=1"
+append_bashrc "export OGRE_RTT_MODE=Copy"
+
+append_bashrc "ROS_DOMAIN_ID=0"
+append_bashrc "RMW_IMPLEMENTATION=rmw_cyclonedds_cpp"
+append_bashrc "CYCLONEDDS_URI=/etc/turtlebot4/cyclonedds_pc.xml"
