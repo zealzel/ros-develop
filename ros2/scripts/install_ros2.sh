@@ -43,7 +43,7 @@ echo =============================
 echo Install ROS 2 packages
 echo =============================
 sudo apt update
-sudo apt upgrade
+sudo apt upgrade -y
 sudo apt install -y ros-${ROS_DISTRO}-${ROS_INSTALL_TYPE}
 sudo apt install -y ros-dev-tools
 
