@@ -1,0 +1,5 @@
+repositories:
+  turtlebot4_robot:
+    type: git
+    url: https://github.com/turtlebot/turtlebot4_robot
+    version: galactic
