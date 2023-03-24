@@ -3,3 +3,23 @@ repositories:
     type: git
     url: https://github.com/turtlebot/turtlebot4_robot
     version: galactic
+  turtlebot4_simulator:
+    type: git
+    url: https://github.com/turtlebot/turtlebot4_simulator
+    version: galactic
+  irobot_create_msgs:
+    type: git
+    url: https://github.com/iRobotEducation/irobot_create_msgs.git
+    version: galactic
+  create3_sim:
+    type: git
+    url: https://github.com/iRobotEducation/create3_sim.git
+    version: galactic
+  turtlebot4:
+    type: git
+    url: https://github.com/turtlebot/turtlebot4.git
+    version: galactic
+  turtlebot4_desktop:
+    type: git
+    url: https://github.com/turtlebot/turtlebot4_desktop.git
+    version: galactic
