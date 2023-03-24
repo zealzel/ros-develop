@@ -1,12 +1,15 @@
 #!/usr/bin/bash
 source ../../scripts/utils.sh
+source ../../scripts/argparse_ros.sh
+
+parse_args "$@"
+echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
+echo "ROSDISTRO=$ROSDISTRO"
 #
 # references:
 # 1. https://colcon.readthedocs.io/en/released/user/installation.html
 # 2. https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Colcon-Tutorial.html
 #
-UBUNTU_CODENAME="focal"
-ROS_DISTRO="galactic"
 
 export DEBIAN_FRONTEND=noninteractive
 ln -fs /usr/share/zoneinfo/Asia/Taipei /etc/localtime
@@ -23,7 +26,7 @@ echo =============================
 echo Install colcon
 echo =============================
 sudo apt update
-sudo apt install -y python3-colcon-common-extensions ros-$ROS_DISTRO-ament-cmake python3-pip
+sudo apt install -y python3-colcon-common-extensions ros-$ROSDISTRO-ament-cmake python3-pip
 
 echo ====================================================================
 echo Sourcing the colcon-argcomplete setup script
