@@ -3,8 +3,6 @@
 # Running the simulator with default settings:
 ros2 launch turtlebot4_ignition_bringup ignition.launch.py
 
-oos2 launch turtlebot4_ignition_bringup ignition.launch.py
-
 # Running synchronous SLAM with Nav2:
 ros2 launch turtlebot4_ignition_bringup ignition.launch.py slam:=sync nav2:=true rviz:=true
 

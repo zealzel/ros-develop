@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+source ../../scripts/utils.sh
 #
 # references:
 # 1. https://colcon.readthedocs.io/en/released/user/installation.html
@@ -23,3 +24,9 @@ echo Install colcon
 echo =============================
 sudo apt update
 sudo apt install -y python3-colcon-common-extensions ros-$ROS_DISTRO-ament-cmake python3-pip
+
+echo ====================================================================
+echo Sourcing the colcon-argcomplete setup script
+echo ====================================================================
+source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+append_bashrc "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash"
