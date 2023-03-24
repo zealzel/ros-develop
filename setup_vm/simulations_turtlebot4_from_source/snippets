@@ -5,6 +5,8 @@ ros2 launch turtlebot4_ignition_bringup ignition.launch.py
 ros2 launch turtlebot4_ignition_bringup ignition.launch.py model:=lite (lite | standard (default))
 ros2 launch turtlebot4_ignition_bringup ignition.launch.py world:=depot (depot (default)| maze | turtlebot4_world)
 
+ros2 launch turtlebot4_ignition_bringup ignition.launch.py world:=shapes x:=2 y:=2
+
 world models are in turtlebot4_ignition_bringup/worlds/
 -----
 depot.sdf
@@ -48,4 +50,15 @@ ros2 launch turtlebot4_navigation nav_bringup.launch.py slam:=sync
 
 === leg_detector ===
 ros2 launch leg_detector demo_stationary_simple_environment.launch.py
+
+
+=============================
+Tried launch commands
+=============================
+
+ros2 launch ros_ign_gazebo ign_gazebo.launch.py ign_args:='shapes.sdf'
+IGN_GAZEBO_RESOURCE_PATH='/opt/ros/galactic/share/turtlebot4_ignition_bringup/worlds' ros2 launch ros_ign_gazebo ign_gazebo.launch.py ign_args:='depot.sdf'
+ros2 launch turtlebot4_description robot_description.launch.py model:=lite use_sim_time:=true
+ros2 run ros_ign_gazebo create -name momo -x 10 -y 10 -z 0 -Y 0 -topic robot_description
+
 
