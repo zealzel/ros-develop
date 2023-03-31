@@ -4,8 +4,11 @@
 # foxy: https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html
 # humble: https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
 
-source ../../scripts/utils.sh
-source ../../scripts/argparse_ros.sh
+# source ../../scripts/utils.sh
+# source ../../scripts/argparse_ros.sh
+source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
+source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/argparse_ros.sh"
+
 
 parse_args "$@"
 
