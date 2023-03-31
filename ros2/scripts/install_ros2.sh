@@ -50,7 +50,7 @@ echo Install ROS 2 packages
 echo =============================
 sudo apt update
 sudo apt upgrade -y
-sudo apt install -y ros-"$ROS_DISTRO-$ROS_INSTALL_TYPE"
+sudo apt install -y ros-"$ROSDISTRO-$ROS_INSTALL_TYPE"
 sudo apt install -y ros-dev-tools
 
 if [ "$APPEND_SOURCE_SCRIPT_TO_BASHRC" = true ]; then
@@ -58,6 +58,6 @@ if [ "$APPEND_SOURCE_SCRIPT_TO_BASHRC" = true ]; then
   echo ====================================================================
   echo Sourcing the setup script
   echo ====================================================================
-  source "/opt/ros/${ROS_DISTRO}/setup.bash"
-  append_bashrc "source /opt/ros/${ROS_DISTRO}/setup.bash"
+  source "/opt/ros/${ROSDISTRO}/setup.bash"
+  append_bashrc "source /opt/ros/${ROSDISTRO}/setup.bash"
 fi
