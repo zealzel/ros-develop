@@ -27,7 +27,7 @@ $ cd $HOME/ros-develop/scripts
 # install ROS2
 $ ./install_ros2.sh --ROSDISTRO=galactic --ROS_INSTALL_TYPE=desktop --APPEND_SOURCE_SCRIPT_TO_BASHRC=true
 or
-$ ./install_ros2.sh -r galactic -i desktop -a true
+$ ./install_ros2.sh -r galactic -i desktop -a
 
 # install colcon
 $ ./install_colcon.sh --ROSDISTRO=galactic
