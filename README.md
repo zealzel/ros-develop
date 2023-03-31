@@ -8,9 +8,16 @@ Please git clone this repo into you developement envirnoment.
 
 The host machine is MacOS, and the virtual machine is Ubuntu 20.04 installed through Parallels.
 
+### Ubuntu source image
+
+The source image is from (Source: http://old-releases.ubuntu.com/releases/)
+
 #### Ubuntu 20.04
 
-The image used is ubuntu-20.04.5-preinstalled-server-arm64+raspi.img.xz
+The image used is ubuntu-20.04.5-desktop-amd64.iso
+
+(http://old-releases.ubuntu.com/releases/20.04.5/ubuntu-20.04-beta-desktop-amd64.iso)
+
 
 ```bash
 # in your virtual machine
