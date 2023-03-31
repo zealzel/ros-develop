@@ -1,7 +1,30 @@
 
 # === Launch simluation with world models ===
 ros2 launch articubot_one launch_sim.launch.py
+ros2 launch articubot_one launch_sim.launch.py world:=./src/articubot_one/worlds/obstacles.world
 
 
 # === teleop with remapping topic ===
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
+
+
+# === SLAM ===
+ros2 launch slam_toolbox online_async_launch.py
+rviz2 # Add Map node and select /map topic
+
+
+# === save the map ===
+# --- save old map format using nav2 (.pgm, .yaml)
+ros2 run nav2_map_server map_saver_cli -f mymap
+# --- save new serialized map format (map pose-graph) using slam_toolbox
+#     useable for continued mapping, slam_toolbox localization, offline manipulation
+ros2 service call /slam_toolbox/serialize_map slam_toolbox/srv/SerializePoseGraph "{filename: 'mymap'}"
+ros2 service call /slam_toolbox/serialize_map slam_toolbox/srv/SerializePoseGraph "filename: 'mymap'"
+
+
+# === navigation by manual ===
+ros2 run nav2_map_server map_server --ros-args -p yaml_filename:=mymap.yaml -p use_sim_time:=true
+ros2 run nav2_util lifecycle_bringup map_server
+ros2 run nav2_amcl amcl --ros-args -p use_sim_time:=true
+ros2 run nav2_util lifecycle_bringup amcl
+

@@ -31,6 +31,7 @@ ros2 launch turtlebot4_viz view_diagnostics.launch.py
 === SLAM & Nav ===
 # run synchronous SLAM on a remote PC to get a higher resolution map
 ros2 launch turtlebot4_navigation slam_sync.launch.py
+ros2 run slam_toolbox sync_slam_toolbox_node use_sim_time:=false
 
 # Asynchronous SLAM
 ros2 launch turtlebot4_navigation slam_async.launch.py
@@ -39,10 +40,12 @@ ros2 launch turtlebot4_navigation slam_async.launch.py
 ros2 launch turtlebot4_viz view_robot.launch.py
 
 # save the map
-ros2 service call /slam_toolbox/save_map slam_toolbox/srv/SaveMap "name: data: 'map_name'"
+# --- save old map format using nav2 (.pgm, .yaml)
+ros2 run nav2_map_server map_saver_cli -f mymap
+# --- save new serialized map format (map pose-graph) using slam_toolbox
+#     useable for continued mapping, slam_toolbox localization, offline manipulation
+ros2 service call /slam_toolbox/serialize_map slam_toolbox/srv/SerializePoseGraph "{filename: 'mymap'}"
 
-# read the map and start navigation
-ros2 launch turtlebot4_navigation nav_bringup.launch.py slam:=off localization:=true map:=office.yaml
 
 === SLAM/Nav simultaneously ===
 ros2 launch turtlebot4_navigation nav_bringup.launch.py slam:=sync
