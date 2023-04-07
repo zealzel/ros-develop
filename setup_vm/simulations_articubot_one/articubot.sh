@@ -5,13 +5,21 @@ source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
 
 WORKSPACE="${1:-colcon_ws}"
 ROS_DISTRO="${ROS_DISTRO-galactic}"
+CURRENT_SCRIPT_PATH="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
 echo
 echo ====================================================================
 echo Basic check
 echo ====================================================================
-vcs_source=articubot.repos
+# vcs_source=articubot.repos
+vcs_source="$CURRENT_SCRIPT_PATH/articubot.repos"
 if [ -d ~/$WORKSPACE ]; then
+  if [ -f $vcs_source ]; then
+    echo "vcs_source: $vcs_source exists"
+  else
+    echo "ERROR: $vcs_source does not exist"
+    exit 1
+  fi
   cp $vcs_source ~/"$WORKSPACE" > /dev/null 2>&1
 else
   echo "ERROR: $WORKSPACE does not exist"

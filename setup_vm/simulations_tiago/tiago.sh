@@ -5,27 +5,29 @@ source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
 
 WORKSPACE="${1:-colcon_ws}"
 ROS_DISTRO="${ROS_DISTRO-galactic}"
+CURRENT_SCRIPT_PATH="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
 echo
 echo ====================================================================
 echo Basic check
 echo ====================================================================
 if [ "$ROS_DISTRO" = "humble" ]; then
-  vcs_source=tiago_public-"$ROS_DISTRO".repos
+  vcs_source="$CURRENT_SCRIPT_PATH/tiago_public-$ROS_DISTRO.repos"
 else
-  vcs_source=tiago_public-"$ROS_DISTRO".rosinstall
+  vcs_source="$CURRENT_SCRIPT_PATH/tiago_public-$ROS_DISTRO.rosinstall"
 fi
-
 if [ -d ~/$WORKSPACE ]; then
+  if [ -f $vcs_source ]; then
+    echo "vcs_source: $vcs_source exists"
+  else
+    echo "ERROR: $vcs_source does not exist"
+    exit 1
+  fi
   cp $vcs_source ~/"$WORKSPACE" > /dev/null 2>&1
 else
   echo "ERROR: $WORKSPACE does not exist"
   exit 1
 fi
-
-echo "ROS_DISTRO: $ROS_DISTRO"
-echo "WORKSPACE: $WORKSPACE"
-echo "vcs_source: $vcs_source"
 
 echo
 echo ====================================================================
