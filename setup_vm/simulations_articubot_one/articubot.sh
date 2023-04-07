@@ -1,9 +1,8 @@
 #!/bin/bash
 
-source ../../scripts/utils.sh
+# source ../../scripts/utils.sh
+source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
 
-ORIGINAL_IMAGE="ubuntu-20.04.4-desktop-amd64.iso"
-IMAGE_DOWNLOAD_SITE=
 WORKSPACE="${1:-colcon_ws}"
 ROS_DISTRO="${ROS_DISTRO-galactic}"
 

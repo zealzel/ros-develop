@@ -28,7 +28,7 @@ ros_packages=(
   "ros-$ROS_DISTRO-navigation2"
   "ros-$ROS_DISTRO-nav2-bringup"
   # robot
-  "ros-$ROS_DISTRO-turtlebot3-simulation"
+  # "ros-$ROS_DISTRO-turtlebot3-simulation"
 )
 
 install_ubuntu_packages "${ros_packages[@]}"
