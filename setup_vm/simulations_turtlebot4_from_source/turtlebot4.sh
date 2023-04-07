@@ -35,7 +35,9 @@ echo
 echo ====================================================================
 echo Install ROS packages for ROS_DISTRO $ROS_DISTRO
 echo ====================================================================
-../../ros2/scripts/install_ros2_packages.sh $ROS_DISTRO
+# ../../ros2/scripts/install_ros2_packages.sh $ROS_DISTRO
+TARGET_SCRIPT_ABSOLUTE_PATH="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/../../ros2/scripts/install_ros2_packages.sh")"
+"${TARGET_SCRIPT_ABSOLUTE_PATH}" "$ROS_DISTRO"
 
 echo
 echo ====================================================================
