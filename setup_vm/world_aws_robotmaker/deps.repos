@@ -7,7 +7,7 @@ repositories:
     type: git
     url: https://github.com/aws-robotics/aws-robomaker-small-house-world.git
     version: ros2
-  aws-robotics/aws-robomaker-small-hospital-world:
+  aws-robotics/aws-robomaker-hospital-world:
     type: git
-    url: https://github.com/aws-robotics/aws-robomaker-small-hospital-world.git
+    url: https://github.com/aws-robotics/aws-robomaker-hospital-world.git
     version: ros2
