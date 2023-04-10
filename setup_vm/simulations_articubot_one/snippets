@@ -28,3 +28,12 @@ ros2 run nav2_util lifecycle_bringup map_server
 ros2 run nav2_amcl amcl --ros-args -p use_sim_time:=true
 ros2 run nav2_util lifecycle_bringup amcl
 
+
+# === navigation by nav2 ===
+# 同時進行 SLAM 和 navigation
+ros2 launch slam_toolbox online_async_launch.py
+ros2 launch nav2_bringup navigation.launch.py use_sim_time:=true
+
+# 載入之前的地圖，進行 localization 和 navigation
+ros2 launch nav2_bringup localization_launch.py use_sim_time:=true map:=mymap.yaml
+ros2 launch nav2_bringup navigation.launch.py use_sim_time:=true map_subscribe_transient_local:=true
