@@ -1,0 +1,48 @@
+
+=== Simulation ===
+# Running the simulator with default settings:
+
+
+# Running synchronous SLAM with Nav2:
+
+
+
+
+=== Robot bringup ===
+
+
+
+=== Visualization ===
+
+
+
+
+=== SLAM & Nav ===
+# run synchronous SLAM on a remote PC to get a higher resolution map
+
+
+# Asynchronous SLAM
+
+
+# visualise the map, launch Rviz2
+
+
+# save the map
+# --- save old map format using nav2 (.pgm, .yaml)
+
+# --- save new serialized map format (map pose-graph) using slam_toolbox
+#     useable for continued mapping, slam_toolbox localization, offline manipulation
+
+
+# read the map and start navigation
+
+
+=== SLAM/Nav simultaneously ===
+
+
+
+=== leg_detector ===
+
+
+
+
