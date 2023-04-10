@@ -9,18 +9,18 @@ if [ "$ROS_DISTRO" = "" ]; then
   exit 1
 fi
 
-echo
-echo ====================================================================
-echo Basic check
-echo ====================================================================
-vcs_source=tb3-"$ROS_DISTRO".repos
+# echo
+# echo ====================================================================
+# echo Basic check
+# echo ====================================================================
+# vcs_source=tb3-"$ROS_DISTRO".repos
 
-if [ -d ~/"$WORKSPACE" ]; then
-  cp "$vcs_source" ~/"$WORKSPACE" > /dev/null 2>&1
-else
-  echo "ERROR: $WORKSPACE does not exist"
-  exit 1
-fi
+# if [ -d ~/"$WORKSPACE" ]; then
+#   cp "$vcs_source" ~/"$WORKSPACE" > /dev/null 2>&1
+# else
+#   echo "ERROR: $WORKSPACE does not exist"
+#   exit 1
+# fi
 
 # echo
 # echo ====================================================================
@@ -33,12 +33,12 @@ fi
 
 echo
 echo ====================================================================
-echo Install turtlebot4 ros2 packages
+echo Install turtlebot3 ros2 packages
 echo ====================================================================
 ros_packages=(
-  "turtlebot4-desktop"
-  "turtlebot4-base"
-  "turtlebot4-bringup"
+  "turtlebot3"
+  "turtlebot3-msgs"
+  "turtlebot3-simulations"
 )
 ../../scripts/install_ros_packages.sh "$ROS_DISTRO" "${ros_packages[@]}"
 
