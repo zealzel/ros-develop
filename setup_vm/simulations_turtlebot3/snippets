@@ -1,48 +1,23 @@
 
+export TURTLEBOT3_MODEL=burger
+
 === Simulation ===
-# Running the simulator with default settings:
+ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py
 
 
-# Running synchronous SLAM with Nav2:
+=== teleop ===
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
 
+=== SLAM ===
+ros2 launch turtlebot3_cartographer cartographer.launch.py use_sim_time:=True
 
 
-=== Robot bringup ===
+# === save the map ===
+ros2 run nav2_map_server map_saver_cli -f mymap
 
 
-
-=== Visualization ===
-
-
-
-
-=== SLAM & Nav ===
-# run synchronous SLAM on a remote PC to get a higher resolution map
-
-
-# Asynchronous SLAM
-
-
-# visualise the map, launch Rviz2
-
-
-# save the map
-# --- save old map format using nav2 (.pgm, .yaml)
-
-# --- save new serialized map format (map pose-graph) using slam_toolbox
-#     useable for continued mapping, slam_toolbox localization, offline manipulation
-
-
+=== Nav ===
 # read the map and start navigation
-
-
-=== SLAM/Nav simultaneously ===
-
-
-
-=== leg_detector ===
-
-
-
+ros2 launch turtlebot3_navigation2 navigation2.launch.py use_sim_time:=True map:=$HOME/map.yaml
 
