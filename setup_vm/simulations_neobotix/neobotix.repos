@@ -1,5 +1,5 @@
 repositories:
-  articubot_one:
+  neo_simulation2:
     type: git
     url: https://github.com/neobotix/neo_simulation2.git
     version: galactic
