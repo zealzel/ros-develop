@@ -42,6 +42,16 @@ TARGET_SCRIPT_ABSOLUTE_PATH="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/../ro
 
 echo
 echo ====================================================================
+echo Ensure rosdep is initialized
+echo ====================================================================
+rosdep update || exit_code=$?
+if [ $exit_code -ne 0 ]; then
+  sudo rosdep init
+  rosdep udpate
+fi
+
+echo
+echo ====================================================================
 echo Build from source
 echo ====================================================================
 # customed repos file
