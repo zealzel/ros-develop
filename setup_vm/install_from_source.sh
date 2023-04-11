@@ -1,6 +1,4 @@
 #!/bin/bash
-
-# source ../../scripts/utils.sh
 source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../scripts/utils.sh"
 
 WORKSPACE="${1:-colcon_ws}"
