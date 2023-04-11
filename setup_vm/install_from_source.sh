@@ -47,7 +47,7 @@ echo ====================================================================
 rosdep update || exit_code=$?
 if [ $exit_code -ne 0 ]; then
   sudo rosdep init
-  rosdep udpate
+  rosdep update
 fi
 
 echo
