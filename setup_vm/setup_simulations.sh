@@ -14,7 +14,7 @@ echo "===================================================================="
 echo "Ensure rosdep is initialized"
 echo "===================================================================="
 rosdep update || exit_code=$?
-if [ $exit_code -ne 0 ]; then
+if [[ $exit_code -ne 0 ]]; then
   sudo rosdep init
   rosdep update --include-eol-distros
 fi
