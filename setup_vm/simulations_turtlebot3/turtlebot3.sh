@@ -2,12 +2,15 @@
 # source ../../scripts/utils.sh
 source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
 
+
+ROS_DISTRO="${ROS_DISTRO-galactic}"
+CURRENT_SCRIPT_PATH="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 WORKSPACE="${1:-colcon_ws}"
 
-if [ "$ROS_DISTRO" = "" ]; then
-  echo "ERROR: ROSDISTRO is not set"
-  exit 1
-fi
+# if [ "$ROS_DISTRO" = "" ]; then
+#   echo "ERROR: ROSDISTRO is not set"
+#   exit 1
+# fi
 
 # echo
 # echo ====================================================================
@@ -40,14 +43,17 @@ ros_packages=(
   "turtlebot3-msgs"
   "turtlebot3-simulations"
 )
-../../scripts/install_ros_packages.sh "$ROS_DISTRO" "${ros_packages[@]}"
+TARGET_SCRIPT_ABSOLUTE_PATH="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/../../scripts/install_ros_packages.sh")"
+"${TARGET_SCRIPT_ABSOLUTE_PATH}" "$ROS_DISTRO" "${ros_packages[@]}"
 
-echo
-echo ====================================================================
-echo Install ROS packages for ROS_DISTRO $ROS_DISTRO
-echo ====================================================================
-TARGET_SCRIPT_ABSOLUTE_PATH="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/../../ros2/scripts/install_ros2_packages.sh")"
-"${TARGET_SCRIPT_ABSOLUTE_PATH}" "$ROS_DISTRO"
+# ../../scripts/install_ros_packages.sh "$ROS_DISTRO" "${ros_packages[@]}"
+
+# echo
+# echo ====================================================================
+# echo Install ROS packages for ROS_DISTRO $ROS_DISTRO
+# echo ====================================================================
+# TARGET_SCRIPT_ABSOLUTE_PATH="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/../../ros2/scripts/install_ros2_packages.sh")"
+# "${TARGET_SCRIPT_ABSOLUTE_PATH}" "$ROS_DISTRO"
 
 echo
 echo ====================================================================

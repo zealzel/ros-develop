@@ -5,9 +5,17 @@ WORKSPACE="${1:-simulations}"
 ROS_DISTRO="${ROS_DISTRO-galactic}"
 
 echo "==============================================="
+echo "Install ROS2 important packages"
+echo "==============================================="
+TARGET_SCRIPT_ABSOLUTE_PATH="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/../ros2/scripts/install_ros2_packages.sh")"
+"${TARGET_SCRIPT_ABSOLUTE_PATH}" "$ROS_DISTRO"
+
+
+echo "==============================================="
 echo "Install robots from package manager"
 echo "==============================================="
 # ./simulations_turtlebot3/turtlebot3.sh
+./install_from_apt.sh $WORKSPACE "false" "simulations_turtlebot3/ros_packages.sh"
 
 echo
 echo "===================================================================="
