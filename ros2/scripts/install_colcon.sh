@@ -14,7 +14,7 @@ echo "ROSDISTRO=$ROSDISTRO"
 #
 
 export DEBIAN_FRONTEND=noninteractive
-ln -fs /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+sudo ln -fs /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 dpkg-reconfigure -f noninteractive tzdata
 
 echo =============================
