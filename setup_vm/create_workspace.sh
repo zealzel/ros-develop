@@ -7,6 +7,8 @@ if [ ! -d "$HOME/$workspace" ]; then
     if [ "$answer" == "y" ]; then
         mkdir -p "$HOME/$workspace/src"
         echo "已成功建立 ~/$workspace/src"
+    else
+        exit 1
     fi
 else
     echo "~/$workspace 目錄已存在"
