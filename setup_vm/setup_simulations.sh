@@ -4,6 +4,8 @@ source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../scripts/utils.sh"
 WORKSPACE="${1:-simulations}"
 ROS_DISTRO="${ROS_DISTRO-galactic}"
 
+./create_workspace.sh $WORKSPACE
+
 echo "==============================================="
 echo "Install ROS2 important packages"
 echo "==============================================="
