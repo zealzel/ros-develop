@@ -19,7 +19,6 @@ TARGET_SCRIPT_ABSOLUTE_PATH="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/../ro
 echo "==============================================="
 echo "Install robots from package manager"
 echo "==============================================="
-# ./simulations_turtlebot3/turtlebot3.sh
 ./install_from_apt.sh $WORKSPACE "false" "simulations_turtlebot3/ros_packages.sh"
 
 echo
@@ -32,14 +31,20 @@ if [[ $exit_code -ne 0 ]]; then
   rosdep update --include-eol-distros
 fi
 
+
 echo "==============================================="
-echo "Build/Install robots from source"
+echo "Build/Install robots/worlds from source"
 echo "==============================================="
 ./install_from_source.sh $WORKSPACE "false" "simulations_articubot_one/articubot.repos"
 ./install_from_source.sh $WORKSPACE "false" "simulations_neobotix/neobotix.repos"
+./install_from_source.sh $WORKSPACE "false" "world_aws_robotmaker/deps.repos"
 
-# exceptions not using install_from_source.sh
+
+echo "==============================================="
+echo "Build/Install robots by customed scripts"
+echo "==============================================="
 ./simulations_tiago/tiago.sh $WORKSPACE
+
 
 echo "==============================================="
 echo "append bashrc for ROS2"
