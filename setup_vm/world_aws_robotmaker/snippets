@@ -1,0 +1,39 @@
+==============================================================================
+aws-robotics/aws-robomaker-small-warehouse-world
+https://github.com/aws-robotics/aws-robomaker-small-warehouse-world.git
+==============================================================================
+ros2 launch aws_robomaker_small_warehouse_world no_roof_small_warehouse.launch.py
+
+# Load directly into Gazebo (without ROS2)
+cd $(ros2 pkg prefix aws_robomaker_small_warehouse_world)/share/aws_robomaker_small_warehouse_world
+export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:`pwd`/models
+gazebo worlds/no_roof_small_warehouse/no_roof_small_warehouse.world
+
+
+==============================================================================
+aws-robotics/aws-robomaker-small-house
+https://github.com/aws-robotics/aws-robomaker-small-house-world.git
+==============================================================================
+# ROS2 Launch
+ros2 launch aws_robomaker_small_house_world view_small_house.launch.py
+
+# Load directly into Gazebo (without ROS2)
+cd $(ros2 pkg prefix aws_robomaker_small_house_world)/share/aws_robomaker_small_house_world
+export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:`pwd`/models
+gazebo worlds/small_house.world
+
+
+==============================================================================
+aws-robotics/aws-robomaker-hospital-world
+https://github.com/aws-robotics/aws-robomaker-hospital-world.git
+==============================================================================
+# Speed up ROS2 launch by ignoring some models download (useful)
+GAZEBO_MASTER_URI="" GAZEBO_MODEL_DATABASE_URI="" ros2 launch aws_robomaker_hospital_world view_hospital.launch.py
+
+# Load directly into Gazebo (without ROS2)
+cd $(ros2 pkg prefix aws_robomaker_hospital_world)/share/aws_robomaker_hospital_world
+export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:`pwd`/models:`pwd`/fuel_models
+gazebo worlds/hospital.world
+
+# ROS2 Launch (too slow)
+ros2 launch aws_robomaker_hospital_world view_hospital.launch.py
