@@ -17,6 +17,12 @@ TARGET_SCRIPT_ABSOLUTE_PATH="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/../ro
 
 
 echo "==============================================="
+echo "Download gazebo classic models"
+echo "==============================================="
+./download_gazebo_models.sh
+
+
+echo "==============================================="
 echo "Install robots from package manager"
 echo "==============================================="
 ./install_from_apt.sh $WORKSPACE "false" "simulations_turtlebot3/ros_packages.sh"
