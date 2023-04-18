@@ -4,6 +4,7 @@ source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../scripts/utils.sh"
 ROS_DISTRO="${ROS_DISTRO-galactic}"
 
 append_bashrc "source /opt/ros/${ROS_DISTRO}/setup.bash"
+append_bashrc "source /usr/share/gazebo/setup.bash"
 
 append_bashrc "export LIBGL_ALWAYS_SOFTWARE=1"
 append_bashrc "export OGRE_RTT_MODE=Copy"
