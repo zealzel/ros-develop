@@ -41,10 +41,10 @@ $ ./setup_simulations.sh
 
 Currently, the following simulation envirnoment are supported:
 
-- simulations_articubot_one
+**simulations_articubot_one**
 ![localImage](./articubot_obstacles.gif)
 
-- simulations_tiago
+**simulations_tiago**
 ![localImage](./tiago_house.gif)
 
 Please follow the snippets in each simulations_xxx folder to test the functions.
