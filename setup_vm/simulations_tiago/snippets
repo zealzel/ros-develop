@@ -16,27 +16,44 @@ corridor_60cm.world     factory.world            memmo_simple.world      pick_pl
 corridor_70cm.world     featured.world           narrow_passage.world    pick_place_close_demo.world  small_office_door_obstacle.world  t_shaped.world
 corridor_85cm.world     footstep_obstacle.world  objects_on_table.world  pick_place_demo.world        small_office_inventory.world      tutorial_office.world
 
+# === observe worlds using gazebo ===
+GAZEBO_MODEL_PATH=$(ros2 pkg prefix pal_gazebo_worlds)/share/pal_gazebo_worlds/models:$GAZEBO_MODEL_PATH \
+  gazebo $(ros2 pkg prefix pal_gazebo_worlds)/share/pal_gazebo_worlds/worlds/home.world
+
 # === teleop with remapping topic ===
 ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r cmd_vel:=key_vel
 
+
+
 # ===================================================
-# slam first nav next
+# slam first, nav next
 # ===================================================
 # slam mapping
-ros2 launch slam_toolbox online_async_launch.py \
-slam_params_file:="$(ros2 pkg prefix br2_navigation)/share/br2_navigation/params/mapper_params_online_async.yaml" \
-use_sim_time:=True
+ros2 launch slam_toolbox online_async_launch.py use_sim_time:=True \
+  slam_params_file:="$(ros2 pkg prefix br2_navigation)/share/br2_navigation/params/mapper_params_online_async.yaml"
 
 # === rviz ===
 ros2 launch nav2_bringup rviz_launch.py
 
-# === save the map ===
-ros2 run nav2_map_server map_saver_cli -f mymap
+# === save the map for navigation ===
+ros2 run nav2_map_server map_saver_cli -f map
+
+# === save the map for continous mapping ===
+ros2 service call /slam_toolbox/serialize_map slam_toolbox/srv/SerializePoseGraph "filename: '$HOME/maps/map'"
 
 # === navigation ===
-ros2 launch nav2_bringup bringup_launch.py \
-params_file:=$(ros2 pkg prefix pmb2_2dnav)/share/pmb2_2dnav/params/pmb2_params.yaml \
-map:=/path/to/mymap.yaml
-# map:=$(ros2 pkg prefix br2_navigation)/share/br2_navigation/maps/home.yaml
+ros2 launch pmb2_2dnav pmb2_nav_bringup.launch.py \
+  map:="$(ros2 pkg prefix br2_navigation)/share/br2_navigation/maps/home.yaml"
 
 
+
+# ===================================================
+# slam & nav simultaneously
+# ===================================================
+# method1: use package tiago_2dnav
+ros2 launch pmb2_2dnav pmb2_nav_bringup.launch.py slam:=True
+
+# method2: directly use package nav2_bringup (目前無法做到, 因為需要將 cmd_vel remap 至 nav_vel, 故要修改launch file)
+ros2 launch nav2_bringup bringup_launch.py slam:=True map:=none use_sim_time:=True \
+  params_file:=$(ros2 pkg prefix pmb2_2dnav)/share/pmb2_2dnav/params/pmb2_params.yaml \
+ros2 launch nav2_bringup rviz_launch.py

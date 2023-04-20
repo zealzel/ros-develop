@@ -18,8 +18,8 @@ rviz2 # Add Map node and select /map topic
 ros2 run nav2_map_server map_saver_cli -f mymap
 # --- save new serialized map format (map pose-graph) using slam_toolbox
 #     useable for continued mapping, slam_toolbox localization, offline manipulation
-ros2 service call /slam_toolbox/serialize_map slam_toolbox/srv/SerializePoseGraph "{filename: 'mymap'}"
-ros2 service call /slam_toolbox/serialize_map slam_toolbox/srv/SerializePoseGraph "filename: 'mymap'"
+ros2 service call /slam_toolbox/serialize_map slam_toolbox/srv/SerializePoseGraph "{filename: '$HOME/maps/mymap'}"
+ros2 service call /slam_toolbox/serialize_map slam_toolbox/srv/SerializePoseGraph "filename: '$HOME/maps/mymap'"
 
 
 # === navigation by manual ===
