@@ -16,13 +16,12 @@ The source image is from (Source: http://old-releases.ubuntu.com/releases/)
 
 The image used is ubuntu-20.04.5-desktop-amd64.iso
 
-(http://old-releases.ubuntu.com/releases/20.04.5/ubuntu-20.04-beta-desktop-amd64.iso)
-
+(http://old-releases.ubuntu.com/releases/20.04.5/ubuntu-20.04.5-desktop-amd64.iso)
 
 ```bash
 # in your virtual machine
 $ git clone https://github.com/zealzel/ros-develop.git $HOME
-$ cd $HOME/ros-develop/scripts
+$ cd $HOME/ros-develop/ros2/scripts
 
 # install ROS2
 $ ./install_ros2.sh --ROSDISTRO=galactic --ROS_INSTALL_TYPE=desktop --APPEND_SOURCE_SCRIPT_TO_BASHRC=true
@@ -33,6 +32,16 @@ $ ./install_ros2.sh -r galactic -i desktop -a
 $ ./install_colcon.sh --ROSDISTRO=galactic
 ```
 
-```bash
+### Setup simulation envirnoment
 
+```bash
+$ cd $HOME/ros-develop/setup_vm
+$ ./setup_simulations.sh
 ```
+
+Currently, the following simulation envirnoment are supported:
+
+- simulations_articubot_one
+- simulations_tiago
+
+Please follow the snippets in each simulations_xxx folder to test the functions.
