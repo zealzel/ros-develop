@@ -42,9 +42,14 @@ ros2 run nav2_map_server map_saver_cli -f map
 ros2 service call /slam_toolbox/serialize_map slam_toolbox/srv/SerializePoseGraph "filename: '$HOME/maps/map'"
 
 # === navigation ===
+# method1: use package tiago_2dnav
 ros2 launch pmb2_2dnav pmb2_nav_bringup.launch.py \
   map:="$(ros2 pkg prefix br2_navigation)/share/br2_navigation/maps/home.yaml"
-
+# method2: directly use package nav2_bringup (目前無法做到, 因為需要將 cmd_vel remap 至 nav_vel, 故要修改launch file)
+ros2 launch nav2_bringup bringup_launch.py slam:=True map:=none use_sim_time:=True \
+  map:="$(ros2 pkg prefix br2_navigation)/share/br2_navigation/maps/home.yaml" \
+  params_file:="$(ros2 pkg prefix pmb2_2dnav)/share/pmb2_2dnav/params/pmb2_params.yaml"
+ros2 launch nav2_bringup rviz_launch.py
 
 
 # ===================================================
@@ -52,8 +57,7 @@ ros2 launch pmb2_2dnav pmb2_nav_bringup.launch.py \
 # ===================================================
 # method1: use package tiago_2dnav
 ros2 launch pmb2_2dnav pmb2_nav_bringup.launch.py slam:=True
-
 # method2: directly use package nav2_bringup (目前無法做到, 因為需要將 cmd_vel remap 至 nav_vel, 故要修改launch file)
 ros2 launch nav2_bringup bringup_launch.py slam:=True map:=none use_sim_time:=True \
-  params_file:=$(ros2 pkg prefix pmb2_2dnav)/share/pmb2_2dnav/params/pmb2_params.yaml \
+  params_file:=$(ros2 pkg prefix pmb2_2dnav)/share/pmb2_2dnav/params/pmb2_params.yaml
 ros2 launch nav2_bringup rviz_launch.py
