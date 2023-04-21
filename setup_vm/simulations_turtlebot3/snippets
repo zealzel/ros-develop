@@ -1,23 +1,53 @@
 
-export TURTLEBOT3_MODEL=burger
+export TURTLEBOT3_MODEL=burger | waffle
 
-=== Simulation ===
-ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py
+# === A1. Launch simluation with world models ===
+ros2 launch turtlebot3_gazebo turtlebot3_{house,world}.launch.py
 
-
-=== teleop ===
+# === A2. teleop ===
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
 
-=== SLAM ===
-ros2 launch turtlebot3_cartographer cartographer.launch.py use_sim_time:=True
+# ===================================================
+# slam first, nav next
+# ===================================================
+# === slam mapping ===
+# B1
+ros2 launch slam_toolbox online_async_launch.py
 
+# === rviz ===
+# B2
+ros2 launch nav2_bringup rviz_launch.py
 
 # === save the map ===
-ros2 run nav2_map_server map_saver_cli -f mymap
+# B3
+ros2 run nav2_map_server map_saver_cli -f map
+
+# === navigation ===
+# method1: use bringup_launch.py
+# B4
+ros2 launch nav2_bringup bringup_launch.py use_sim_time:=True map:="/path_to_map/map"
+
+# method2: use navigation2.launch.py in turtlebot3_navigation2 (default map is turtlebot3_world.yaml)
+# B5
+ros2 launch turtlebot3_navigation2 navigation2.launch.py use_sim_time:=True
+
+# method3: use tb3_simulation_launch.py provided by nav2_bringup
+# B6 = A1 + B2 + B4
+export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/$ROS_DISTRO/share/turtlebot3_gazebo/models
+ros2 launch nav2_bringup tb3_simulation_launch.py (default map is turtlebot3_world.yaml)
 
 
-=== Nav ===
-# read the map and start navigation
-ros2 launch turtlebot3_navigation2 navigation2.launch.py use_sim_time:=True map:=$HOME/map.yaml
+# ===================================================
+# slam & nav simultaneously
+# ===================================================
+# method1: use bringup_launch.py
+# C1
+ros2 launch nav2_bringup bringup_launch.py slam:=True map:=none use_sim_time:=True
+# C2
+ros2 launch nav2_bringup rviz_launch.py
 
+# method2: use tb3_simulation_launch.py provided by nav2_bringup
+# C3 = A1 + C1 + C2
+export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/$ROS_DISTRO/share/turtlebot3_gazebo/models
+ros2 launch nav2_bringup tb3_simulation_launch.py slam:=True
