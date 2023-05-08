@@ -26,6 +26,21 @@ echo Create udev rules
 echo ====================================================================
 ../../scripts/create_zbot1.5_udev_files.sh
 
+echo "==============================================="
+echo "Install robots from package manager"
+echo "==============================================="
+../install_from_apt.sh $WORKSPACE "false" "zbot1.5_articubot/ros_packages.sh"
+
+echo
+echo "===================================================================="
+echo "Ensure rosdep is initialized"
+echo "===================================================================="
+rosdep update || exit_code=$?
+if [[ $exit_code -ne 0 ]]; then
+  sudo rosdep init
+  rosdep update --include-eol-distros
+fi
+
 echo
 echo ===============================================
 echo Build/Install robots packages from source
