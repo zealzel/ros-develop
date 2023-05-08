@@ -21,6 +21,12 @@ echo ====================================================================
 ../scripts/create_zbot1.5_udev_files.sh
 
 echo
+echo ===============================================
+echo Build/Install robots packages from source
+echo ===============================================
+./install_from_source.sh $WORKSPACE "false" "zbot1.5_articubot.repos"
+
+echo
 echo ====================================================================
 echo Append bashrc file
 echo ====================================================================
