@@ -11,8 +11,8 @@ udev_lines=$(cat <<EOL
 SUBSYSTEM=="i2c-dev", GROUP="i2c", MODE="0666"
 SUBSYSTEM=="gpio*", GROUP="gpio", MODE="0666"
 SUBSYSTEM=="usb", ATTRS{idVendor}=="03e7", MODE="0666"
-SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", SYMLINK="RPLIDAR", MODE="0666"
-KERNEL=="ttyUSB*", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE:="0777", SYMLINK+="RPLIDAR"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", SYMLINK="rplidar", MODE="0666"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", SYMLINK+="arduino", MODE="0666"
 EOL
 )
 
