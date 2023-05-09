@@ -1,6 +1,6 @@
 #!/bin/bash
 workspace=$1
-if [ ! -d "$HOME/$workspace" ]; then
+if [ ! -d "$HOME/$workspace/src" ]; then
     echo "目錄 ~/$workspace 不存在，是否要建立 ~/$workspace/src? (y/n)"
     read answer
 
