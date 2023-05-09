@@ -12,7 +12,7 @@ echo ====================================================================
 echo Basic check
 echo ====================================================================
 # vcs_source="$CURRENT_SCRIPT_PATH/articubot.repos"
-vcs_source="$CURRENT_SCRIPT_PATH/$VCS_REPOS"
+vcs_source="$VCS_REPOS"
 
 if [ -d ~/"$WORKSPACE" ]; then
   if [ -f "$vcs_source" ]; then

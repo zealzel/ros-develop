@@ -11,7 +11,8 @@ echo
 echo ====================================================================
 echo Basic check
 echo ====================================================================
-ros_package_file="$CURRENT_SCRIPT_PATH/$APT_PACKAGE_FILE"
+# ros_package_file="$CURRENT_SCRIPT_PATH/$APT_PACKAGE_FILE"
+ros_package_file="$APT_PACKAGE_FILE"
 
 if [ -d ~/"$WORKSPACE" ]; then
   if [ -f "$ros_package_file" ]; then
