@@ -3,7 +3,7 @@ source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
 
 WORKSPACE="${1:-zbot_ws}"
 ROS_DISTRO="${ROS_DISTRO-galactic}"
-../create_workspace.sh $WORKSPACE || exit_code=$?
+../../scripts/create_workspace.sh $WORKSPACE || exit_code=$?
 if [[ $exit_code -ne 0 ]]; then
   exit
 fi
@@ -29,7 +29,7 @@ echo ====================================================================
 echo "==============================================="
 echo "Install robots from package manager"
 echo "==============================================="
-../install_from_apt.sh $WORKSPACE "false" "zbot1.5_articubot/ros_packages.sh"
+../../scripts/install_from_apt.sh $WORKSPACE "false" "zbot1.5_articubot/ros_packages.sh"
 
 echo
 echo "===================================================================="
@@ -45,7 +45,7 @@ echo
 echo ===============================================
 echo Build/Install robots packages from source
 echo ===============================================
-../install_from_source.sh $WORKSPACE "false" "zbot1.5_articubot/zbot1.5_articubot.repos"
+../../scripts/install_from_source.sh $WORKSPACE "false" "zbot1.5_articubot/zbot1.5_articubot.repos"
 
 echo
 echo ====================================================================
