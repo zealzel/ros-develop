@@ -24,7 +24,7 @@ echo
 echo ====================================================================
 echo Create udev rules
 echo ====================================================================
-../../scripts/create_zbot1.5_udev_files.sh
+./create_udev.sh
 
 echo "==============================================="
 echo "Install robots from package manager"
