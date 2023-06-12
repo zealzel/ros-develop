@@ -39,11 +39,12 @@ function install_realsense {
   sudo cp 99-realsense-libusb.rules /etc/udev/rules.d
 }
 
-if [[ "$ROSDISTRO" == "" || "$ROSDISTRO" == "<unknown>" ]]; then
-  echo "No ROS2 distro detected"
-  echo "Try running $ source /opt/ros/<ros_distro>/setup.bash and try again."
-  exit 1
-fi
+source /opt/ros/${ROS_DISTRO}/setup.bash
+# if [[ "$ROSDISTRO" == "" || "$ROSDISTRO" == "<unknown>" ]]; then
+#   echo "No ROS2 distro detected"
+#   echo "Try running $ source /opt/ros/<ros_distro>/setup.bash and try again."
+#   exit 1
+# fi
 
 echo "You are installing zbot_lino on your robot computer."
 echo
