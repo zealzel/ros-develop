@@ -1,24 +1,29 @@
-set -e
+#!/bin/bash
+source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
+
+WORKSPACE="${1:-zbotlino_ws}"
+ROS_DISTRO="${ROS_DISTRO-galactic}"
+../../scripts/create_workspace.sh "$WORKSPACE" || exit_code=$?
+if [[ $exit_code -ne 0 ]]; then
+  exit
+fi
+
+ORIGINAL_IMAGE="[488d07354c8b92592c3c0e759b0f4730dce21dce]ubuntu-20.04.5-preinstalled-server-arm64+raspi.img.xz"
+IMAGE_DOWNLOAD_SITE=
+echo "The original image: $ORIGINAL_IMAGE"
+echo "The original image donwload site: $IMAGE_DOWNLOAD_SITE"
+
+echo
+echo ====================================================================
+echo Install ROS2
+echo ====================================================================
+../../ros2/scripts/install_ros2.sh
+../../ros2/scripts/install_ros2_packages.sh
 
 ROSDISTRO="$(printenv ROS_DISTRO)"
-BASE=$1
-LASER_SENSOR=$2
-DEPTH_SENSOR=$3
-ARCH="$(uname -m)"
-WORKSPACE="$HOME/linorobot2_ws"
-
-ROBOT_TYPE_ARRAY=(2wd 4wd mecanum)
-DEPTH_SENSOR_ARRAY=(realsense zed zedm zed2 zed2i)
-LASER_SENSOR_ARRAY=(rplidar ldlidar ydlidar xv11)
-LASER_SENSOR_ARRAY+=("${DEPTH_SENSOR_ARRAY[@]}")
-
-if [ "$LASER_SENSOR" = "" ]; then
-  LASER_SENSOR="rplidar"
-fi
-
-if [ "$DEPTH_SENSOR" = "" ]; then
-  DEPTH_SENSOR="realsense"
-fi
+BASE=2wd
+LASER_SENSOR=rplidar
+DEPTH_SENSOR=realsense
 
 function install_rplidar {
   sudo apt install -y ros-"$ROS_DISTRO"-rplidar-ros
@@ -40,64 +45,22 @@ if [[ "$ROSDISTRO" == "" || "$ROSDISTRO" == "<unknown>" ]]; then
   exit 1
 fi
 
-if [ "$*" == "" ]; then
-  echo "No arguments provided"
-  echo
-  echo "Example: $ bash install_linorobot2.bash 2wd rplidar"
-  echo "Example: $ bash install_linorobot2.bash 2wd rplidar realsense"
-  echo "Example: $ bash install_linorobot2.bash 2wd - realsense"
-  echo "Example: $ bash install_linorobot2.bash 2wd"
-
-  echo
+echo "You are installing zbot_lino on your robot computer."
+echo
+echo "===========SUMMARY============"
+echo "ROBOT TYPE   : $BASE"
+echo "LASER SENSOR : $LASER_SENSOR"
+echo "DEPTH SENSOR : $DEPTH_SENSOR"
+echo
+echo "This installer will edit your ~/.bashrc."
+echo "Create a zbotlino_ws on your $HOME directory."
+echo "Install zbot_lino ROS2 dependencies."
+echo "Install udev rules on /etc/udev/rules.d folder."
+echo -n "Enter [y] to continue. "
+read reply
+if [[ "$reply" != "y" && "$reply" != "Y" ]]; then
+  echo "Exiting now."
   exit 1
-fi
-
-if [[ "$BASE" != "ci" ]] && !(printf '%s\n' "${ROBOT_TYPE_ARRAY[@]}" | grep -xq "$BASE"); then
-  echo "Invalid linorobot base: $1"
-  echo
-  echo "Valid Options:"
-  for key in "${!ROBOT_TYPE_ARRAY[@]}"; do echo "${ROBOT_TYPE_ARRAY[$key]}"; done
-  echo
-  exit 1
-fi
-
-if [[ "$BASE" != "ci" && "$LASER_SENSOR" != "" && "$LASER_SENSOR" != "-" ]] && !(printf '%s\n' "${LASER_SENSOR_ARRAY[@]}" | grep -xq "$LASER_SENSOR"); then
-  echo "Invalid linorobot2 laser sensor: $LASER_SENSOR"
-  echo
-  echo "Valid Options:"
-  for key in "${!LASER_SENSOR_ARRAY[@]}"; do echo "${LASER_SENSOR_ARRAY[$key]}"; done
-  echo
-  exit 1
-fi
-
-if [[ "$BASE" != "ci" && "$DEPTH_SENSOR" != "" ]] && !(printf '%s\n' "${DEPTH_SENSOR_ARRAY[@]}" | grep -xq "$DEPTH_SENSOR"); then
-  echo "Invalid linorobot2 depth sensor: $DEPTH_SENSOR"
-  echo
-  echo "Valid Options:"
-  for key in "${!DEPTH_SENSOR_ARRAY[@]}"; do echo "${DEPTH_SENSOR_ARRAY[$key]}"; done
-  echo
-  exit 1
-fi
-
-if [[ "$BASE" != "ci" ]]; then
-  echo
-  echo "You are installing linorobot2 on your robot computer."
-  echo
-  echo "===========SUMMARY============"
-  echo "ROBOT TYPE   : $BASE"
-  echo "LASER SENSOR : $LASER_SENSOR"
-  echo "DEPTH SENSOR : $DEPTH_SENSOR"
-  echo
-  echo "This installer will edit your ~/.bashrc."
-  echo "Create a linorobot2_ws on your $HOME directory."
-  echo "Install linorobot2 ROS2 dependencies."
-  echo "Install udev rules on /etc/udev/rules.d folder."
-  echo -n "Enter [y] to continue. "
-  read reply
-  if [[ "$reply" != "y" && "$reply" != "Y" ]]; then
-    echo "Exiting now."
-    exit 1
-  fi
 fi
 
 echo
@@ -144,23 +107,14 @@ echo
 echo "===================================================================="
 echo "Install LIDAR/Depth Sensor ROS2 drivers"
 echo "===================================================================="
-if (printf '%s\n' "${LASER_SENSOR_ARRAY[@]}" | grep -xq "$LASER_SENSOR"); then
-  install_"$LASER_SENSOR"
-fi
-
-if (printf '%s\n' "${DEPTH_SENSOR_ARRAY[@]}" | grep -xq "$DEPTH_SENSOR"); then
-  install_"$DEPTH_SENSOR"
-fi
-
-if [[ "$BASE" == "ci" ]]; then
-  for key in "${!LASER_SENSOR_ARRAY[@]}"; do install_"${LASER_SENSOR_ARRAY[$key]}"; done
-fi
+install_rplidar
+install_realsense
 
 echo
 echo "===================================================================="
 echo "Install apt packages"
 echo "===================================================================="
-sudo apt install -y python3-vcstool build-essential ros-${ROS_DISTRO}-robot-localization
+sudo apt install -y python3-vcstool build-essential ros-"$ROS_DISTRO"-robot-localization
 
 echo
 echo "===================================================================="
@@ -170,7 +124,7 @@ cd "$WORKSPACE"
 vcs_source="$VCS_REPOS"
 vcs import src < "$vcs_source"
 cd "$WORKSPACE/src/zbot_lino/linorobot2" && touch COLCON_IGNORE
-cd $WORKSPACE
+cd "$WORKSPACE"
 rosdep install --from-path src --ignore-src -y
 colcon build && source "$WORKSPACE"/install/setup.bash
 
@@ -187,31 +141,24 @@ echo "===================================================================="
 echo "Build zbot_lino"
 echo "===================================================================="
 cd "$WORKSPACE/src/zbot_lino/linorobot2" && rm COLCON_IGNORE
-cd $WORKSPACE && colcon build
+cd "$WORKSPACE" && colcon build
 source "$WORKSPACE"/install/setup.bash
 
 ## ENV Variables
 echo ======== Env Variables ========
 if [[ "$BASE" != "ci" ]]; then
-  ### 1. Robot Type
   echo "export LINOROBOT2_BASE=$BASE" >> ~/.bashrc
-  ### 2. Sensors
-  if [[ "$LASER_SENSOR" != "-" || "$LASER_SENSOR" != "" ]]; then
-    echo "export LINOROBOT2_LASER_SENSOR=$LASER_SENSOR" >> ~/.bashrc
-  fi
-
-  if [[ "$DEPTH_SENSOR" != "-" || "$DEPTH_SENSOR" != "" ]]; then
-    echo "export LINOROBOT2_DEPTH_SENSOR=$DEPTH_SENSOR" >> ~/.bashrc
-  fi
+  echo "export LINOROBOT2_LASER_SENSOR=$LASER_SENSOR" >> ~/.bashrc
+  echo "export LINOROBOT2_DEPTH_SENSOR=$DEPTH_SENSOR" >> ~/.bashrc
   echo
   echo "Do you want to add sourcing of linorobot2_ws on your ~/.bashrc?"
   echo -n "Yes [y] or No [n]: "
   read reply
   if [[ "$reply" == "y" || "$reply" == "Y" ]]; then
-    echo "source \$HOME/linorobot2_ws/install/setup.bash" >> ~/.bashrc
+    echo "source \$HOME/${WORKSPACE}/install/setup.bash" >> ~/.bashrc
   else
     echo
-    echo "Remember to run $ source ~/linorobot2_ws/install/setup.bash every time you open a terminal."
+    echo "Remember to run $ source ~/${WORKSPACE}/install/setup.bash every time you open a terminal."
   fi
 fi
 
@@ -219,4 +166,3 @@ echo
 echo "INSTALLATION DONE."
 echo
 echo "Restart your robot computer now."
-
