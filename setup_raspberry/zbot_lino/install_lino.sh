@@ -1,9 +1,10 @@
 #!/bin/bash
 source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
 
-WORKSPACE="${1:-zbotlino_ws}"
+WORKSPACE_NAME="${1:-zbotlino_ws}"
+WORKSPACE=$HOME/$WORKSPACE_NAME
 ROS_DISTRO="${ROS_DISTRO-galactic}"
-../../scripts/create_workspace.sh "$WORKSPACE" || exit_code=$?
+../../scripts/create_workspace.sh "$WORKSPACE_NAME" || exit_code=$?
 if [[ $exit_code -ne 0 ]]; then
   exit
 fi
@@ -67,13 +68,6 @@ fi
 echo
 echo "INSTALLING NOW...."
 echo
-
-echo
-echo "===================================================================="
-echo "Create workspace"
-echo "===================================================================="
-mkdir -p "$WORKSPACE"/src
-source /opt/ros/"$ROS_DISTRO"/setup.bash
 
 echo
 echo "===================================================================="
