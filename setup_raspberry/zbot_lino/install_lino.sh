@@ -150,10 +150,10 @@ if [[ "$BASE" != "ci" ]]; then
   echo -n "Yes [y] or No [n]: "
   read reply
   if [[ "$reply" == "y" || "$reply" == "Y" ]]; then
-    echo "source \$HOME/${WORKSPACE}/install/setup.bash" >> ~/.bashrc
+    echo "source ${WORKSPACE}/install/setup.bash" >> ~/.bashrc
   else
     echo
-    echo "Remember to run $ source ~/${WORKSPACE}/install/setup.bash every time you open a terminal."
+    echo "Remember to run $ source ${WORKSPACE}/install/setup.bash every time you open a terminal."
   fi
 fi
 
