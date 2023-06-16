@@ -6,9 +6,9 @@ ROS1DISTRO_ARRY=("melodic" "noetic")
 ROS2DISTRO_ARRY=("galactic" "foxy" "humble")
 
 if [[ " ${ROS1DISTRO_ARRY[@]} " =~ " ${ROS_DISTRO} " ]]; then
-  echo "ROS1 distro: $ROSDISTRO currently is not supported"
+  echo "ROS1 distro: $ROS_DISTRO currently is not supported"
   exit 1
-elif [[ " ${ROS2DISTRO_ARRY[@]} " =~ " ${ROSDISTRO} " ]]; then
+elif [[ " ${ROS2DISTRO_ARRY[@]} " =~ " ${ROS_DISTRO} " ]]; then
   ros_packages=(
     # basic
     "ros-$ROS_DISTRO-xacro"
@@ -36,7 +36,7 @@ elif [[ " ${ROS2DISTRO_ARRY[@]} " =~ " ${ROSDISTRO} " ]]; then
     # "ros-$ROS_DISTRO-turtlebot3-simulation"
   )
 else
-  echo "ROS distro: $ROSDISTRO is not supported"
+  echo "ROS distro: $ROS_DISTRO is not supported"
   exit 1
 fi
 
