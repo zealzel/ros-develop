@@ -9,19 +9,27 @@ echo '================================'
 echo '       Install neovim           '
 echo '================================'
 # Official neovim repo: https://github.com/neovim/neovim/releases
-NVIM_VERSION="v0.8.3"
-wget https://github.com/neovim/neovim/releases/download/"$NVIM_VERSION"/nvim-linux64.deb
+#NVIM_VERSION="v0.8.3"
+# wget https://github.com/neovim/neovim/releases/download/"$NVIM_VERSION"/nvim-linux64.deb
 
 # NVIM_VERSION="nightly"
 # https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb
 
-sudo apt install -y ./nvim-linux64.deb || exit_code=$?
-if [[ $exit_code -ne 0 ]]; then
-  echo "install neovim failed."
-  exit
-else
-  echo "install neovim done."
-fi
+#sudo apt install -y ./nvim-linux64.deb || exit_code=$?
+# if [[ $exit_code -ne 0 ]]; then
+#   echo "install neovim failed."
+#   exit
+# else
+#   echo "install neovim done."
+# fi
+
+NVIM_VERSION="v0.9.1"
+rm $HOME/nvim-linux64.tar.gz > /dev/null 2>&1
+rm -rf $HOME/nvim-linux64 > /dev/null 2>&1
+cd "$HOME" && wget "https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim-linux64.tar.gz"
+tar xvf $HOME/nvim-linux64.tar.gz
+sudo rm /usr/bin/nvim > /dev/null 2>&1
+sudo ln -s $HOME/nvim-linux64/bin/nvim /usr/bin/nvim
 
 echo '================================'
 echo '        Install python          '

@@ -1,0 +1,10 @@
+ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyACM0
+ros2 launch linorobot2_bringup bringup.launch.py
+
+ros2 launch linorobot2_navigation slam.launch.py
+ros2 run nav2_map_server map_saver_cli -f mymap
+ros2 launch linorobot2_navigation navigation.launch.py
+
+
+
+ros2 launch linorobot2_navigation navigation.launch.py map:=$HOME/maps/office_0627_2.yaml

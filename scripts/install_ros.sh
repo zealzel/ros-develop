@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 
 # === ROS1 distros ===
+# melodic: https://wiki.ros.org/melodic/Installation/Ubuntu
 # noetic: http://wiki.ros.org/noetic/Installation/Ubuntu
 # === ROS2 distros ===
 # galactic: https://docs.ros.org/en/galactic/Installation/Ubuntu-Install-Debians.html
