@@ -10,9 +10,9 @@ curl -sSL http://get.gazebosim.org | sh
 # Install gazebo_ros_pkgs
 # ref: http://classic.gazebosim.org/tutorials?tut=ros2_installing&cat=connect_ros
 if [[ " ${ROS1DISTRO_ARRY[@]} " =~ " ${ROS_DISTRO} " ]]; then
-  sudo apt install "ros-${ROS_DISTRO}-gazebo-ros-pkgs"
+  sudo apt install "ros-${ROS_DISTRO}-gazebo-ros-pkgs" -y
 elif [[ " ${ROS2DISTRO_ARRY[@]} " =~ " ${ROS_DISTRO} " ]]; then
-  sudo apt install "ros-${ROS_DISTRO}-gazebo-ros-pkgs"
+  sudo apt install "ros-${ROS_DISTRO}-gazebo-ros-pkgs" -y
 else
   echo "ROS1 distro: $ROS_DISTRO currently is not supported"
   exit 1
