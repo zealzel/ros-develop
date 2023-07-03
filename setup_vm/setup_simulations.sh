@@ -41,7 +41,7 @@ fi
 echo "==============================================="
 echo "Build/Install robots/worlds from source"
 echo "==============================================="
-./install_from_source.sh $WORKSPACE "false" "simulations_articubot_one/articubot.repos"
+./install_from_source.sh $WORKSPACE "false" "simulations_zbot_artic/zbot_artic.repos"
 ./install_from_source.sh $WORKSPACE "false" "simulations_neobotix/neobotix.repos"
 ./install_from_source.sh $WORKSPACE "false" "world_aws_robotmaker/deps.repos"
 
