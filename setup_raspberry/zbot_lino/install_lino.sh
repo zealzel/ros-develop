@@ -3,7 +3,7 @@ source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
 
 WORKSPACE_NAME="${1:-zbotlino_ws}"
 WORKSPACE=$HOME/$WORKSPACE_NAME
-ROS_DISTRO="${ROS_DISTRO-galactic}"
+ROSDISTRO="${ROSDISTRO-galactic}"
 ../../scripts/create_workspace.sh "$WORKSPACE_NAME" || exit_code=$?
 if [[ $exit_code -ne 0 ]]; then
   exit
@@ -21,7 +21,8 @@ echo ====================================================================
 ../../ros2/scripts/install_ros2.sh
 ../../ros2/scripts/install_ros2_packages.sh
 
-ROSDISTRO="$(printenv ROS_DISTRO)"
+source /opt/ros/${ROSDISTRO}/setup.bash
+ROS_DISTRO="$(printenv ROS_DISTRO)"
 BASE=2wd
 LASER_SENSOR=rplidar
 DEPTH_SENSOR=realsense
@@ -40,8 +41,7 @@ function install_realsense {
   sudo cp 99-realsense-libusb.rules /etc/udev/rules.d
 }
 
-source /opt/ros/${ROS_DISTRO}/setup.bash
-if [[ "$ROSDISTRO" == "" || "$ROSDISTRO" == "<unknown>" ]]; then
+if [[ "$ROS_DISTRO" == "" || "$ROS_DISTRO" == "<unknown>" ]]; then
   echo "No ROS2 distro detected"
   echo "Try running $ source /opt/ros/<ros_distro>/setup.bash and try again."
   exit 1
