@@ -146,6 +146,8 @@ if [[ "$BASE" != "ci" ]]; then
   echo "export LINOROBOT2_LASER_SENSOR=$LASER_SENSOR" >> ~/.bashrc
   echo "export LINOROBOT2_DEPTH_SENSOR=$DEPTH_SENSOR" >> ~/.bashrc
   echo
+  echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> ~/.bashrc
+  echo
   echo "Do you want to add sourcing of linorobot2_ws on your ~/.bashrc?"
   echo -n "Yes [y] or No [n]: "
   read reply
