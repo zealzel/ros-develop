@@ -4,7 +4,7 @@ function print_usage {
   echo "Usage: $0 [OPTIONS]"
   echo ""
   echo "OPTIONS:"
-  echo "  -u, --UBUNTU_CODENAME  the codename of Ubuntu LTS (default: focal)"
+  echo "  -u, --UBUNTU_CODENAME  the codename of Ubuntu LTS (focal|jammy) (default: focal)"
   echo "  -r, --ROSDISTRO        the ROS distribution to install (noetic|galactic|foxy|humble) (default: galactic)"
   echo "  -i, --ROS_INSTALL_TYPE the type of ROS installation (desktop|ros-base) (default: desktop)"
   echo "  -a, --APPEND_SOURCE_SCRIPT_TO_BASHRC"
