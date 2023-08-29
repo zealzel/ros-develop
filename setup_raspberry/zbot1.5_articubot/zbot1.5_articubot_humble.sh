@@ -49,7 +49,7 @@ echo Build/Install robots packages from source
 echo ===============================================
 # install_from_source="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/../../scripts/install_from_source.sh")"
 # "${install_from_source}" $WORKSPACE "false" "zbot1.5_articubot/zbot1.5_articubot.repos"
-../../scripts/install_from_source.sh $WORKSPACE "false" "zbot1.5_articubot.repos"
+../../scripts/install_from_source.sh $WORKSPACE "false" "zbot1.5_articubot_humble.repos"
 
 echo
 echo ====================================================================
