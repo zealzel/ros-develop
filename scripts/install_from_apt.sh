@@ -1,8 +1,10 @@
 #!/bin/bash
 source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../scripts/utils.sh"
+source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../scripts/argparse_ros.sh"
+parse_args "$@"
 
 WORKSPACE="${1:-colcon_ws}"
-ROS_DISTRO="${ROS_DISTRO-galactic}"
+ROSDISTRO="${ROSDISTRO-galactic}"
 CURRENT_SCRIPT_PATH="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 ADD_BASHRC=${2-"false"}
 APT_PACKAGE_FILE=$3
@@ -27,21 +29,13 @@ else
   exit 1
 fi
 
-# for ros_package in "${ros_packages[@]}"; do
-#   apt_packages+=("ros-$ROS_DISTRO-$ros_package")
-#   echo $ros_package
-# done
-# for apt_package in "${apt_packages[@]}"; do
-#   echo $apt_package
-# done
-
 echo
 echo ====================================================================
-echo Install ROS packages for ROS_DISTRO "$ROS_DISTRO"
+echo Install ROS packages for ROSDISTRO "$ROSDISTRO"
 echo ====================================================================
 TARGET_SCRIPT_ABSOLUTE_PATH="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/../scripts/install_ros_packages.sh")"
 echo "TARGET_SCRIPT_ABSOLUTE_PATH: $TARGET_SCRIPT_ABSOLUTE_PATH"
-"${TARGET_SCRIPT_ABSOLUTE_PATH}" "$ROS_DISTRO" "${ros_packages[@]}"
+"${TARGET_SCRIPT_ABSOLUTE_PATH}" "$ROSDISTRO" "${ros_packages[@]}"
 
 
 if [ "$ADD_BASHRC" = "true" ]; then
@@ -49,7 +43,7 @@ if [ "$ADD_BASHRC" = "true" ]; then
   echo ====================================================================
   echo Append bashrc file
   echo ====================================================================
-  append_bashrc "source /opt/ros/${ROS_DISTRO}/setup.bash"
+  append_bashrc "source /opt/ros/${ROSDISTRO}/setup.bash"
 
   append_bashrc "export LIBGL_ALWAYS_SOFTWARE=1"
   append_bashrc "export OGRE_RTT_MODE=Copy"

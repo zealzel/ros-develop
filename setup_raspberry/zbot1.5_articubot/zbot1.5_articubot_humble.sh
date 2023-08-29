@@ -1,8 +1,13 @@
 #!/bin/bash
 source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
+source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/argparse_ros.sh"
+parse_args "$@"
 
 WORKSPACE="${1:-zbot_ws}"
-ROS_DISTRO="${ROS_DISTRO-humble}"
+ROSDISTRO="${ROSDISTRO-humble}"
+echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
+echo "ROSDISTRO=$ROSDISTRO"
+
 ../../scripts/create_workspace.sh $WORKSPACE || exit_code=$?
 if [[ $exit_code -ne 0 ]]; then
   exit
@@ -17,8 +22,8 @@ echo
 echo ====================================================================
 echo Install ROS2
 echo ====================================================================
-../../ros2/scripts/install_ros2.sh -u jammy -r humble
-../../ros2/scripts/install_ros2_packages.sh -r humble
+../../ros2/scripts/install_ros2.sh -u $UBUNTU_CODENAME -r $ROSDISTRO
+../../ros2/scripts/install_ros2_packages.sh -r $ROSDISTRO
 
 echo
 echo ====================================================================
@@ -31,7 +36,7 @@ echo "Install robots from package manager"
 echo "==============================================="
 # install_from_apt="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/../../scripts/install_from_apt.sh")"
 # "${install_from_apt}" $WORKSPACE "false" "zbot1.5_articubot/ros_packages.sh"
-../../scripts/install_from_apt.sh $WORKSPACE "false" "ros_packages.sh"
+../../scripts/install_from_apt.sh $WORKSPACE "false" "ros_packages.sh" -r humble
 
 echo
 echo "===================================================================="
@@ -55,4 +60,4 @@ echo
 echo ====================================================================
 echo Append bashrc file
 echo ====================================================================
-append_bashrc 'source /opt/ros/${ROS_DISTRO}/setup.bash'
+append_bashrc 'source /opt/ros/${ROSDISTRO}/setup.bash'
