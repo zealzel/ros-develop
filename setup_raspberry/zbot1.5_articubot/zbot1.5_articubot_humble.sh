@@ -18,7 +18,7 @@ echo ====================================================================
 echo Install ROS2
 echo ====================================================================
 ../../ros2/scripts/install_ros2.sh -u jammy -r humble
-../../ros2/scripts/install_ros2_packages.sh
+../../ros2/scripts/install_ros2_packages.sh -r humble
 
 echo
 echo ====================================================================
