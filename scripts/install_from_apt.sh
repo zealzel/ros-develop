@@ -18,12 +18,12 @@ if [ -d ~/"$WORKSPACE" ]; then
   if [ -f "$ros_package_file" ]; then
     echo "ros_package_file: $ros_package_file exists"
   else
-    echo "ERROR: $ros_package_file does not exist"
+    echo "ERROR: ros_package_file $ros_package_file does not exist"
     exit 1
   fi
   source "$ros_package_file"
 else
-  echo "ERROR: $WORKSPACE does not exist"
+  echo "ERROR: WORKSPACE $WORKSPACE does not exist"
   exit 1
 fi
 
