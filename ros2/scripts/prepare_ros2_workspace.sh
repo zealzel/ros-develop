@@ -6,7 +6,7 @@ parse_args "$@"
 # echo "ROSDISTRO=$ROSDISTRO"
 # echo "WORKSPACE=$WORKSPACE"
 
-../scripts/create_workspace.sh $WORKSPACE || exit_code=$?
+../../scripts/create_workspace.sh $WORKSPACE || exit_code=$?
 if [[ $exit_code -ne 0 ]]; then
   exit
 fi
