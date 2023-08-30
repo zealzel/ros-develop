@@ -7,6 +7,7 @@ function print_usage {
   echo "  -u, --UBUNTU_CODENAME  the codename of Ubuntu LTS (focal|jammy) (default: focal)"
   echo "  -r, --ROSDISTRO        the ROS distribution to install (noetic|galactic|foxy|humble) (default: galactic)"
   echo "  -i, --ROS_INSTALL_TYPE the type of ROS installation (desktop|ros-base) (default: desktop)"
+  echo "  -w, --WORKSPACE the workspace to install ROS2 (default: ros2_ws)"
   echo "  -a, --APPEND_SOURCE_SCRIPT_TO_BASHRC"
   echo "                         whether to append the setup script to ~/.bashrc (default: false)"
   echo "  -h, --help             print this help message and exit"
@@ -15,7 +16,7 @@ function print_usage {
 function parse_args {
   # 将命令行参数转换为短选项和长选项
   OPTIONS=u:r:i:ah
-  LONGOPTIONS=UBUNTU_CODENAME:,ROSDISTRO:,ROS_INSTALL_TYPE:,APPEND_SOURCE_SCRIPT_TO_BASHRC,help
+  LONGOPTIONS=UBUNTU_CODENAME:,ROSDISTRO:,ROS_INSTALL_TYPE:,WORKSPACE:,APPEND_SOURCE_SCRIPT_TO_BASHRC,help
 
   # 解析命令行参数
   PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTIONS --name "$0" -- "$@")
@@ -40,6 +41,10 @@ function parse_args {
         ;;
       -i|--ROS_INSTALL_TYPE)
         ROS_INSTALL_TYPE="${2#*=}"
+        shift 2
+        ;;
+      -w|--WORKSPACE)
+        WORKSPACE="${2#*=}"
         shift 2
         ;;
       -a|--APPEND_SOURCE_SCRIPT_TO_BASHRC)
@@ -79,5 +84,6 @@ function parse_args {
   UBUNTU_CODENAME="${UBUNTU_CODENAME:-focal}"
   ROSDISTRO="${ROSDISTRO:-galactic}"
   ROS_INSTALL_TYPE="${ROS_INSTALL_TYPE:-desktop}"
+  WORKSPACE="${WORKSPACE:-ros2_ws}"
   APPEND_SOURCE_SCRIPT_TO_BASHRC="${APPEND_SOURCE_SCRIPT_TO_BASHRC:-false}"
 }

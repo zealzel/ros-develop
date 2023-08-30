@@ -1,7 +1,7 @@
 #!/bin/bash
 source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../scripts/utils.sh"
-source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../scripts/argparse_ros.sh"
-parse_args "$@"
+# source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../scripts/argparse_ros.sh"
+# parse_args "$@"
 
 WORKSPACE="${1:-colcon_ws}"
 ROSDISTRO="${ROSDISTRO-galactic}"
