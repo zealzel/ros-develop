@@ -3,7 +3,7 @@ source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
 source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/argparse_ros.sh"
 parse_args "$@"
 
-WORKSPACE="${WORKSPACE-zbot_ws}"
+WORKSPACE="zbot_ws"
 ROSDISTRO="${ROSDISTRO-humble}"
 echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
 echo "ROSDISTRO=$ROSDISTRO"
