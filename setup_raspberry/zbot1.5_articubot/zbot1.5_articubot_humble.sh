@@ -4,7 +4,7 @@ source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/argparse_r
 parse_args "$@"
 
 UBUNTU_CODENAME="jammy"
-ROSDISTRO="${ROSDISTRO-humble}"
+ROSDISTRO="humble"
 WORKSPACE="zbot_ws"
 echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
 echo "ROSDISTRO=$ROSDISTRO"
