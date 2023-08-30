@@ -5,7 +5,7 @@ parse_args "$@"
 
 UBUNTU_CODENAME="jammy"
 ROSDISTRO="humble"
-WORKSPACE="zbotartic_ws"
+WORKSPACE="zbotlino_ws"
 echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
 echo "ROSDISTRO=$ROSDISTRO"
 echo "WORKSPACE=$WORKSPACE"
