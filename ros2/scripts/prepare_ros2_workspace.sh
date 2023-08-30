@@ -2,6 +2,9 @@
 source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../scripts/utils.sh"
 source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../scripts/argparse_ros.sh"
 parse_args "$@"
+# echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
+# echo "ROSDISTRO=$ROSDISTRO"
+# echo "WORKSPACE=$WORKSPACE"
 
 ../scripts/create_workspace.sh $WORKSPACE || exit_code=$?
 if [[ $exit_code -ne 0 ]]; then
