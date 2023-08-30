@@ -6,10 +6,6 @@ echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
 echo "ROSDISTRO=$ROSDISTRO"
 echo "WORKSPACE=$WORKSPACE"
 ../../ros2/scripts/prepare_ros2_workspace.sh -u $UBUNTU_CODENAME -r $ROSDISTRO -w $WORKSPACE
-../../scripts/create_workspace.sh $WORKSPACE || exit_code=$?
-if [[ $exit_code -ne 0 ]]; then
-  exit
-fi
 
 ORIGINAL_IMAGE="[1ebe853ca69ce507a69f97bb70f13bc1ffcfa7a2]ubuntu-22.04.2-preinstalled-server-arm64+raspi.img.xz"
 IMAGE_DOWNLOAD_SITE=
