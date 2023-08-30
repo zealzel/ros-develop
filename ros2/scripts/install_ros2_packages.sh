@@ -1,10 +1,6 @@
 #!/bin/bash
-# source ../../scripts/utils.sh
-source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
-
 source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
 source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/argparse_ros.sh"
-
 parse_args "$@"
 
 echo "ROSDISTRO=$ROSDISTRO"
