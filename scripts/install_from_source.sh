@@ -35,7 +35,7 @@ echo ====================================================================
 echo Install ROS packages for ROSDISTRO "$ROSDISTRO"
 echo ====================================================================
 TARGET_SCRIPT_ABSOLUTE_PATH="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/../ros2/scripts/install_ros2_packages.sh")"
-"$TARGET_SCRIPT_ABSOLUTE_PATH" "$ROSDISTRO"
+"$TARGET_SCRIPT_ABSOLUTE_PATH" -r $ROSDISTRO
 
 echo
 echo ====================================================================
