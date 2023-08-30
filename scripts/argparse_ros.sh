@@ -15,7 +15,7 @@ function print_usage {
 
 function parse_args {
   # 将命令行参数转换为短选项和长选项
-  OPTIONS=u:r:i:ah
+  OPTIONS=u:r:i:w:ah
   LONGOPTIONS=UBUNTU_CODENAME:,ROSDISTRO:,ROS_INSTALL_TYPE:,WORKSPACE:,APPEND_SOURCE_SCRIPT_TO_BASHRC,help
 
   # 解析命令行参数

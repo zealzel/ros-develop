@@ -8,6 +8,7 @@ WORKSPACE="${WORKSPACE-zbot_ws}"
 ROSDISTRO="${ROSDISTRO-humble}"
 echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
 echo "ROSDISTRO=$ROSDISTRO"
+echo "WORKSPACE=$WORKSPACE"
 
 ../../scripts/create_workspace.sh $WORKSPACE || exit_code=$?
 if [[ $exit_code -ne 0 ]]; then
