@@ -5,7 +5,7 @@ parse_args "$@"
 
 UBUNTU_CODENAME="jammy"
 ROSDISTRO="humble"
-WORKSPACE="zbot_ws"
+WORKSPACE="zbotartic_ws"
 echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
 echo "ROSDISTRO=$ROSDISTRO"
 echo "WORKSPACE=$WORKSPACE"
@@ -33,15 +33,15 @@ echo Create udev rules
 echo ====================================================================
 ./create_udev.sh
 
-echo "==============================================="
-echo "Install robots from package manager"
-echo "==============================================="
+echo ===============================================
+echo Install robots from package manager
+echo ===============================================
 ../../scripts/install_from_apt.sh $WORKSPACE "humble" "ros_packages.sh" "false"
 
 echo
-echo "===================================================================="
-echo "Ensure rosdep is initialized"
-echo "===================================================================="
+echo ====================================================================
+echo Ensure rosdep is initialized
+echo ====================================================================
 rosdep update || exit_code=$?
 if [[ $exit_code -ne 0 ]]; then
   sudo rosdep init

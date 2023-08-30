@@ -1,10 +1,16 @@
 #!/bin/bash
 source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
+source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/argparse_ros.sh"
+parse_args "$@"
 
-WORKSPACE_NAME="${1:-zbotlino_ws}"
-WORKSPACE=$HOME/$WORKSPACE_NAME
-ROSDISTRO="${ROSDISTRO-humble}"
-../../scripts/create_workspace.sh "$WORKSPACE_NAME" || exit_code=$?
+UBUNTU_CODENAME="jammy"
+ROSDISTRO="humble"
+WORKSPACE="zbotartic_ws"
+echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
+echo "ROSDISTRO=$ROSDISTRO"
+echo "WORKSPACE=$WORKSPACE"
+
+../../scripts/create_workspace.sh $WORKSPACE || exit_code=$?
 if [[ $exit_code -ne 0 ]]; then
   exit
 fi
@@ -18,8 +24,8 @@ echo
 echo ====================================================================
 echo Install ROS2
 echo ====================================================================
-../../ros2/scripts/install_ros2.sh -u jammy -r humble
-../../ros2/scripts/install_ros2_packages.sh
+../../ros2/scripts/install_ros2.sh -u $UBUNTU_CODENAME -r $ROSDISTRO
+../../ros2/scripts/install_ros2_packages.sh -r $ROSDISTRO
 
 source /opt/ros/${ROSDISTRO}/setup.bash
 ROS_DISTRO="$(printenv ROS_DISTRO)"
