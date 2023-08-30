@@ -3,7 +3,6 @@ source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
 source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/argparse_ros.sh"
 parse_args "$@"
 
-# WORKSPACE="${1:-zbot_ws}"
 WORKSPACE="${WORKSPACE-zbot_ws}"
 ROSDISTRO="${ROSDISTRO-humble}"
 echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
@@ -36,9 +35,7 @@ echo ====================================================================
 echo "==============================================="
 echo "Install robots from package manager"
 echo "==============================================="
-# install_from_apt="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/../../scripts/install_from_apt.sh")"
-# "${install_from_apt}" $WORKSPACE "false" "zbot1.5_articubot/ros_packages.sh"
-../../scripts/install_from_apt.sh $WORKSPACE "false" "ros_packages.sh" -r humble
+../../scripts/install_from_apt.sh $WORKSPACE "humble" "ros_packages.sh" "false"
 
 echo
 echo "===================================================================="
@@ -54,8 +51,6 @@ echo
 echo ===============================================
 echo Build/Install robots packages from source
 echo ===============================================
-# install_from_source="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/../../scripts/install_from_source.sh")"
-# "${install_from_source}" $WORKSPACE "false" "zbot1.5_articubot/zbot1.5_articubot.repos"
 ../../scripts/install_from_source.sh $WORKSPACE "false" "zbot1.5_articubot_humble.repos"
 
 echo

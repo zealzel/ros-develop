@@ -1,13 +1,11 @@
 #!/bin/bash
 source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../scripts/utils.sh"
-# source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../scripts/argparse_ros.sh"
-# parse_args "$@"
 
 WORKSPACE="${1:-colcon_ws}"
-ROSDISTRO="${ROSDISTRO-galactic}"
-CURRENT_SCRIPT_PATH="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
-ADD_BASHRC=${2-"false"}
+ROSDISTRO="${2:-galactic}"
 APT_PACKAGE_FILE=$3
+ADD_BASHRC=${4-"false"}
+CURRENT_SCRIPT_PATH="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
 echo
 echo ====================================================================
