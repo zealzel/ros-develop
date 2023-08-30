@@ -2,12 +2,9 @@
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 source "$script_dir/../../scripts/utils.sh"
 source "$script_dir/../../scripts/argparse_ros.sh"
-# source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
-# source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/argparse_ros.sh"
 parse_args "$@"
 
 "$script_dir/../../scripts/create_workspace.sh" $WORKSPACE || exit_code=$?
-# "$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/../../scripts/create_workspace.sh")" $WORKSPACE || exit_code=$?
 if [[ $exit_code -ne 0 ]]; then
   exit
 fi
@@ -18,8 +15,6 @@ echo Install ROS2
 echo ====================================================================
 "$script_dir/install_ros2.sh" -u $UBUNTU_CODENAME -r $ROSDISTRO
 "$script_dir/install_ros2_packages.sh" -u $UBUNTU_CODENAME -r $ROSDISTRO
-# "$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/install_ros2.sh")" -u $UBUNTU_CODENAME -r $ROSDISTRO
-# "$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/install_ros2_packages.sh")" -u $UBUNTU_CODENAME -r $ROSDISTRO
 
 echo
 echo ====================================================================

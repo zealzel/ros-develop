@@ -1,0 +1,13 @@
+repositories:
+  serial:
+    type: git
+    url: https://github.com/joshnewans/serial
+    version: newans_ros2
+  diffdrive_arduino:
+    type: git
+    url: https://github.com/zealzel/diffdrive_arduino
+    version: galactic-zbot1.5-arti
+  articubot_one:
+    type: git
+    url: https://github.com/zealzel/articubot_one.git
+    version: main
