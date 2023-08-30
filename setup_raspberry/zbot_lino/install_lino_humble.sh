@@ -6,7 +6,6 @@ parse_args "$@"
 UBUNTU_CODENAME="jammy"
 ROSDISTRO="humble"
 WORKSPACE="zbotlino_ws"
-WORKSPACE=$HOME/$WORKSPACE
 echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
 echo "ROSDISTRO=$ROSDISTRO"
 echo "WORKSPACE=$WORKSPACE"
@@ -89,6 +88,7 @@ echo
 echo ====================================================================
 echo Basic check
 echo ====================================================================
+WORKSPACE=$HOME/$WORKSPACE
 VCS_REPOS="zbot_lino.repos"
 vcs_source="$VCS_REPOS"
 if [ -d "$WORKSPACE" ]; then
