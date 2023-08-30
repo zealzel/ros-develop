@@ -54,8 +54,8 @@ echo Build/Install robots packages from source
 echo ===============================================
 ../../scripts/install_from_source.sh $WORKSPACE $ROSDISTRO "zbot1.5_articubot_humble.repos" "false"
 
-echo
-echo ====================================================================
-echo Append bashrc file
-echo ====================================================================
-append_bashrc 'source /opt/ros/${ROSDISTRO}/setup.bash'
+# echo
+# echo ====================================================================
+# echo Append bashrc file
+# echo ====================================================================
+# append_bashrc "source /opt/ros/$ROSDISTRO/setup.bash"

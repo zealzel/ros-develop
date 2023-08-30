@@ -12,7 +12,6 @@ parse_args "$@"
 echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
 echo "ROSDISTRO=$ROSDISTRO"
 echo "ROS_INSTALL_TYPE=$ROS_INSTALL_TYPE"
-echo "APPEND_SOURCE_SCRIPT_TO_BASHRC=$APPEND_SOURCE_SCRIPT_TO_BASHRC"
 
 ensure_sudo
 sudo apt-get update && sudo apt-get install -y curl gnupg
@@ -50,11 +49,9 @@ sudo apt upgrade -y
 sudo apt install -y ros-"$ROSDISTRO-$ROS_INSTALL_TYPE"
 sudo apt install -y ros-dev-tools
 
-if [ "$APPEND_SOURCE_SCRIPT_TO_BASHRC" = "true" ]; then
-  echo
-  echo ====================================================================
-  echo Sourcing the setup script
-  echo ====================================================================
-  source "/opt/ros/${ROSDISTRO}/setup.bash"
-  append_bashrc "source /opt/ros/${ROSDISTRO}/setup.bash"
-fi
+echo
+echo ====================================================================
+echo Sourcing the setup script
+echo ====================================================================
+source "/opt/ros/${ROSDISTRO}/setup.bash"
+append_bashrc "source /opt/ros/${ROSDISTRO}/setup.bash"
