@@ -11,6 +11,7 @@ parse_args "$@"
 source /opt/ros/${ROSDISTRO}/setup.bash >/dev/null 2>&1 || exit_code=$?
 if [[ $exit_code -ne 0 ]]; then
   echo "/opt/ros/$ROSDISTRO/setup.sh does not exist."
+  print_usage
   exit
 fi
 ROS_DISTRO="$(printenv ROS_DISTRO)"
