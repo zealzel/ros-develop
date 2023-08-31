@@ -5,10 +5,14 @@ source "$script_dir/../scripts/argparse_ros.sh"
 WORKSPACE="simulations"
 UBUNTU_CODENAME=$(cat /etc/os-release |grep VERSION_CODENAME|cut -d"=" -f2)
 parse_args "$@"
-echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
-echo "ROSDISTRO=$ROSDISTRO"
-echo "WORKSPACE=$WORKSPACE"
-source /opt/ros/${ROSDISTRO}/setup.bash
+# echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
+# echo "ROSDISTRO=$ROSDISTRO"
+# echo "WORKSPACE=$WORKSPACE"
+source /opt/ros/${ROSDISTRO}/setup.bash >/dev/null 2>&1 || exit_code=$?
+if [[ $exit_code -ne 0 ]]; then
+  echo "/opt/ros/$ROSDISTRO/setup.sh does not exist."
+  exit
+fi
 ROS_DISTRO="$(printenv ROS_DISTRO)"
 ../ros2/scripts/prepare_ros2_workspace.sh -u $UBUNTU_CODENAME -r $ROS_DISTRO -w $WORKSPACE
 
