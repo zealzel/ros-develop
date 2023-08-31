@@ -65,7 +65,7 @@ echo ====================================================================
 echo Basic check
 echo ====================================================================
 WORKSPACE=$HOME/$WORKSPACE
-VCS_REPOS="zbot_lino.repos"
+VCS_REPOS="zbot_lino_$ROSDISTRO.repos"
 vcs_source="$VCS_REPOS"
 if [ -d "$WORKSPACE" ]; then
   if [ -f "$vcs_source" ]; then
