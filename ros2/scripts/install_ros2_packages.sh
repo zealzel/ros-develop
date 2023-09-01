@@ -28,6 +28,8 @@ ros_packages=(
   "ros-$ROSDISTRO-slam-toolbox"
   "ros-$ROSDISTRO-navigation2"
   "ros-$ROSDISTRO-nav2-bringup"
+  # dds
+  "ros-$ROSDISTRO-rmw-cyclonedds-cpp"
   # robot
   # "ros-$ROS_DISTRO-turtlebot3-simulation"
 )
