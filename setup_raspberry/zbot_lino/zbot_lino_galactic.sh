@@ -1,33 +1,18 @@
 #!/bin/bash
-source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
-source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/argparse_ros.sh"
-parse_args "$@"
-
-UBUNTU_CODENAME="jammy"
-ROSDISTRO="humble"
+UBUNTU_CODENAME="focal"
+ROSDISTRO="galactic"
 WORKSPACE="zbotlino_ws"
 echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
 echo "ROSDISTRO=$ROSDISTRO"
 echo "WORKSPACE=$WORKSPACE"
+../../ros2/scripts/prepare_ros2_workspace.sh -u "$UBUNTU_CODENAME" -r "$ROSDISTRO" -w "$WORKSPACE"
 
-../../scripts/create_workspace.sh $WORKSPACE || exit_code=$?
-if [[ $exit_code -ne 0 ]]; then
-  exit
-fi
-
-ORIGINAL_IMAGE="[1ebe853ca69ce507a69f97bb70f13bc1ffcfa7a2]ubuntu-22.04.2-preinstalled-server-arm64+raspi.img.xz"
+ORIGINAL_IMAGE="[488d07354c8b92592c3c0e759b0f4730dce21dce]ubuntu-20.04.5-preinstalled-server-arm64+raspi.img.xz"
 IMAGE_DOWNLOAD_SITE=
 echo "The original image: $ORIGINAL_IMAGE"
 echo "The original image donwload site: $IMAGE_DOWNLOAD_SITE"
 
-echo
-echo ====================================================================
-echo Install ROS2
-echo ====================================================================
-../../ros2/scripts/install_ros2.sh -u $UBUNTU_CODENAME -r $ROSDISTRO
-../../ros2/scripts/install_ros2_packages.sh -r $ROSDISTRO
-
-source /opt/ros/${ROSDISTRO}/setup.bash
+source /opt/ros/"$ROSDISTRO"/setup.bash
 ROS_DISTRO="$(printenv ROS_DISTRO)"
 BASE=2wd
 LASER_SENSOR=rplidar
@@ -76,20 +61,11 @@ echo "INSTALLING NOW...."
 echo
 
 echo
-echo "===================================================================="
-echo "Ensure rosdep is initialized"
-echo "===================================================================="
-if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
-  sudo rosdep init
-  rosdep update --include-eol-distros
-fi
-
-echo
 echo ====================================================================
 echo Basic check
 echo ====================================================================
 WORKSPACE=$HOME/$WORKSPACE
-VCS_REPOS="zbot_lino.repos"
+VCS_REPOS="zbot_lino_$ROSDISTRO.repos"
 vcs_source="$VCS_REPOS"
 if [ -d "$WORKSPACE" ]; then
   if [ -f "$vcs_source" ]; then
@@ -153,7 +129,11 @@ if [[ "$BASE" != "ci" ]]; then
   echo "export LINOROBOT2_LASER_SENSOR=$LASER_SENSOR" >> ~/.bashrc
   echo "export LINOROBOT2_DEPTH_SENSOR=$DEPTH_SENSOR" >> ~/.bashrc
   echo
-  echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> ~/.bashrc
+  if "$ROS_DISTRO" == "galactic"; then
+    echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> ~/.bashrc
+  elif "$ROS_DISTRO" == "humble"; then
+    echo "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp" >> ~/.bashrc
+  fi
   echo
   echo "Do you want to add sourcing of linorobot2_ws on your ~/.bashrc?"
   echo -n "Yes [y] or No [n]: "
