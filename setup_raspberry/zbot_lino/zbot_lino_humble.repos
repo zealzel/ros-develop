@@ -6,4 +6,4 @@ repositories:
   zbot_lino:
     type: git
     url: https://github.com/zealzel/zbot_lino
-    version: master
+    version: humble
