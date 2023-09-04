@@ -143,10 +143,10 @@ if [[ "$BASE" != "ci" ]]; then
   echo "export LINOROBOT2_LASER_SENSOR=$LASER_SENSOR" >> ~/.bashrc
   echo "export LINOROBOT2_DEPTH_SENSOR=$DEPTH_SENSOR" >> ~/.bashrc
   echo
-  if "$ROS_DISTRO" == "galactic"; then
+  if [[ "$ROS_DISTRO" == "galactic" ]]; then
     # echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> ~/.bashrc
     echo "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp" >> ~/.bashrc
-  elif "$ROS_DISTRO" == "humble"; then
+  elif [[ "$ROS_DISTRO" == "humble" ]]; then
     echo "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp" >> ~/.bashrc
   fi
   echo
