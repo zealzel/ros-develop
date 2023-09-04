@@ -115,6 +115,7 @@ cd "$WORKSPACE"
 vcs_source="$VCS_REPOS"
 vcs import src < "$vcs_source"
 cd "$WORKSPACE/src/zbot_lino/linorobot2" && touch COLCON_IGNORE
+cd "$WORKSPACE/src/zbot_lino/linorobot2/linorobot2_gazebo" && touch COLCON_IGNORE
 cd "$WORKSPACE"
 rosdep install --from-path src --ignore-src -y
 colcon build && source "$WORKSPACE"/install/setup.bash
