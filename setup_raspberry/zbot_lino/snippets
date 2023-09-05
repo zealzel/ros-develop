@@ -4,8 +4,28 @@ RMW_IMPLEMENTATION=rmw_fastrtps_cpp ros2 launch nav2_bringup rviz_launch.py
 
 ros2 launch linorobot2_navigation slam.launch.py
 ros2 run nav2_map_server map_saver_cli -f mymap
+ros2 service call /slam_toolbox/serialize_map slam_toolbox/srv/SerializePoseGraph "filename: '$HOME/maps/mymap'"
 ros2 launch linorobot2_navigation navigation.launch.py
 
-
-
 ros2 launch linorobot2_navigation navigation.launch.py map:=$HOME/maps/office_0627_2.yaml
+ros2 launch linorobot2_navigation navigation.launch.py map:=$HOME/maps/office_res0.02_0904.yaml
+
+# keepout
+ros2 launch nav2_costmap_filters_demo costmap_filter_info.launch.py params_file:=/home/pi/zbotlino_ws/src/navigation2_tutorials/nav2_costmap_filters_demo/params/keepout_params.yaml mask:=/home/pi/maps/office_res0.02_0904_keepout2.yaml
+ros2 launch linorobot2_navigation navigation.launch.py params_file:=$HOME/zbotlino_ws/src/zbot_lino/linorobot2/linorobot2_navigation/config/navigation_keepout.yaml map:=$HOME/maps/office_res0.02_0904.yaml
+
+
+ros2 launch linorobot2_gazebo gazebo.launch.py world:=/opt/ros/humble/share/turtlebot3_gazebo/worlds/turtlebot3_world.world x:=0.5
+
+ros2 launch nav2_costmap_filters_demo costmap_filter_info.launch.py \
+    params_file:=$HOME/simulations/src/navigation2_tutorials/nav2_costmap_filters_demo/params/keepout_params.yaml \
+    mask:=$HOME/maps/keepout_mask.yaml
+ros2 launch linorobot2_navigation navigation.launch.py \
+    params_file:=$HOME/simulations/src/zbot_lino/linorobot2/linorobot2_navigation/config/navigation_keepout.yaml \
+    map:=/opt/ros/humble/share/turtlebot3_navigation2/map/map.yaml
+
+
+ros2 launch linorobot2_navigation navigation_keepout.launch.py \
+    map:=/opt/ros/humble/share/turtlebot3_navigation2/map/map.yaml \
+    mask:=$HOME/maps/keepout_mask.yaml
+
