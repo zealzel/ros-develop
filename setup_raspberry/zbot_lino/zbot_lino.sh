@@ -1,5 +1,6 @@
 #!/bin/bash
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+prepare_vcs_sh="$(readlink -f $script_dir/../../scripts/prepare_vcs.sh)"
 UBUNTU_CODENAME=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d"=" -f2)
 
 if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
@@ -75,7 +76,8 @@ echo ====================================================================
 echo Prepare VCS sources
 echo ====================================================================
 vcs_repo_path="$script_dir/zbot_lino_$ROSDISTRO.repos"
-prepare_vcs $WORKSPACE $vcs_repo_path
+"$prepare_vcs_sh" $WORKSPACE $vcs_repo_path
+# prepare_vcs $WORKSPACE $vcs_repo_path
 
 echo
 echo "===================================================================="
@@ -94,14 +96,15 @@ echo
 echo "===================================================================="
 echo "Install micro_ros_setup"
 echo "===================================================================="
-cd "$WORKSPACE"
+WORKSPACEPATH="$HOME/$WORKSPACE"
+cd "$WORKSPACEPATH"
 vcs_source="$VCS_REPOS"
 vcs import src < "$vcs_source"
-cd "$WORKSPACE/src/zbot_lino/linorobot2" && touch COLCON_IGNORE
-cd "$WORKSPACE/src/zbot_lino/linorobot2/linorobot2_gazebo" && touch COLCON_IGNORE
-cd "$WORKSPACE"
+cd "$WORKSPACEPATH/src/zbot_lino/linorobot2" && touch COLCON_IGNORE
+cd "$WORKSPACEPATH/src/zbot_lino/linorobot2/linorobot2_gazebo" && touch COLCON_IGNORE
+cd "$WORKSPACEPATH"
 rosdep install --from-path src --ignore-src -y
-colcon build && source "$WORKSPACE"/install/setup.bash
+colcon build && source "$WORKSPACEPATH"/install/setup.bash
 
 echo
 echo "===================================================================="
@@ -109,15 +112,15 @@ echo "Setup micro-ROS agent"
 echo "===================================================================="
 ros2 run micro_ros_setup create_agent_ws.sh
 ros2 run micro_ros_setup build_agent.sh
-source "$WORKSPACE"/install/setup.bash
+source "$WORKSPACEPATH"/install/setup.bash
 
 echo
 echo "===================================================================="
 echo "Build zbot_lino"
 echo "===================================================================="
-cd "$WORKSPACE/src/zbot_lino/linorobot2" && rm COLCON_IGNORE
-cd "$WORKSPACE" && colcon build
-source "$WORKSPACE"/install/setup.bash
+cd "$WORKSPACEPATH/src/zbot_lino/linorobot2" && rm COLCON_IGNORE
+cd "$WORKSPACEPATH" && colcon build
+source "$WORKSPACEPATH"/install/setup.bash
 
 ## ENV Variables
 echo ======== Env Variables ========
@@ -137,9 +140,9 @@ if [[ "$BASE" != "ci" ]]; then
   echo -n "Yes [y] or No [n]: "
   read reply
   if [[ "$reply" == "y" || "$reply" == "Y" ]]; then
-    echo "source ${WORKSPACE}/install/setup.bash" >> ~/.bashrc
+    echo "source ${WORKSPACEPATH}/install/setup.bash" >> ~/.bashrc
   else
     echo
-    echo "Remember to run $ source ${WORKSPACE}/install/setup.bash every time you open a terminal."
+    echo "Remember to run $ source ${WORKSPACEPATH}/install/setup.bash every time you open a terminal."
   fi
 fi
