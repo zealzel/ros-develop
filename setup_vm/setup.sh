@@ -1,5 +1,6 @@
 #!/bin/bash
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+install_from_source_sh="$script_dir/../scripts/install_from_source.sh"
 source "$script_dir/../scripts/utils.sh"
 source "$script_dir/../scripts/argparse_ros.sh"
 WORKSPACE="simulations"
@@ -30,8 +31,11 @@ echo ===============================================
 echo ===============================================
 echo 2. Build/Install robots/worlds from source
 echo ===============================================
-./install_from_source.sh $WORKSPACE "false" "simulations_zbot_artic/zbot_artic.repos"
-./install_from_source.sh $WORKSPACE "false" "simulations_zbot_lino/zbot_lino.repos"
+$install_from_source_sh $WORKSPACE "$script_dir/simulations_turtlebot3/turtlebot3.repos"
+$install_from_source_sh $WORKSPACE "$script_dir/simulations_zbot_lino/zbot_lino.repos"
+
+# ./install_from_source.sh $WORKSPACE "false" "simulations_zbot_artic/zbot_artic.repos"
+# ./install_from_source.sh $WORKSPACE "false" "simulations_zbot_lino/zbot_lino.repos"
 # ./install_from_source.sh $WORKSPACE "false" "simulations_neobotix/neobotix.repos"
 # ./install_from_source.sh $WORKSPACE "false" "world_aws_robotmaker/deps.repos"
 
@@ -43,3 +47,4 @@ echo ===============================================
 
 rm -f $WORKSPACE/*.repos
 rm -f $WORKSPACE/*.rosinstall
+
