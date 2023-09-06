@@ -10,6 +10,7 @@ if [[ $ROSDISTRO == "humble" ]]; then
   echo "Install mppi_controllers from source."
   # ref: MPPI crashing on loading plug-ings #3767
   # https://github.com/ros-planning/navigation2/issues/3767
+  rm -rf /tmp/navigation2 > /dev/null 2>&1
   git clone https://github.com/ros-planning/navigation2 /tmp/navigation2 -b "$ROSDISTRO"
   cp -R /tmp/navigation2/mppi_controllers "$WORKSPACE/src"
 fi
