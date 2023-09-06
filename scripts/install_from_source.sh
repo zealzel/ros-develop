@@ -20,7 +20,7 @@ echo ====================================================================
 echo Build from source
 echo ====================================================================
 cd $HOME/"$WORKSPACE"
-vcs import src < "$vcs_source"
+vcs import src < "$VCS_REPOS"
 rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install
 
