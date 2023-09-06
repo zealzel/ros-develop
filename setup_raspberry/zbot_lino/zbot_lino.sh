@@ -79,6 +79,9 @@ vcs_repo_path="$script_dir/zbot_lino_$ROSDISTRO.repos"
 "$prepare_vcs_sh" $WORKSPACE $vcs_repo_path
 # prepare_vcs $WORKSPACE $vcs_repo_path
 
+# Added temporarily for testing
+../ros2/scripts/install_mppi_controllers.sh -r $ROS_DISTRO -w $WORKSPACE
+
 echo
 echo "===================================================================="
 echo "Install LIDAR/Depth Sensor ROS2 drivers"
