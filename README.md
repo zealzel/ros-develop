@@ -1,6 +1,6 @@
 ## Setup zbot on Raspberry Pi 4B
 
-Please refer to [Install zbot_artic & zbot_lino](blob/master/setup_raspberry/README.md) for more details.
+Please refer to [Install zbot_artic & zbot_lino](setup_raspberry/README.md) for more details.
 
 ## Quickly build envirnoment for ROS1/ROS2 developement.
 
