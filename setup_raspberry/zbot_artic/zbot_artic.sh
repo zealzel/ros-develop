@@ -41,5 +41,4 @@ echo
 echo ===============================================
 echo Build/Install robots packages from source
 echo ===============================================
-# source "/opt/ros/${ROSDISTRO}/setup.bash" && ../../scripts/install_from_source.sh $WORKSPACE $ROSDISTRO "zbot1.5_articubot_$ROSDISTRO.repos" "false"
-source "/opt/ros/${ROSDISTRO}/setup.bash" && ../../scripts/install_from_source.sh $WORKSPACE "$script_dir/zbot1.5_articubot_$ROSDISTRO.repos"
+source "/opt/ros/${ROSDISTRO}/setup.bash" && ../../scripts/install_from_source.sh $WORKSPACE "$script_dir/zbot_artic_$ROSDISTRO.repos"
