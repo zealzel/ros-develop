@@ -1,4 +1,5 @@
 #!/bin/bash
+script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 UBUNTU_CODENAME=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d"=" -f2)
 
 if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
@@ -40,4 +41,5 @@ echo
 echo ===============================================
 echo Build/Install robots packages from source
 echo ===============================================
-source "/opt/ros/${ROSDISTRO}/setup.bash" && ../../scripts/install_from_source.sh $WORKSPACE $ROSDISTRO "zbot1.5_articubot_$ROSDISTRO.repos" "false"
+# source "/opt/ros/${ROSDISTRO}/setup.bash" && ../../scripts/install_from_source.sh $WORKSPACE $ROSDISTRO "zbot1.5_articubot_$ROSDISTRO.repos" "false"
+source "/opt/ros/${ROSDISTRO}/setup.bash" && ../../scripts/install_from_source.sh $WORKSPACE "$script_dir/zbot1.5_articubot_$ROSDISTRO.repos"

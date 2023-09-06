@@ -1,4 +1,5 @@
 #!/bin/bash
+script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 UBUNTU_CODENAME=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d"=" -f2)
 
 if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
@@ -70,29 +71,11 @@ if [[ "$reply" != "y" && "$reply" != "Y" ]]; then
 fi
 
 echo
-echo "INSTALLING NOW...."
-echo
-
-echo
 echo ====================================================================
-echo Basic check
+echo Prepare VCS sources
 echo ====================================================================
-WORKSPACE=$HOME/$WORKSPACE
-VCS_REPOS="zbot_lino_$ROSDISTRO.repos"
-vcs_source="$VCS_REPOS"
-if [ -d "$WORKSPACE" ]; then
-  if [ -f "$vcs_source" ]; then
-    echo "vcs_source: $vcs_source exists"
-  else
-    echo "ERROR: $vcs_source does not exist"
-    exit 1
-  fi
-  cp "$vcs_source" "$WORKSPACE" > /dev/null 2>&1
-  #cp "$vcs_source" "$WORKSPACE"
-else
-  echo "ERROR: $WORKSPACE does not exist"
-  exit 1
-fi
+vcs_repo_path="$script_dir/zbot_lino_$ROSDISTRO.repos"
+prepare_vcs $WORKSPACE $vcs_repo_path
 
 echo
 echo "===================================================================="
@@ -160,8 +143,3 @@ if [[ "$BASE" != "ci" ]]; then
     echo "Remember to run $ source ${WORKSPACE}/install/setup.bash every time you open a terminal."
   fi
 fi
-
-echo
-echo "INSTALLATION DONE."
-echo
-echo "Restart your robot computer now."
