@@ -1,5 +1,7 @@
 #!/bin/bash
-source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../scripts/utils.sh"
+script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+source "$script_dir/../scripts/utils.sh"
+prepare_vcs_sh="$(readlink -f $script_dir/prepare_vcs.sh)"
 
 WORKSPACE="${1:-colcon_ws}"
 VCS_REPOS=$2
@@ -8,7 +10,7 @@ echo
 echo ====================================================================
 echo Prepare VCS sources
 echo ====================================================================
-./prepare_vcs.sh $WORKSPACE $VCS_REPOS
+$prepare_vcs_sh $WORKSPACE $VCS_REPOS
 
 echo "WORKSPACE: $WORKSPACE"
 echo "VCS_REPOS: $VCS_REPOS"
