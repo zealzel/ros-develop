@@ -31,7 +31,7 @@ echo ===============================================
 echo ===============================================
 echo 2. Build/Install robots/worlds from source
 echo ===============================================
-$install_from_source_sh $WORKSPACE "$script_dir/simulations_turtlebot3/turtlebot3.repos"
+$install_from_source_sh $WORKSPACE "$script_dir/simulations_zbot_artic/zbot_artic.repos"
 $install_from_source_sh $WORKSPACE "$script_dir/simulations_zbot_lino/zbot_lino.repos"
 
 # ./install_from_source.sh $WORKSPACE "false" "simulations_zbot_artic/zbot_artic.repos"
