@@ -12,5 +12,5 @@ if [[ $ROSDISTRO == "humble" ]]; then
   # https://github.com/ros-planning/navigation2/issues/3767
   rm -rf /tmp/navigation2 > /dev/null 2>&1
   git clone https://github.com/ros-planning/navigation2 /tmp/navigation2 -b "$ROSDISTRO"
-  cp -R /tmp/navigation2/nav2_mppi_controller "$WORKSPACE/src"
+  cp -R /tmp/navigation2/nav2_mppi_controller "$HOME/$WORKSPACE/src"
 fi
