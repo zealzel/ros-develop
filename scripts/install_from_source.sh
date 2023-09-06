@@ -10,7 +10,7 @@ echo
 echo ====================================================================
 echo Prepare VCS sources
 echo ====================================================================
-$prepare_vcs_sh $WORKSPACE $VCS_REPOS
+"$prepare_vcs_sh" $WORKSPACE $VCS_REPOS
 
 echo "WORKSPACE: $WORKSPACE"
 echo "VCS_REPOS: $VCS_REPOS"
