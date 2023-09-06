@@ -1,11 +1,11 @@
 #!/bin/bash
-source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../scripts/utils.sh"
+script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+install_ros_package_sh="$(readlink -f $script_dir/install_ros_packages.sh)"
+source "$script_dir/../scripts/utils.sh"
 
 WORKSPACE="${1:-colcon_ws}"
 ROSDISTRO="${2:-galactic}"
 APT_PACKAGE_FILE=$3
-ADD_BASHRC=${4-"false"}
-CURRENT_SCRIPT_PATH="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
 echo
 echo ====================================================================
@@ -13,7 +13,7 @@ echo Basic check
 echo ====================================================================
 ros_package_file="$APT_PACKAGE_FILE"
 
-if [ -d ~/"$WORKSPACE" ]; then
+if [ -d $HOME/"$WORKSPACE" ]; then
   if [ -f "$ros_package_file" ]; then
     echo "ros_package_file: $ros_package_file exists"
   else
@@ -30,22 +30,6 @@ echo
 echo ====================================================================
 echo Install ROS packages for ROSDISTRO "$ROSDISTRO"
 echo ====================================================================
-TARGET_SCRIPT_ABSOLUTE_PATH="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/../scripts/install_ros_packages.sh")"
-echo "TARGET_SCRIPT_ABSOLUTE_PATH: $TARGET_SCRIPT_ABSOLUTE_PATH"
-"${TARGET_SCRIPT_ABSOLUTE_PATH}" "$ROSDISTRO" "${ros_packages[@]}"
+"$install_ros_package_sh" "$ROSDISTRO" "${ros_packages[@]}"
 
-
-if [ "$ADD_BASHRC" = "true" ]; then
-  echo
-  echo ====================================================================
-  echo Append bashrc file
-  echo ====================================================================
-  append_bashrc "source /opt/ros/${ROSDISTRO}/setup.bash"
-
-  append_bashrc "export LIBGL_ALWAYS_SOFTWARE=1"
-  append_bashrc "export OGRE_RTT_MODE=Copy"
-
-  append_bashrc "ROS_DOMAIN_ID=0"
-  append_bashrc "RMW_IMPLEMENTATION=rmw_cyclonedds_cpp"
-  append_bashrc "CYCLONEDDS_URI=/etc/turtlebot4/cyclonedds_pc.xml"
-fi
+append_bashrc "CYCLONEDDS_URI=/etc/turtlebot4/cyclonedds_pc.xml"
