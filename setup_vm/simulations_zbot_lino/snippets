@@ -1,6 +1,7 @@
 # === simulation ===
 ros2 launch linorobot2_gazebo gazebo.launch.py # default world: playground
-ros2 launch linorobot2_gazebo gazebo.launch.py
+# world: turtlebot3 maze
+ros2 launch linorobot2_gazebo gazebo.launch.py \
     world:=$(ros2 pkg prefix turtlebot3_gazebo)/share/turtlebot3_gazebo/worlds/turtlebot3_world.world x:=0.5
 
 <<<----------------------------------------------------------------------->>>

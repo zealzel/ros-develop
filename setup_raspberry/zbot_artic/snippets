@@ -1,11 +1,5 @@
-# === simulation ===
-ros2 launch articubot_one launch_sim.launch.py # default world: empty
-# world: articubot_one cones
-ros2 launch articubot_one launch_sim.launch.py \
-    world:=$(ros2 pkg prefix articubot_one)/share/articubot_one/worlds/obstacles.world
-# world: turtlebot3 maze
-ros2 launch articubot_one launch_sim.launch.py \
-    world:=$(ros2 pkg prefix turtlebot3_gazebo)/share/turtlebot3_gazebo/worlds/turtlebot3_world.world x:=0.5
+# === robot bringup ===
+ros2 launch articubot_one launch_robot.launch.py
 
 <<<----------------------------------------------------------------------->>>
 
