@@ -29,20 +29,33 @@ ros2 run nav2_map_server map_saver_cli -f mymap # pgm/yaml
 ros2 service call /slam_toolbox/serialize_map slam_toolbox/srv/SerializePoseGraph "filename: '$HOME/maps/mymap'" # serialized map for continuous mapping
 
 # === navigation ===
+ros2 launch articubot_one navigation_launch.py \
+    map:=/opt/ros/$ROS_DISTRO/share/turtlebot3_navigation2/map/map.yaml
+
 # method1: use bringup_launch.py
-ros2 launch nav2_bringup bringup_launch.py use_sim_time:=True \
-    map:="/path_to_map/map"
 ros2 launch nav2_bringup bringup_launch.py \
-    params_file:="/home/pi/zbot_ws/src/articubot_one/config/nav2_params1.yaml" \
-    map:="/home/pi/maps/office3_res0.02_0523.yaml"
+    map:=/opt/ros/$ROS_DISTRO/share/turtlebot3_navigation2/map/map.yaml
+
+ros2 launch nav2_bringup bringup_launch.py \
+    map:=/opt/ros/$ROS_DISTRO/share/turtlebot3_navigation2/map/map.yaml \
+    params_file:="$(ros2 pkg prefix articubot_one)/share/articubot_one/config/nav2_params.yaml.20230512"
+
 # method2: use localization_launch.py & navigation_launch.py separately
 ros2 launch nav2_bringup localization_launch.py use_sim_time:=True map:="/path_to_map/map"
 ros2 launch nav2_bringup navigation.launch.py use_sim_time:=True
+
 # method3: use more basic nav2 nodes (TBD)
 ros2 run nav2_map_server map_server --ros-args -p yaml_filename:=mymap.yaml -p use_sim_time:=True
 ros2 run nav2_util lifecycle_bringup map_server
 ros2 run nav2_amcl amcl --ros-args -p use_sim_time:=True
 ros2 run nav2_util lifecycle_bringup amcl
+
+
+# === defined-route navigation ===
+ros2 launch articubot_one navigation_keepout.launch.py \
+    map:=/opt/ros/humble/share/turtlebot3_navigation2/map/map.yaml \
+    mask:=$HOME/maps/keepout_mask.yaml
+
 
 # ===================================================
 # slam & nav simultaneously
