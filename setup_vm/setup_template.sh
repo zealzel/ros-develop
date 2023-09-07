@@ -52,15 +52,15 @@ echo ===============================================
 echo ===============================================
 echo 2. Build/Install robots/worlds from source
 echo ===============================================
-"$install_from_source_sh" $WORKSPACE "$script_dir/simulations_zbot_artic/zbot_artic.repos"
-"$install_from_source_sh" $WORKSPACE "$script_dir/simulations_zbot_lino/zbot_lino.repos"
-"$install_from_source_sh" $WORKSPACE "$script_dir/simulations_neobotix/neobotix.repos"
-"$install_from_source_sh" $WORKSPACE "$script_dir/world_aws_robotmaker/deps.repos"
+"$install_from_source_sh" $WORKSPACE "$script_dir/simulations_zbot_artic/zbot_artic_$ROS_DISTRO.repos"
+"$install_from_source_sh" $WORKSPACE "$script_dir/simulations_zbot_lino/zbot_lino_$ROS_DISTRO.repos"
+# "$install_from_source_sh" $WORKSPACE "$script_dir/simulations_neobotix/neobotix.repos"
+# "$install_from_source_sh" $WORKSPACE "$script_dir/world_aws_robotmaker/deps.repos"
 
 echo ===============================================
 echo 3. Build/Install robots by customed scripts
 echo ===============================================
-./simulations_tiago/tiago.sh $WORKSPACE
+# ./simulations_tiago/tiago.sh $WORKSPACE
 
 rm -f $WORKSPACE/*.repos
 rm -f $WORKSPACE/*.rosinstall
