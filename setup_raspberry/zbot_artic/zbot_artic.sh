@@ -1,6 +1,6 @@
 #!/bin/bash
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
-source "$script_dir/../scripts/utils.sh"
+source "$script_dir/../../scripts/utils.sh"
 UBUNTU_CODENAME=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d"=" -f2)
 
 if [[ "$UBUNTU_CODENAME" == "focal" ]]; then

@@ -1,5 +1,6 @@
 #!/bin/bash
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+source "$script_dir/../../scripts/utils.sh"
 prepare_vcs_sh="$(readlink -f $script_dir/../../scripts/prepare_vcs.sh)"
 UBUNTU_CODENAME=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d"=" -f2)
 
@@ -134,16 +135,16 @@ if [[ "$BASE" != "ci" ]]; then
   echo
   if [[ "$ROS_DISTRO" == "galactic" ]]; then
     # echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> ~/.bashrc
-    echo "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp" >> ~/.bashrc
+    append_bashrc "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp"
   elif [[ "$ROS_DISTRO" == "humble" ]]; then
-    echo "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp" >> ~/.bashrc
+    append_bashrc "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp"
   fi
   echo
   echo "Do you want to add sourcing of linorobot2_ws on your ~/.bashrc?"
   echo -n "Yes [y] or No [n]: "
   read reply
   if [[ "$reply" == "y" || "$reply" == "Y" ]]; then
-    echo "source ${WORKSPACEPATH}/install/setup.bash" >> ~/.bashrc
+    append_bashrc "source ${WORKSPACEPATH}/install/setup.bash"
   else
     echo
     echo "Remember to run $ source ${WORKSPACEPATH}/install/setup.bash every time you open a terminal."
