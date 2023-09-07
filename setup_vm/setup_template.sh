@@ -64,3 +64,8 @@ echo ===============================================
 
 rm -f $WORKSPACE/*.repos
 rm -f $WORKSPACE/*.rosinstall
+
+echo ===============================================
+echo Set env variables
+echo ===============================================
+./ros2_append_bashrc.sh
