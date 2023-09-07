@@ -1,5 +1,6 @@
 #!/bin/bash
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+source "$script_dir/../scripts/utils.sh"
 UBUNTU_CODENAME=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d"=" -f2)
 
 if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
@@ -45,3 +46,22 @@ echo ===============================================
 echo Build/Install robots packages from source
 echo ===============================================
 source "/opt/ros/${ROSDISTRO}/setup.bash" && ../../scripts/install_from_source.sh $WORKSPACE "$script_dir/zbot_artic_$ROSDISTRO.repos"
+
+
+echo ======== Env Variables ========
+if [[ "$ROS_DISTRO" == "galactic" ]]; then
+    append_bashrc "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp"
+elif [[ "$ROS_DISTRO" == "humble" ]]; then
+    append_bashrc "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp"
+fi
+echo
+echo "Do you want to add sourcing of linorobot2_ws on your ~/.bashrc?"
+echo -n "Yes [y] or No [n]: "
+read reply
+WORKSPACEPATH="$HOME/$WORKSPACE"
+if [[ "$reply" == "y" || "$reply" == "Y" ]]; then
+    append_bashrc "source ${WORKSPACEPATH}/install/setup.bash"
+else
+    echo
+    echo "Remember to run $ source ${WORKSPACEPATH}/install/setup.bash every time you open a terminal."
+fi
