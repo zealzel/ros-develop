@@ -16,6 +16,8 @@ ros2 service call /slam_toolbox/serialize_map slam_toolbox/srv/SerializePoseGrap
 # === navigation ===
 ros2 launch linorobot2_navigation navigation.launch.py \
     map:=$HOME/maps/office_res0.02_0904.yaml
+ros2 launch linorobot2_navigation navigation.launch.py \
+    map:=/opt/ros/humble/share/turtlebot3_navigation2/map/map.yaml
 
 # === defined-route navigation ===
 ros2 launch linorobot2_navigation navigation_keepout.launch.py \
