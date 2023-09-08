@@ -55,7 +55,7 @@ elif [[ "$ROS_DISTRO" == "humble" ]]; then
     append_bashrc "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp"
 fi
 echo
-echo "Do you want to add sourcing of linorobot2_ws on your ~/.bashrc?"
+echo "Do you want to add sourcing of $WORKSPACE on your ~/.bashrc?"
 echo -n "Yes [y] or No [n]: "
 read reply
 WORKSPACEPATH="$HOME/$WORKSPACE"
