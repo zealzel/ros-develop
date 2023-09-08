@@ -37,16 +37,19 @@ echo ====================================================================
 ./create_udev.sh
 
 echo ===============================================
-echo Install robots from package manager
+echo Install packages from apt
 echo ===============================================
 ../../scripts/install_from_apt.sh $WORKSPACE $ROSDISTRO "ros_packages.sh" "false"
+
+# Temporarily. Needed by usb_cam. Need to be handled more systematically
+sudo apt install python3-pip -y
+../../scripts/install_python_packages.sh pydantic
 
 echo
 echo ===============================================
 echo Build/Install robots packages from source
 echo ===============================================
 source "/opt/ros/${ROSDISTRO}/setup.bash" && ../../scripts/install_from_source.sh $WORKSPACE "$script_dir/zbot_artic_$ROSDISTRO.repos"
-
 
 echo ======== Env Variables ========
 if [[ "$ROS_DISTRO" == "galactic" ]]; then
