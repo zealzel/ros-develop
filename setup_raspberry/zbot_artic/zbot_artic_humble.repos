@@ -17,13 +17,13 @@ repositories:
     version: main
   fitrobot:
     type: git
-    https://github.com/fitfabsw/fitrobot
+    url: https://github.com/fitfabsw/fitrobot
     version: main
   rosboard:
     type: git
-    https://github.com/dheera/rosboard
+    url: https://github.com/dheera/rosboard
     version: main
   usb_cam:
     type: git
-    https://github.com/ros-drivers/usb_cam
+    url: https://github.com/ros-drivers/usb_cam
     version: ros2
