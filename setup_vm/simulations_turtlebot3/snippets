@@ -27,7 +27,8 @@ ros2 run nav2_map_server map_saver_cli -f map
 # === navigation ===
 # method1: use bringup_launch.py
 # B4
-ros2 launch nav2_bringup bringup_launch.py use_sim_time:=True map:="/path_to_map/map"
+ros2 launch nav2_bringup bringup_launch.py use_sim_time:=True \
+    map:=/opt/ros/humble/share/turtlebot3_navigation2/map/map.yaml
 
 # method2: use navigation2.launch.py in turtlebot3_navigation2 (default map is turtlebot3_world.yaml)
 # B5

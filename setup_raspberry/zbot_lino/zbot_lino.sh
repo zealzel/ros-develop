@@ -78,10 +78,9 @@ echo Prepare VCS sources
 echo ====================================================================
 vcs_repo_path="$script_dir/zbot_lino_$ROSDISTRO.repos"
 "$prepare_vcs_sh" $WORKSPACE $vcs_repo_path
-# prepare_vcs $WORKSPACE $vcs_repo_path
 
 # Added temporarily for testing
-../ros2/scripts/install_mppi_controllers.sh -r $ROS_DISTRO -w $WORKSPACE
+../../ros2/scripts/install_mppi_controllers.sh -r $ROS_DISTRO -w $WORKSPACE
 
 echo
 echo "===================================================================="
@@ -102,8 +101,7 @@ echo "Install micro_ros_setup"
 echo "===================================================================="
 WORKSPACEPATH="$HOME/$WORKSPACE"
 cd "$WORKSPACEPATH"
-vcs_source="$VCS_REPOS"
-vcs import src < "$vcs_source"
+vcs import src < "$vcs_repo_path"
 cd "$WORKSPACEPATH/src/zbot_lino/linorobot2" && touch COLCON_IGNORE
 cd "$WORKSPACEPATH/src/zbot_lino/linorobot2/linorobot2_gazebo" && touch COLCON_IGNORE
 cd "$WORKSPACEPATH"
