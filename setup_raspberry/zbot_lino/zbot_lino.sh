@@ -30,9 +30,21 @@ echo "WORKSPACE=$WORKSPACE"
 
 source /opt/ros/"$ROSDISTRO"/setup.bash
 ROS_DISTRO="$(printenv ROS_DISTRO)"
+
 # choose from zbotlino, zbotlinoinvert, zbotlinosick1
-BASE=zbotlino
-LASER_SENSOR=rplidar
+BASE=zbotlinosick1
+
+if [ $BASE == "zbotlino" ]; then
+  LASER_SENSOR=rplidar
+elif [ $BASE == "zbotlinoinvert" ]; then
+  LASER_SENSOR=nanoscan3
+elif [ $BASE == "zbotlinosick1" ]; then
+  LASER_SENSOR=nanoscan3
+else
+  echo "Invalid robot type"
+  exit 1
+fi
+
 DEPTH_SENSOR=realsense
 
 function install_rplidar {
