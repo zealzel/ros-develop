@@ -31,7 +31,7 @@ echo "WORKSPACE=$WORKSPACE"
 source /opt/ros/"$ROSDISTRO"/setup.bash
 ROS_DISTRO="$(printenv ROS_DISTRO)"
 BASE=2wd
-LASER_SENSOR=rplidar
+LASER_SENSOR=nanoscan3
 DEPTH_SENSOR=realsense
 
 function install_rplidar {
@@ -76,7 +76,8 @@ echo
 echo ====================================================================
 echo Prepare VCS sources
 echo ====================================================================
-vcs_repo_path="$script_dir/zbot_lino_$ROSDISTRO.repos"
+# vcs_repo_path="$script_dir/zbot_lino_$ROSDISTRO.repos"
+vcs_repo_path="$script_dir/zbot_linov2_$ROSDISTRO.repos"
 "$prepare_vcs_sh" $WORKSPACE $vcs_repo_path
 
 # Added temporarily for testing
