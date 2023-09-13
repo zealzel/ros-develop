@@ -30,7 +30,8 @@ echo "WORKSPACE=$WORKSPACE"
 
 source /opt/ros/"$ROSDISTRO"/setup.bash
 ROS_DISTRO="$(printenv ROS_DISTRO)"
-BASE=2wd
+# choose from zbotlino, zbotlinoinvert, zbotlinosick1
+BASE=zbotlino
 LASER_SENSOR=rplidar
 DEPTH_SENSOR=realsense
 
