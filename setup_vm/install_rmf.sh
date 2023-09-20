@@ -38,4 +38,4 @@ install_ubuntu_packages "${ros_packages[@]}"
 echo ===============================================
 echo Build/Install from source
 echo ===============================================
-"$install_from_source_sh" $WORKSPACE "$script_dir/rmf/install_rmf_$ROS_DISTRO.repos"
+"$install_from_source_sh" $WORKSPACE "$script_dir/rmf/rmf_$ROS_DISTRO.repos"
