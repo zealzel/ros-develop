@@ -30,6 +30,11 @@ ros_packages=(
   "ros-$ROSDISTRO-nav2-bringup"
   # dds
   "ros-$ROSDISTRO-rmw-cyclonedds-cpp"
+  # rmf
+  "ros-$ROSDISTRO-rmf-traffic-editor"
+  "ros-$ROSDISTRO-rmf-building-map-tools"
+  "ros-$ROSDISTRO-rmf-traffic-editor-assets"
+  "ros-$ROSDISTRO-rmf-traffic-editor-test-maps"
   # robot
   # "ros-$ROS_DISTRO-turtlebot3-simulation"
 )
