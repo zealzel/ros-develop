@@ -22,7 +22,9 @@ parse_args "$@"
 # echo "WORKSPACE=$WORKSPACE"
 
 ros_packages=(
+  # rmf
   "ros-$ROSDISTRO-rmf-dev"
+  # traffic-editor
   "ros-$ROSDISTRO-rmf-traffic-editor"
   "ros-$ROSDISTRO-rmf-building-map-tools"
   "ros-$ROSDISTRO-rmf-traffic-editor-assets"
