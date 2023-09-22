@@ -1,12 +1,15 @@
 #!/bin/bash
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
+source "$script_dir/../scripts/utils.sh"
 source "$script_dir/../scripts/argparse.sh"
+
 declare -A arg_desc=(
   ["-w,--WORKSPACE"]="Workspace name (default: colcon_ws)"
   ["-v,--VCS_REPOS"]="vcs repos"
   ["-x,--EXCLUDES"]="excluded ros packages"
 )
+
 declare -A parsed_args
 parse_args "$@"
 WORKSPACE=${parsed_args["WORKSPACE"]-ros2_ws}
@@ -61,4 +64,4 @@ colcon build --symlink-install
 echo ====================================================================
 echo Append bashrc file
 echo ====================================================================
-append_bashrc "RMW_IMPLEMENTATION=rmw_cyclonedds_cpp"
+append_bashrc "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp"
