@@ -11,6 +11,7 @@ declare -A parsed_args
 parse_args "$@"
 WORKSPACE=${parsed_args["WORKSPACE"]-ros2_ws}
 VCS_REPOS=${parsed_args["VCS_REPOS"]}
+VCS_REPOS=$(readlink -f $VCS_REPOS)
 EXCLUDES=${parsed_args["EXCLUDES"]}
 IFS=',' read -ra EXCLUDES_ARRAY <<< "$EXCLUDES"
 
