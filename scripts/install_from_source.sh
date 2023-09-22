@@ -21,6 +21,20 @@ echo Build from source
 echo ====================================================================
 cd $HOME/"$WORKSPACE"
 vcs import src < "$VCS_REPOS"
+
+
+# ignored_ros_packages=(
+#   "ros-$ROSDISTRO-xacro"
+#   "ros-$ROSDISTRO-joy-teleop"
+# )
+
+# for pkg in "${ignored_ros_packages[@]}"; do
+#     pkg_path=$(find src -type d -name $pkg)
+#     echo $pkg_path
+# done
+
+# find src -type d -name rmf_building_sim_gz_classic_plugins
+
 rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install
 
