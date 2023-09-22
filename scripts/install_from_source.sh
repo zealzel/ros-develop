@@ -42,9 +42,9 @@ echo
 echo ====================================================================
 echo Build from source
 echo ====================================================================
-cd $HOME/"$WORKSPACE"
+WORKSPACEPATH="$HOME/$WORKSPACE"
+cd "$WORKSPACEPATH"
 vcs import src < "$VCS_REPOS"
-
 for pkg in "${ignored_ros_packages[@]}"; do
     pkg_path=$(find src -type d -name $pkg)
     echo "$pkg --> $pkg_path"
