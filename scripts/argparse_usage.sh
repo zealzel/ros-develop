@@ -16,7 +16,7 @@ declare -A parsed_args
 parse_args "$@"
 
 # 打印使用說明
-print_usage
+#print_usage
 
 UBUNTU_CODENAME=${parsed_args["ubuntu_codename"]-focal}
 ROSDISTRO=${parsed_args["rosdistro"]-galactic}
