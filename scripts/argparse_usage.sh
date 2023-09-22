@@ -1,5 +1,5 @@
 #!/bin/bash
-source argparser.sh
+source argparse.sh
 
 # 選項描述
 declare -A arg_desc=(

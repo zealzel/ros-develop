@@ -1,19 +1,38 @@
 #!/bin/bash
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
-source "$script_dir/../scripts/utils.sh"
-prepare_vcs_sh="$(readlink -f $script_dir/prepare_vcs.sh)"
 
-WORKSPACE="${1:-colcon_ws}"
-VCS_REPOS=$2
+source "$script_dir/../scripts/argparse.sh"
+declare -A arg_desc=(
+  ["-w,--WORKSPACE"]="Workspace name (default: colcon_ws)"
+  ["-v,--VCS_REPOS"]="vcs repos"
+  ["-x,--EXCLUDES"]="excluded ros packages"
+)
+declare -A parsed_args
+parse_args "$@"
+WORKSPACE=${parsed_args["workspace"]-ros2_ws}
+VCS_REPOS=${parsed_args["VCS_REPOS"]}
+EXCLUDES=${parsed_args["EXCLUDES"]}
+IFS=',' read -ra EXCLUDES_ARRAY <<< "$EXCLUDES"
+
+echo "WORKSPACE: $WORKSPACE"
+echo "VCS_REPOS: $VCS_REPOS"
+if [ -n "$EXCLUDES" ]; then
+    echo "EXCLUDES: "
+    for ex in "${EXCLUDES_ARRAY[@]}"; do
+      echo "$ex"
+    done
+fi
 
 echo
 echo ====================================================================
 echo Prepare VCS sources
 echo ====================================================================
-"$prepare_vcs_sh" $WORKSPACE $VCS_REPOS
-
-echo "WORKSPACE: $WORKSPACE"
-echo "VCS_REPOS: $VCS_REPOS"
+prepare_vcs_sh="$(readlink -f $script_dir/prepare_vcs.sh)"
+"$prepare_vcs_sh" $WORKSPACE $VCS_REPOS || exit_code=$?
+if [[ $exit_code -ne 0 ]]; then
+  echo "prepare_vcs_sh failed"
+  exit
+fi
 
 echo
 echo ====================================================================
