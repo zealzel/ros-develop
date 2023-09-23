@@ -61,6 +61,7 @@ echo ===============================================
 echo 3. Build/Install robots by customed scripts
 echo ===============================================
 # ./simulations_tiago/tiago.sh $WORKSPACE
+./install_rmf.sh -w $WORKSPACE -r $ROSDISTRO
 
 WORKSPACEPATH="$HOME/$WORKSPACE"
 rm -f $WORKSPACEPATH/*.repos
