@@ -53,7 +53,7 @@ echo ===============================================
 echo 2. Build/Install robots/worlds from source
 echo ===============================================
 "$install_from_source_sh" -w $WORKSPACE -v "$script_dir/simulations_zbot_artic/zbot_artic_$ROS_DISTRO.repos"
-"$install_from_source_sh" -w $WORKSPACE -v "$script_dir/simulations_zbot_artic/zbot_artic_$ROS_DISTRO.repos"
+"$install_from_source_sh" -w $WORKSPACE -v "$script_dir/simulations_zbot_lino/zbot_lino_$ROS_DISTRO.repos"
 # "$install_from_source_sh" $WORKSPACE "$script_dir/simulations_neobotix/neobotix.repos"
 # "$install_from_source_sh" $WORKSPACE "$script_dir/world_aws_robotmaker/deps.repos"
 

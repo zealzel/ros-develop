@@ -43,5 +43,5 @@ echo ===============================================
 
 if [[ "$ROSDISTRO" == "humble" ]]; then
   # temporary ignore ignition related packages since they will fail during building
-  "$install_from_source_sh" "$WORKSPACE" "$script_dir/rmf/rmf_$ROS_DISTRO.repos" -i rmf_building_sim_gz_plugins,rmf_robot_sim_gz_plugins
+  "$install_from_source_sh" -w "$WORKSPACE" -v "$script_dir/rmf/rmf_$ROS_DISTRO.repos" -i rmf_building_sim_gz_plugins,rmf_robot_sim_gz_plugins
 fi
