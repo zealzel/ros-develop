@@ -7,10 +7,6 @@ repositories:
     type: git
     url: https://github.com/open-rmf/rmf_demos
     version: humble
-  rmf_simulation:
-    type: git
-    url: https://github.com/open-rmf/rmf_simulation
-    version: humble
   my_rmf:
     type: git
     url: https://github.com/zealzel/my_rmf
