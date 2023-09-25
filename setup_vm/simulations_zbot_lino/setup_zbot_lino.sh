@@ -29,4 +29,4 @@ if [[ $exit_code -ne 0 ]]; then
 fi
 
 ROS_DISTRO="$(printenv ROS_DISTRO)"
-"$install_from_source_sh" -w $WORKSPACE -v "zbot_lino_$ROS_DISTRO.repos" -i micro_ros_agent
+"$install_from_source_sh" -w $WORKSPACE -v "zbot_lino_$ROS_DISTRO.repos" -i linorobot2_bringup
