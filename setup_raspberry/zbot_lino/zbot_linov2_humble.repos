@@ -7,15 +7,23 @@ repositories:
     type: git
     url: https://github.com/zealzel/zbot_lino
     version: humble
-  sick_safetyscanners_base
+  fitrobot_interfaces:
+    type: git
+    url: https://github.com/fitfabsw/fitrobot_interfaces
+    version: main
+  fitrobot:
+    type: git
+    url: https://github.com/fitfabsw/fitrobot
+    version: main
+  sick_safetyscanners_base:
     type: git
     url: https://github.com/SICKAG/sick_safetyscanners_base
     version: ros2
-  sick_safetyscanners2_interfaces
+  sick_safetyscanners2_interfaces:
     type: git
     url: https://github.com/SICKAG/sick_safetyscanners2_interfaces
     version: master
-  sick_safetyscanners2
+  sick_safetyscanners2:
     type: git
     url: https://github.com/SICKAG/sick_safetyscanners2
     version: master
