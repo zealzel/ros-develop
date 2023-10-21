@@ -18,7 +18,7 @@ repositories:
   fitrobot:
     type: git
     url: https://github.com/fitfabsw/fitrobot
-    version: main
+    version: dev
   rosboard:
     type: git
     url: https://github.com/dheera/rosboard
