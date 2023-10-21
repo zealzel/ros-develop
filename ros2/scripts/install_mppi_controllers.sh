@@ -1,6 +1,19 @@
 #!/usr/bin/bash
 source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
 source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/argparse_ros.sh"
+
+UBUNTU_CODENAME=$(cat /etc/os-release |grep VERSION_CODENAME|cut -d"=" -f2)
+if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
+  echo "Ubuntu 20.04 detected. Set defualt ROSDISTRO to galactic."
+  ROSDISTRO="galactic"
+elif [[ "$UBUNTU_CODENAME" == "jammy" ]]; then
+  echo "Ubuntu 22.04 detected. Set defualt ROSDISTRO to humble."
+  ROSDISTRO="humble"
+else
+  echo "Ubuntu $UBUNTU_CODENAME is not supported"
+  exit 1
+fi
+
 parse_args "$@"
 
 LATEST_WORKED_COMMIT="1.1.12"
