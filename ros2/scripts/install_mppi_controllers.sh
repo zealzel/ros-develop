@@ -1,6 +1,7 @@
 #!/usr/bin/bash
-source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
-source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/argparse_ros.sh"
+script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+source "$script_dir/../../scripts/utils.sh"
+source "$script_dir/../../scripts/argparse_ros.sh"
 
 UBUNTU_CODENAME=$(cat /etc/os-release |grep VERSION_CODENAME|cut -d"=" -f2)
 if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
@@ -21,6 +22,11 @@ LATEST_WORKED_COMMIT="1.1.12"
 echo "ROSDISTRO=$ROSDISTRO"
 echo "WORKSPACE=$WORKSPACE"
 echo "LATEST_WORKED_COMMIT=$LATEST_WORKED_COMMIT"
+
+"$script_dir/../../scripts/create_workspace.sh" $WORKSPACE || exit_code=$?
+if [[ $exit_code -ne 0 ]]; then
+  exit
+fi
 
 if [[ $ROSDISTRO == "humble" ]]; then
   echo "Install mppi_controllers from source."
