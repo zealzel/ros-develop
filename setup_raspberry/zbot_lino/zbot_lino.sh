@@ -31,8 +31,8 @@ echo "WORKSPACE=$WORKSPACE"
 source /opt/ros/"$ROSDISTRO"/setup.bash
 ROS_DISTRO="$(printenv ROS_DISTRO)"
 
-# choose from zbotlino, zbotlinoinvert, zbotlinosick1
-BASE=zbotlinosick1
+# choose from zbotlino, zbotlinoinvert, zbotlinosick1, zbotlinosick2
+BASE=zbotlinosick2
 
 if [ $BASE == "zbotlino" ]; then
   LASER_SENSOR=rplidar
@@ -40,12 +40,15 @@ elif [ $BASE == "zbotlinoinvert" ]; then
   LASER_SENSOR=nanoscan3
 elif [ $BASE == "zbotlinosick1" ]; then
   LASER_SENSOR=nanoscan3
+elif [ $BASE == "zbotlinosick2" ]; then
+  LASER_SENSOR=nanoscan3
 else
   echo "Invalid robot type"
   exit 1
 fi
 
-DEPTH_SENSOR=realsense
+# DEPTH_SENSOR=realsense
+DEPTH_SENSOR=
 
 function install_rplidar {
   sudo apt install -y ros-"$ROS_DISTRO"-rplidar-ros
@@ -107,7 +110,8 @@ echo
 echo "===================================================================="
 echo "Install apt packages"
 echo "===================================================================="
-sudo apt install -y python3-vcstool build-essential ros-"$ROS_DISTRO"-robot-localization
+# sudo apt install -y python3-vcstool build-essential ros-"$ROS_DISTRO"-robot-localization
+sudo apt install -y python3-vcstool build-essential ros-"$ROS_DISTRO"-robot-localization ros-"$ROS_DISTRO"-rosbridge-server
 
 echo
 echo "===================================================================="
