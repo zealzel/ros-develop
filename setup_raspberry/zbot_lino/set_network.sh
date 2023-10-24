@@ -9,4 +9,4 @@ sudo cp 50-cloud-init.yaml "$filepath"
 
 # copy cyclonedds config file
 cp cyclonedds.xml $HOME
-append_bashrc 'export CYCLONEDDS_URI=/path/to/cyclonedds_config.xml'
+append_bashrc 'export CYCLONEDDS_URI=$HOME/cyclonedds_config.xml'
