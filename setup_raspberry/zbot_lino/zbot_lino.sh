@@ -166,3 +166,12 @@ if [[ "$BASE" != "ci" ]]; then
     echo "Remember to run $ source ${WORKSPACEPATH}/install/setup.bash every time you open a terminal."
   fi
 fi
+
+echo
+echo "===================================================================="
+echo "setup systemd services                                              "
+echo "===================================================================="
+sudo cp "$WORKSPACEPATH/src/fitrobot/systemd/fitrobot.lino.service" /etc/systemd/system
+sudo cp "$WORKSPACEPATH/src/fitrobot/systemd/fitrobot_lino.bringup.service" /etc/systemd/system
+sudo systemctl enable fitrobot.lino.service
+sudo systemctl enable fitrobot_lino.bringup.service
