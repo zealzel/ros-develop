@@ -17,7 +17,8 @@ fi
 
 parse_args "$@"
 
-LATEST_WORKED_COMMIT="1.1.12"
+# LATEST_WORKED_COMMIT="1.1.12"
+LATEST_WORKED_COMMIT="3ed4c2df"
 
 echo "ROSDISTRO=$ROSDISTRO"
 echo "WORKSPACE=$WORKSPACE"
@@ -30,6 +31,11 @@ fi
 
 if [[ $ROSDISTRO == "humble" ]]; then
   echo "Install mppi_controllers from source."
+  # In order to build the latest mppi_controllers, we need to build navigation2 from source.
+  #
+  # 1. remove the mppi_controllers binary package
+  sudo apt remove ros-$ROSDISTRO-mppi-controllers -y
+  #
   # when comping from source, trying out several commit, below is the latest results
   #
   # humble (57f55c) failed (10/16)
@@ -47,4 +53,12 @@ if [[ $ROSDISTRO == "humble" ]]; then
   git clone https://github.com/ros-planning/navigation2 /tmp/navigation2 -b "$ROSDISTRO"
   cd /tmp/navigation2 && git checkout $LATEST_WORKED_COMMIT
   cp -R /tmp/navigation2/nav2_mppi_controller "$HOME/$WORKSPACE/src"
+
+  # 2. build
+  cd "$HOME/$WORKSPACE"
+  rm -rf build/nav2_mppi_controller install/nav2_mppi_controller > /dev/null 2>&1
+  colcon build --symlink-install --packages-select nav2_mppi_controller
+  #
+  # 3. re-install nav2-bringup
+  sudo apt install ros-$ROSDISTRO-nav2-bringup -y
 fi

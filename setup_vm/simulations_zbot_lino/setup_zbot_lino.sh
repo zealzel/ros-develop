@@ -28,5 +28,9 @@ if [[ $exit_code -ne 0 ]]; then
   exit
 fi
 
+../../ros2/scripts/install_mppi_controllers.sh -r $ROS_DISTRO -w $WORKSPACE
+
+../install_rmf.sh -w $WORKSPACE -r $ROSDISTRO
+
 ROS_DISTRO="$(printenv ROS_DISTRO)"
 "$install_from_source_sh" -w $WORKSPACE -v "zbot_lino_$ROS_DISTRO.repos" -i linorobot2_bringup
