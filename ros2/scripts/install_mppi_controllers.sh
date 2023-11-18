@@ -34,7 +34,7 @@ if [[ $ROSDISTRO == "humble" ]]; then
   # In order to build the latest mppi_controllers, we need to build navigation2 from source.
   #
   # 1. remove the mppi_controllers binary package
-  sudo apt remove ros-$ROSDISTRO-mppi-controller -y
+  sudo apt remove ros-$ROSDISTRO-nav2-mppi-controller -y
   #
   # when comping from source, trying out several commit, below is the latest results
   #
