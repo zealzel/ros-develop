@@ -15,6 +15,10 @@ repositories:
     type: git
     url: https://github.com/fitfabsw/fitrobot
     version: dev
+  fitrobotcpp:
+    type: git
+    url: https://github.com/fitfabsw/fitrobotcpp
+    version: main
   sick_safetyscanners_base:
     type: git
     url: https://github.com/SICKAG/sick_safetyscanners_base
