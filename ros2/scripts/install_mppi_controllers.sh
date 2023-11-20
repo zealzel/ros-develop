@@ -66,6 +66,8 @@ if [[ $ROSDISTRO == "humble" ]]; then
   git clone https://github.com/ros-planning/navigation2 /tmp/navigation2 -b "$ROSDISTRO"
   cd /tmp/navigation2 && git checkout $LATEST_WORKED_COMMIT
   cp -R /tmp/navigation2/nav2_mppi_controller "$HOME/$WORKSPACE/src"
+  cp -R /tmp/navigation2/nav2_amcl "$HOME/$WORKSPACE/src"
+  # cp -R /tmp/navigation2/nav2_behavior_tree "$HOME/$WORKSPACE/src"
 
   echo "3. colcon build the nav2_mppi_controller package"
   cd "$HOME/$WORKSPACE"
