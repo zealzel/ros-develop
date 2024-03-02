@@ -18,7 +18,9 @@ fi
 parse_args "$@"
 
 # LATEST_WORKED_COMMIT="1.1.12"
-LATEST_WORKED_COMMIT="3ed4c2df" # including BIG improvements in MPPI !! must have !!!
+#a45b151ceb3aa9edebad8a528cd672935f0c668d
+LATEST_WORKED_COMMIT="a45b151c" # 2024/3/3
+# LATEST_WORKED_COMMIT="3ed4c2df" # including BIG improvements in MPPI !! must have !!!
 
 echo "ROSDISTRO=$ROSDISTRO"
 echo "WORKSPACE=$WORKSPACE"
@@ -41,6 +43,7 @@ fi
 #   3. colcon build the nav2_mppi_controller package
 #   4. re-install ros-humble-nav2-bringup
 #
+# a45b151c worked (2024/3/3)
 # 3ed4c2 worked (11/17)
 #   we should be able build any commit from now on following above procedures
 # humble (57f55c) failed (10/16)
@@ -66,13 +69,13 @@ if [[ $ROSDISTRO == "humble" ]]; then
   git clone https://github.com/ros-planning/navigation2 /tmp/navigation2 -b "$ROSDISTRO"
   cd /tmp/navigation2 && git checkout $LATEST_WORKED_COMMIT
   cp -R /tmp/navigation2/nav2_mppi_controller "$HOME/$WORKSPACE/src"
-  cp -R /tmp/navigation2/nav2_amcl "$HOME/$WORKSPACE/src"
+  # cp -R /tmp/navigation2/nav2_amcl "$HOME/$WORKSPACE/src"
   # cp -R /tmp/navigation2/nav2_behavior_tree "$HOME/$WORKSPACE/src"
 
   echo "3. colcon build the nav2_mppi_controller package"
   cd "$HOME/$WORKSPACE"
   rm -rf build/nav2_mppi_controller install/nav2_mppi_controller > /dev/null 2>&1
-  colcon build --symlink-install --packages-select nav2_mppi_controller
+  # colcon build --symlink-install --packages-select nav2_mppi_controller nav2_amcl
   #
   echo "4. re-install ros-humble-nav2-bringup"
   sudo apt install ros-$ROSDISTRO-nav2-bringup -y
