@@ -88,3 +88,10 @@ ensure_sudo() {
     fi
   fi
 }
+
+disable_needrestart() {
+  if [[ $(dpkg -l | grep needrestart) ]]; then
+    echo "needrestart is installed"
+    sudo sed -i 's/#$nrconf{restart} = '"'"'i'"'"';/$nrconf{restart} = '"'"'a'"'"';/g' /etc/needrestart/needrestart.conf
+  fi
+}

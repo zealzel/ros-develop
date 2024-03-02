@@ -19,6 +19,10 @@ else
   exit 1
 fi
 
+# this is a workaround for the needrestart issue
+# ref: https://gist.github.com/fernandoaleman/c3191ed46c977f0a3fcfbdac319183fc
+disable_needrestart
+
 echo "The original image: $ORIGINAL_IMAGE"
 echo "The original image download site: $IMAGE_DOWNLOAD_SITE"
 
