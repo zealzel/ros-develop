@@ -182,3 +182,12 @@ sudo cp "$WORKSPACEPATH/src/fitrobot/systemd/fitrobot.lino.service" /etc/systemd
 sudo cp "$WORKSPACEPATH/src/fitrobot/systemd/fitrobot_lino.bringup.service" /etc/systemd/system
 sudo systemctl enable fitrobot.lino.service
 sudo systemctl enable fitrobot_lino.bringup.service
+
+echo
+echo "===================================================================="
+echo "setup network including additional wifi driver                      "
+echo "===================================================================="
+
+# better to run this script manually
+# ./set_network.sh
+# ./install_rtl88x2bu.sh
