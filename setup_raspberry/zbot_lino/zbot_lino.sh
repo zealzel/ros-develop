@@ -122,6 +122,12 @@ sudo apt install -y python3-vcstool build-essential ros-"$ROS_DISTRO"-robot-loca
 
 echo
 echo "===================================================================="
+echo "Setup audio"
+echo "===================================================================="
+./setup_audio.sh
+
+echo
+echo "===================================================================="
 echo "Install micro_ros_setup"
 echo "===================================================================="
 WORKSPACEPATH="$HOME/$WORKSPACE"

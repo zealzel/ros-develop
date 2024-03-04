@@ -1,0 +1,99 @@
+pi@adata:~/WM8960-Audio-HAT$ sudo ./install.sh
+Hit:1 http://ports.ubuntu.com/ubuntu-ports jammy InRelease
+Get:2 http://ports.ubuntu.com/ubuntu-ports jammy-updates InRelease [119 kB]
+Hit:3 http://packages.ros.org/ros2/ubuntu jammy InRelease
+Hit:4 http://ports.ubuntu.com/ubuntu-ports jammy-backports InRelease
+Get:5 http://ports.ubuntu.com/ubuntu-ports jammy-security InRelease [110 kB]
+Get:6 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 Packages [1,225 kB]
+Get:7 http://ports.ubuntu.com/ubuntu-ports jammy-updates/universe arm64 Packages [991 kB]
+Get:8 http://ports.ubuntu.com/ubuntu-ports jammy-security/main arm64 Packages [1,016 kB]
+Get:9 http://ports.ubuntu.com/ubuntu-ports jammy-security/universe arm64 Packages [789 kB]
+Fetched 4,250 kB in 5s (857 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+E: Unable to locate package raspberrypi-kernel-headers
+E: Unable to locate package raspberrypi-kernel
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+dkms is already the newest version (2.8.7-2ubuntu2.2).
+git is already the newest version (1:2.34.1-1ubuntu1.10).
+git set to manually installed.
+The following additional packages will be installed:
+  libi2c0 libjack-jackd2-0 read-edid
+Suggested packages:
+  libi2c-dev python3-smbus jackd2
+The following NEW packages will be installed:
+  i2c-tools libasound2-plugins libi2c0 libjack-jackd2-0 read-edid
+0 upgraded, 5 newly installed, 0 to remove and 0 not upgraded.
+Need to get 454 kB of archives.
+After this operation, 1,809 kB of additional disk space will be used.
+Get:1 http://ports.ubuntu.com/ubuntu-ports jammy/main arm64 libjack-jackd2-0 arm64 1.9.20~dfsg-1 [284 kB]
+Get:2 http://ports.ubuntu.com/ubuntu-ports jammy/main arm64 libasound2-plugins arm64 1.2.6-1 [67.8 kB]
+Get:3 http://ports.ubuntu.com/ubuntu-ports jammy/universe arm64 libi2c0 arm64 4.3-2build1 [6,446 B]
+Get:4 http://ports.ubuntu.com/ubuntu-ports jammy/universe arm64 read-edid arm64 3.0.2-1.1 [15.8 kB]
+Get:5 http://ports.ubuntu.com/ubuntu-ports jammy/universe arm64 i2c-tools arm64 4.3-2build1 [79.5 kB]
+Fetched 454 kB in 3s (171 kB/s)
+Selecting previously unselected package libjack-jackd2-0:arm64.
+(Reading database ... 255428 files and directories currently installed.)
+Preparing to unpack .../libjack-jackd2-0_1.9.20~dfsg-1_arm64.deb ...
+Unpacking libjack-jackd2-0:arm64 (1.9.20~dfsg-1) ...
+Selecting previously unselected package libasound2-plugins:arm64.
+Preparing to unpack .../libasound2-plugins_1.2.6-1_arm64.deb ...
+Unpacking libasound2-plugins:arm64 (1.2.6-1) ...
+Selecting previously unselected package libi2c0:arm64.
+Preparing to unpack .../libi2c0_4.3-2build1_arm64.deb ...
+Unpacking libi2c0:arm64 (4.3-2build1) ...
+Selecting previously unselected package read-edid.
+Preparing to unpack .../read-edid_3.0.2-1.1_arm64.deb ...
+Unpacking read-edid (3.0.2-1.1) ...
+Selecting previously unselected package i2c-tools.
+Preparing to unpack .../i2c-tools_4.3-2build1_arm64.deb ...
+Unpacking i2c-tools (4.3-2build1) ...
+Setting up libi2c0:arm64 (4.3-2build1) ...
+Setting up read-edid (3.0.2-1.1) ...
+Setting up i2c-tools (4.3-2build1) ...
+Setting up libjack-jackd2-0:arm64 (1.9.20~dfsg-1) ...
+Setting up libasound2-plugins:arm64 (1.2.6-1) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.6) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+Failed to check for processor microcode upgrades.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Creating symlink /var/lib/dkms/wm8960-soundcard/1.0/source -> /usr/src/wm8960-soundcard-1.0
+
+Kernel preparation unnecessary for this kernel. Skipping...
+
+Building module:
+cleaning build area...
+make -j4 KERNELRELEASE=5.15.0-1047-raspi -C /lib/modules/5.15.0-1047-raspi/build M=/var/lib/dkms/wm8960-soundcard/1.0/build.....(bad exit status: 2)
+ERROR (dkms apport): binary package for wm8960-soundcard: 1.0 not found
+Error! Bad return status for module build on kernel: 5.15.0-1047-raspi (aarch64)
+Consult /var/lib/dkms/wm8960-soundcard/1.0/build/make.log for more information.
+sed: can't read /boot/config.txt: No such file or directory
+grep: /boot/config.txt: No such file or directory
+Created symlink /etc/systemd/system/sysinit.target.wants/wm8960-soundcard.service → /lib/systemd/system/wm8960-soundcard.service.
+Job for wm8960-soundcard.service failed because the control process exited with error code.
+See "systemctl status wm8960-soundcard.service" and "journalctl -xeu wm8960-soundcard.service" for details.
+------------------------------------------------------
+Please reboot your raspberry pi to apply all settings
+Enjoy!
+------------------------------------------------------
+
