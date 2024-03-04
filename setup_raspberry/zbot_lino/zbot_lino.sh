@@ -35,8 +35,9 @@ echo "WORKSPACE=$WORKSPACE"
 source /opt/ros/"$ROSDISTRO"/setup.bash
 ROS_DISTRO="$(printenv ROS_DISTRO)"
 
-# choose from zbotlino, zbotlinoinvert, zbotlinosick1, zbotlinosick2
-BASE=zbotlinosick2
+# choose from zbotlino, zbotlinoinvert, zbotlinosick1, zbotlinosick2, zbotlino2
+# BASE=zbotlinosick2
+BASE=zbotlino2
 
 if [ $BASE == "zbotlino" ]; then
   LASER_SENSOR=rplidar
@@ -45,6 +46,8 @@ elif [ $BASE == "zbotlinoinvert" ]; then
 elif [ $BASE == "zbotlinosick1" ]; then
   LASER_SENSOR=nanoscan3
 elif [ $BASE == "zbotlinosick2" ]; then
+  LASER_SENSOR=nanoscan3
+elif [ $BASE == "zbotlino2" ]; then
   LASER_SENSOR=nanoscan3
 else
   echo "Invalid robot type"
