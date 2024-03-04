@@ -75,6 +75,7 @@ if [[ $ROSDISTRO == "humble" ]]; then
   echo "3. colcon build the nav2_mppi_controller package"
   cd "$HOME/$WORKSPACE"
   rm -rf build/nav2_mppi_controller install/nav2_mppi_controller > /dev/null 2>&1
+  colcon build --symlink-install --packages-select nav2_mppi_controller
   # colcon build --symlink-install --packages-select nav2_mppi_controller nav2_amcl
   #
   echo "4. re-install ros-humble-nav2-bringup"
