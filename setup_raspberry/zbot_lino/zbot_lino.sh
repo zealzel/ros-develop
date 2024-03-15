@@ -64,11 +64,25 @@ function install_rplidar {
   sudo cp rplidar.rules /etc/udev/rules.d/
 }
 
-function install_realsense {
-  sudo apt install -y ros-"$ROS_DISTRO"-realsense2-camera
+# function install_realsense {
+#   sudo apt install -y ros-"$ROS_DISTRO"-realsense2-camera
+#   cd /tmp
+#   wget https://raw.githubusercontent.com/IntelRealSense/librealsense/master/config/99-realsense-libusb.rules
+#   sudo cp 99-realsense-libusb.rules /etc/udev/rules.d
+# }
+
+function install_realsense_new {
+  # sudo apt install -y ros-"$ROS_DISTRO"-realsense2-camera
+
+  cd
+  wget https://github.com/IntelRealSense/librealsense/raw/master/scripts/libuvc_installation.sh
+  chmod +x ./libuvc_installation.sh
+  ./libuvc_installation.sh
+
   cd /tmp
   wget https://raw.githubusercontent.com/IntelRealSense/librealsense/master/config/99-realsense-libusb.rules
   sudo cp 99-realsense-libusb.rules /etc/udev/rules.d
+  sudo udevadm control --reload-rules && sudo udevadm trigger
 }
 
 if [[ "$ROS_DISTRO" == "" || "$ROS_DISTRO" == "<unknown>" ]]; then
@@ -111,7 +125,7 @@ echo "===================================================================="
 echo "Install LIDAR/Depth Sensor ROS2 drivers"
 echo "===================================================================="
 install_rplidar
-install_realsense
+install_realsense_new
 
 echo
 echo "===================================================================="

@@ -31,7 +31,3 @@ repositories:
     type: git
     url: https://github.com/SICKAG/sick_safetyscanners2
     version: master
-  realsense-ros:
-    type: git
-    url: https://github.com/IntelRealSense/realsense-ros
-    version: ros2-development
