@@ -119,6 +119,7 @@ echo "Install apt packages"
 echo "===================================================================="
 # sudo apt install -y python3-vcstool build-essential ros-"$ROS_DISTRO"-robot-localization
 sudo apt install -y python3-vcstool build-essential ros-"$ROS_DISTRO"-robot-localization ros-"$ROS_DISTRO"-rosbridge-server
+sudo apt install -y python3-websocket # for fitrobot_lino.status.service
 
 echo
 echo "===================================================================="
@@ -186,8 +187,10 @@ echo "setup systemd services                                              "
 echo "===================================================================="
 sudo cp "$WORKSPACEPATH/src/fitrobot/systemd/fitrobot.lino.service" /etc/systemd/system
 sudo cp "$WORKSPACEPATH/src/fitrobot/systemd/fitrobot_lino.bringup.service" /etc/systemd/system
+sudo cp "$WORKSPACEPATH/src/fitrobot/systemd/fitrobot_lino.status.service" /etc/systemd/system
 sudo systemctl enable fitrobot.lino.service
 sudo systemctl enable fitrobot_lino.bringup.service
+sudo systemctl enable fitrobot_lino.status.service
 
 echo
 echo "===================================================================="
@@ -197,3 +200,4 @@ echo "===================================================================="
 # better to run this script manually
 # ./set_network.sh
 # ./install_rtl88x2bu.sh
+# ./overclock.sh
