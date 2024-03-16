@@ -5,6 +5,8 @@ source sensors.sh
 script_start_time=$(date +%s)
 prepare_vcs_sh="$(readlink -f "$script_dir"/../../scripts/prepare_vcs.sh)"
 
+declare -A elapsed_times
+
 # Detect Ubuntu version and set ROS distribution accordingly
 . /etc/os-release
 case $VERSION_CODENAME in
