@@ -117,9 +117,6 @@ echo ====================================================================
 vcs_repo_path="$script_dir/zbot_linov2_$ROSDISTRO.repos"
 "$prepare_vcs_sh" $WORKSPACE $vcs_repo_path
 
-# Added temporarily for testing
-../../ros2/scripts/install_mppi_controllers.sh -r $ROS_DISTRO -w $WORKSPACE
-
 echo
 echo "===================================================================="
 echo "Install LIDAR/Depth Sensor ROS2 drivers"
@@ -142,8 +139,18 @@ echo "===================================================================="
 WORKSPACEPATH="$HOME/$WORKSPACE"
 cd "$WORKSPACEPATH"
 vcs import src < "$vcs_repo_path"
-cd "$WORKSPACEPATH/src/zbot_lino/linorobot2" && touch COLCON_IGNORE
-cd "$WORKSPACEPATH/src/zbot_lino/linorobot2/linorobot2_gazebo" && touch COLCON_IGNORE
+touch "$WORKSPACEPATH/src/fitrobot"/COLCON_IGNORE
+touch "$WORKSPACEPATH/src/fitrobot_interfaces"/COLCON_IGNORE
+touch "$WORKSPACEPATH/src/fitrobotcpp"/COLCON_IGNORE
+touch "$WORKSPACEPATH/src/realsense-ros"/COLCON_IGNORE
+touch "$WORKSPACEPATH/src/sick_safetyscanners2"/COLCON_IGNORE
+touch "$WORKSPACEPATH/src/sick_safetyscanners2_interfaces"/COLCON_IGNORE
+touch "$WORKSPACEPATH/src/sick_safetyscanners2_base"/COLCON_IGNORE
+touch "$WORKSPACEPATH/src/zbot_lino/linorobot2"/COLCON_IGNORE
+touch "$WORKSPACEPATH/src/zbot_lino/linorobot2/linorobot2_gazebo"/COLCON_IGNORE
+
+# cd "$WORKSPACEPATH/src/zbot_lino/linorobot2" && touch COLCON_IGNORE
+# cd "$WORKSPACEPATH/src/zbot_lino/linorobot2/linorobot2_gazebo" && touch COLCON_IGNORE
 cd "$WORKSPACEPATH"
 rosdep install --from-path src --ignore-src -y
 colcon build && source "$WORKSPACEPATH"/install/setup.bash
@@ -160,9 +167,24 @@ echo
 echo "===================================================================="
 echo "Build zbot_lino"
 echo "===================================================================="
-cd "$WORKSPACEPATH/src/zbot_lino/linorobot2" && rm COLCON_IGNORE
-cd "$WORKSPACEPATH" && colcon build
+# cd "$WORKSPACEPATH/src/zbot_lino/linorobot2" && rm COLCON_IGNORE
+
+rm "$WORKSPACEPATH/src/fitrobot"/COLCON_IGNORE
+rm "$WORKSPACEPATH/src/fitrobot_interfaces"/COLCON_IGNORE
+rm "$WORKSPACEPATH/src/fitrobotcpp"/COLCON_IGNORE
+rm "$WORKSPACEPATH/src/realsense-ros"/COLCON_IGNORE
+rm "$WORKSPACEPATH/src/sick_safetyscanners2"/COLCON_IGNORE
+rm "$WORKSPACEPATH/src/sick_safetyscanners2_interfaces"/COLCON_IGNORE
+rm "$WORKSPACEPATH/src/sick_safetyscanners2_base"/COLCON_IGNORE
+rm "$WORKSPACEPATH/src/zbot_lino/linorobot2"/COLCON_IGNORE
+
+cd "$WORKSPACEPATH" && colcon build --symlink-install
 source "$WORKSPACEPATH"/install/setup.bash
+
+echo "===================================================================="
+echo "Use newests nav2 mppi_controllers                                   "
+echo "===================================================================="
+../../ros2/scripts/install_mppi_controllers.sh -r $ROS_DISTRO -w $WORKSPACE
 
 ## ENV Variables
 echo ======== Env Variables ========
@@ -214,5 +236,5 @@ echo "===================================================================="
 ./overclock.sh # for pi4
 
 # better to run this script manually
+./install_rtl88x2bu.sh
 # ./set_network.sh
-# ./install_rtl88x2bu.sh
