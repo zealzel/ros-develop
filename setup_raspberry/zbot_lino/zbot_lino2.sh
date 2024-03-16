@@ -42,7 +42,7 @@ stage1="Prepare ROS2 environment and workspace"
 stage1_start_time=$(date +%s)
 ../../ros2/scripts/prepare_ros2_workspace.sh -u "$UBUNTU_CODENAME" -r "$ROSDISTRO" -w "$WORKSPACE"
 check_exit_code $? "$stage1"
-calculate_and_store_time $stage1_start_time $stage1
+calculate_and_store_time $stage1_start_time "$stage1"
 
 source /opt/ros/"$ROSDISTRO"/setup.bash
 ROS_DISTRO="$(printenv ROS_DISTRO)"
@@ -93,7 +93,7 @@ stage2_start_time=$(date +%s)
 # install_rplidar
 install_librealsense2
 check_exit_code $? "$stage2"
-calculate_and_store_time $stage2_start_time $stage2
+calculate_and_store_time $stage2_start_time "$stage2"
 
 echo
 echo "===================================================================="
@@ -105,7 +105,7 @@ sudo apt install -y python3-vcstool build-essential ros-"$ROS_DISTRO"-robot-loca
 check_exit_code $? "$stage3"
 sudo apt install -y python3-websocket # for fitrobot_lino.status.service
 check_exit_code $? "$stage3"
-calculate_and_store_time $stage3_start_time $stage3
+calculate_and_store_time $stage3_start_time "$stage3"
 
 echo
 echo "===================================================================="
@@ -119,7 +119,7 @@ cd "$WORKSPACEPATH"
 vcs import src < "$vcs_repo_path"
 rosdep install --from-path src --ignore-src -y
 check_exit_code $? "$stage4"
-calculate_and_store_time $stage4_start_time $stage4
+calculate_and_store_time $stage4_start_time "$stage4"
 
 echo
 echo "===================================================================="
