@@ -65,15 +65,18 @@ if [[ "$reply" != "y" && "$reply" != "Y" ]]; then
   exit 1
 fi
 
-echo
-echo ====================================================================
-echo Prepare ROS2 environment and workspace
-echo ====================================================================
-stage1="Prepare ROS2 environment and workspace"
-stage1_start_time=$(date +%s)
-../../ros2/scripts/prepare_ros2_workspace.sh -u "$UBUNTU_CODENAME" -r "$ROSDISTRO" -w "$WORKSPACE"
-check_exit_code $? "$stage1"
-calculate_and_store_time $stage1_start_time "$stage1"
+stage1_description="Prepare ROS2 environment and workspace"
+
+stage1() {
+  describe_stage=$1
+  title_stage1 "$describe_stage"
+  stage1_start_time=$(date +%s)
+  $script_dir/../../ros2/scripts/prepare_ros2_workspace.sh -u "$UBUNTU_CODENAME" -r "$ROSDISTRO" -w "$WORKSPACE"
+  check_exit_code $? "$describe_stage"
+  calculate_and_store_time $stage1_start_time "$describe_stage"
+}
+
+stage1 "$stage1_description"
 
 source /opt/ros/"$ROSDISTRO"/setup.bash
 ROS_DISTRO="$(printenv ROS_DISTRO)"
