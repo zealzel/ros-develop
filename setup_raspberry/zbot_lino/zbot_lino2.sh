@@ -69,7 +69,7 @@ stage1_description="Prepare ROS2 environment and workspace"
 
 stage1() {
   describe_stage=$1
-  title_stage1 "$describe_stage"
+  title "$describe_stage"
   stage1_start_time=$(date +%s)
   $script_dir/../../ros2/scripts/prepare_ros2_workspace.sh -u "$UBUNTU_CODENAME" -r "$ROSDISTRO" -w "$WORKSPACE"
   check_exit_code $? "$describe_stage"
