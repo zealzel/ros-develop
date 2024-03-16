@@ -34,19 +34,6 @@ echo "UBUNTU_CODENAME=$VERSION_CODENAME"
 echo "ROSDISTRO=$ROSDISTRO"
 echo "WORKSPACE=$WORKSPACE"
 
-echo
-echo ====================================================================
-echo Prepare ROS2 environment and workspace
-echo ====================================================================
-stage1="Prepare ROS2 environment and workspace"
-stage1_start_time=$(date +%s)
-../../ros2/scripts/prepare_ros2_workspace.sh -u "$UBUNTU_CODENAME" -r "$ROSDISTRO" -w "$WORKSPACE"
-check_exit_code $? "$stage1"
-calculate_and_store_time $stage1_start_time "$stage1"
-
-source /opt/ros/"$ROSDISTRO"/setup.bash
-ROS_DISTRO="$(printenv ROS_DISTRO)"
-
 BASE=zbotlino2
 case $BASE in
   zbotlino)
@@ -61,13 +48,7 @@ case $BASE in
     ;;
 esac
 
-if [[ "$ROS_DISTRO" == "" || "$ROS_DISTRO" == "<unknown>" ]]; then
-  echo "No ROS2 distro detected"
-  echo "Try running $ source /opt/ros/<ros_distro>/setup.bash and try again."
-  exit 1
-fi
-
-echo "You are installing zbot_lino on your robot computer."
+echo "You are installing zbot_lino2 on your robot computer."
 echo
 echo "===========SUMMARY============"
 echo "ROBOT TYPE   : $BASE"
@@ -81,6 +62,25 @@ echo -n "Enter [y] to continue. "
 read reply
 if [[ "$reply" != "y" && "$reply" != "Y" ]]; then
   echo "Exiting now."
+  exit 1
+fi
+
+echo
+echo ====================================================================
+echo Prepare ROS2 environment and workspace
+echo ====================================================================
+stage1="Prepare ROS2 environment and workspace"
+stage1_start_time=$(date +%s)
+../../ros2/scripts/prepare_ros2_workspace.sh -u "$UBUNTU_CODENAME" -r "$ROSDISTRO" -w "$WORKSPACE"
+check_exit_code $? "$stage1"
+calculate_and_store_time $stage1_start_time "$stage1"
+
+source /opt/ros/"$ROSDISTRO"/setup.bash
+ROS_DISTRO="$(printenv ROS_DISTRO)"
+
+if [[ "$ROS_DISTRO" == "" || "$ROS_DISTRO" == "<unknown>" ]]; then
+  echo "No ROS2 distro detected"
+  echo "Try running $ source /opt/ros/<ros_distro>/setup.bash and try again."
   exit 1
 fi
 
