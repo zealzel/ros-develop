@@ -137,12 +137,6 @@ sudo apt install -y python3-websocket # for fitrobot_lino.status.service
 
 echo
 echo "===================================================================="
-echo "Setup audio"
-echo "===================================================================="
-./setup_audio.sh
-
-echo
-echo "===================================================================="
 echo "Install micro_ros_setup"
 echo "===================================================================="
 WORKSPACEPATH="$HOME/$WORKSPACE"
@@ -208,10 +202,17 @@ sudo systemctl enable fitrobot_lino.status.service
 
 echo
 echo "===================================================================="
+echo "Setup audio"
+echo "===================================================================="
+./setup_audio.sh
+
+echo
+echo "===================================================================="
 echo "setup network including additional wifi driver                      "
 echo "===================================================================="
+
+./overclock.sh # for pi4
 
 # better to run this script manually
 # ./set_network.sh
 # ./install_rtl88x2bu.sh
-# ./overclock.sh

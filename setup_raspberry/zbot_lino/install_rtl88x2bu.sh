@@ -10,3 +10,9 @@ make clean
 make
 sudo make install
 sudo modprobe 88x2bu
+rtn=$?
+if [ $rtn -eq 0 ]; then
+  echo "RTL88x2BU-Linux-Driver installed successfully"
+else
+  echo "RTL88x2BU-Linux-Driver installation failed"
+fi
