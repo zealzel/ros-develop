@@ -1,3 +1,26 @@
+
+# print_elapsed_time() {
+#     start_time=$1
+#     end_time=$(date +%s)
+#     elapsed=$((end_time - start_time))
+#     echo "Elapsed time: $elapsed seconds"
+# }
+
+calculate_and_store_time() {
+    local start_time=$1
+    local stage_name=$2
+    local end_time=$(date +%s)
+    local elapsed=$((end_time - start_time))
+    elapsed_times["$stage_name"]=$elapsed
+}
+
+print_elapsed_summary() {
+    echo "Elapsed time summary:"
+    for stage in "${!elapsed_times[@]}"; do
+        echo "$stage: ${elapsed_times[$stage]} seconds"
+    done
+}
+
 idpt-append-sudo() {
   line="$1"
   file="$2"
