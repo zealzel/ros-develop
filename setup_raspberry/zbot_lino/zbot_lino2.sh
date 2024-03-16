@@ -36,9 +36,11 @@ echo
 echo ====================================================================
 echo Prepare ROS2 environment and workspace
 echo ====================================================================
+stage1="Prepare ROS2 environment and workspace"
 stage1_start_time=$(date +%s)
 ../../ros2/scripts/prepare_ros2_workspace.sh -u "$UBUNTU_CODENAME" -r "$ROSDISTRO" -w "$WORKSPACE"
-calculate_and_store_time $stage1_start_time "Prepare ROS2 environment and workspace"
+calculate_and_store_time $stage1_start_time $stage1
+check_exit_code $? $stage1
 
 source /opt/ros/"$ROSDISTRO"/setup.bash
 ROS_DISTRO="$(printenv ROS_DISTRO)"
@@ -84,66 +86,80 @@ echo
 echo "===================================================================="
 echo "Install LIDAR/Depth Sensor ROS2 drivers"
 echo "===================================================================="
+stage2="Install LIDAR/Depth Sensor ROS2 drivers"
 stage2_start_time=$(date +%s)
 # install_rplidar
 install_librealsense2
-calculate_and_store_time $stage2_start_time "Install LIDAR/Depth Sensor ROS2 drivers"
+calculate_and_store_time $stage2_start_time $stage2
+check_exit_code $? $stage2
 
 echo
 echo "===================================================================="
 echo "Install apt packages"
 echo "===================================================================="
+stage3="Install apt packages"
 stage3_start_time=$(date +%s)
 sudo apt install -y python3-vcstool build-essential ros-"$ROS_DISTRO"-robot-localization ros-"$ROS_DISTRO"-rosbridge-server
 sudo apt install -y python3-websocket # for fitrobot_lino.status.service
-calculate_and_store_time $stage3_start_time "Install apt packages"
+calculate_and_store_time $stage3_start_time $stage3
+check_exit_code $? $stage3
 
 echo
 echo "===================================================================="
 echo "Install rosdep dependencies"
 echo "===================================================================="
+stage4="Install rosdep dependencies"
 stage4_start_time=$(date +%s)
 vcs_repo_path="$script_dir/zbot_linov2_$ROS_DISTRO.repos"
 "$prepare_vcs_sh" "$WORKSPACE" "$vcs_repo_path"
 cd "$WORKSPACEPATH"
 vcs import src < "$vcs_repo_path"
 rosdep install --from-path src --ignore-src -y
-calculate_and_store_time $stage4_start_time "Install rosdep dependencies"
+calculate_and_store_time $stage4_start_time $stage4
+check_exit_code $? $stage4
 
 echo
 echo "===================================================================="
 echo "Install micro_ros_setup"
 echo "===================================================================="
+stage5="Install micro_ros_setup"
 stage5_start_time=$(date +%s)
 colcon build --packages-select micro_ros_setup && source "$WORKSPACEPATH"/install/setup.bash
-calculate_and_store_time $stage5_start_time "Install micro_ros_setup"
+calculate_and_store_time $stage5_start_time $stage5
+check_exit_code $? $stage5
 
 echo
 echo "===================================================================="
 echo "Setup micro-ROS agent"
 echo "===================================================================="
+stage6="Setup micro-ROS agent"
 stage6_start_time=$(date +%s)
 ros2 run micro_ros_setup create_agent_ws.sh
 ros2 run micro_ros_setup build_agent.sh
 source "$WORKSPACEPATH"/install/setup.bash
-calculate_and_store_time $stage6_start_time "Setup micro-ROS agent"
+calculate_and_store_time $stage6_start_time $stage6
+check_exit_code $? $stage6
 
 echo
 echo "===================================================================="
 echo "Build zbot_lino"
 echo "===================================================================="
+stage7="Build zbot_lino"
 stage7_start_time=$(date +%s)
 touch "$WORKSPACEPATH/src/zbot_lino/linorobot2/linorobot2_gazebo"/COLCON_IGNORE
 cd "$WORKSPACEPATH" && colcon build --symlink-install
 source "$WORKSPACEPATH"/install/setup.bash
-calculate_and_store_time $stage7_start_time "Build zbot_lino"
+calculate_and_store_time $stage7_start_time $stage7
+check_exit_code $? $stage7
 
 echo "===================================================================="
 echo "Use newest nav2 mppi_controllers                                    "
 echo "===================================================================="
+stage8="Use newest nav2 mppi_controllers"
 stage8_start_time=$(date +%s)
 ../../ros2/scripts/install_mppi_controllers.sh -r "$ROS_DISTRO" -w "$WORKSPACE"
-calculate_and_store_time $stage8_start_time "Use newest nav2 mppi_controllers"
+calculate_and_store_time $stage8_start_time $stage8
+check_exit_code $? $stage8
 
 echo "===================================================================="
 echo "Setup environment variables                                         "
@@ -169,9 +185,11 @@ echo
 echo "===================================================================="
 echo "Setup audio"
 echo "===================================================================="
+stage9="Setup audio"
 stage9_start_time=$(date +%s)
 ./setup_audio.sh
-calculate_and_store_time $stage9_start_time "Setup audio"
+calculate_and_store_time $stage9_start_time $stage9
+check_exit_code $? $stage9
 
 echo
 echo "===================================================================="
@@ -179,9 +197,13 @@ echo "setup network including additional wifi driver                      "
 echo "===================================================================="
 ./overclock.sh # for pi4
 
-# better to run this script manually
+stage10="Setup network including additional wifi driver"
 stage10_start_time=$(date +%s)
 ./install_rtl88x2bu.sh
-calculate_and_store_time $stage10_start_time "setup network including additional wifi driver"
+calculate_and_store_time $stage10_start_time $stage10
+check_exit_code $? $stage10
+
 print_elapsed_summary
+
+# better to run this script manually
 # ./set_network.sh

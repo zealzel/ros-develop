@@ -1,10 +1,12 @@
 
-# print_elapsed_time() {
-#     start_time=$1
-#     end_time=$(date +%s)
-#     elapsed=$((end_time - start_time))
-#     echo "Elapsed time: $elapsed seconds"
-# }
+check_exit_code() {
+  exit_code=$1
+  description=$2
+  if [[ $exit_code -ne 0 ]]; then
+    echo "$description failed with exit code $exit_code"
+    exit
+  fi
+}
 
 calculate_and_store_time() {
     local start_time=$1
