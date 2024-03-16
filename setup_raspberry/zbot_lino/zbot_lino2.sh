@@ -183,4 +183,5 @@ echo "===================================================================="
 stage10_start_time=$(date +%s)
 ./install_rtl88x2bu.sh
 calculate_and_store_time $stage10_start_time "setup network including additional wifi driver"
+print_elapsed_summary
 # ./set_network.sh
