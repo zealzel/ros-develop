@@ -23,20 +23,41 @@ check_exit_code() {
   fi
 }
 
+# 计算并存储时间
 calculate_and_store_time() {
     local start_time=$1
     local stage_name=$2
     local end_time=$(date +%s)
     local elapsed=$((end_time - start_time))
-    elapsed_times["$stage_name"]=$elapsed
+
+    # 将阶段名和耗时分别添加到各自的数组
+    stage_names+=("$stage_name")
+    elapsed_times+=("$elapsed")
 }
 
+# 打印耗时摘要
 print_elapsed_summary() {
-    echo "Elapsed time summary:"
-    for stage in "${!elapsed_times[@]}"; do
-        echo "$stage: ${elapsed_times[$stage]} seconds"
+    echo -e "\n=== Elapsed time summary ==="
+    local len=${#stage_names[@]}
+    for ((i=0; i<$len; i++)); do
+        echo "${stage_names[$i]}: ${elapsed_times[$i]} seconds"
     done
 }
+
+# calculate_and_store_time() {
+#     local start_time=$1
+#     local stage_name=$2
+#     local end_time=$(date +%s)
+#     local elapsed=$((end_time - start_time))
+#     elapsed_times["$stage_name"]=$elapsed
+# }
+
+# print_elapsed_summary() {
+#     echo "Elapsed time summary:"
+#     for stage in "${!elapsed_times[@]}"; do
+#         echo "$stage: ${elapsed_times[$stage]} seconds"
+#     done
+# }
 
 idpt-append-sudo() {
   line="$1"
