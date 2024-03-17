@@ -1,4 +1,10 @@
 #!/bin/bash
+
+log_and_echo() {
+  tee log.txt
+}
+
+{
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 source "$script_dir/../../scripts/utils.sh"
 source sensors.sh
@@ -209,3 +215,5 @@ print_elapsed_summary
 
 # better to run this script manually
 # ./set_network.sh
+
+} 2>&1 | log_and_echo
