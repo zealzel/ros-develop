@@ -7,6 +7,12 @@ title() {
   echo ====================================================================
 }
 
+check_last_command() {
+  if [ $? -ne 0 ]; then
+    return 1  # 返回非0值表示失败
+  fi
+}
+
 check_exit_code() {
   exit_code=$1
   description=$2
