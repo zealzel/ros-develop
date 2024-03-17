@@ -124,6 +124,9 @@ stage4() {
 
 stage5_description="Install micro_ros_setup"
 stage5() {
+  rm -rf "$WORKSPACEPATH"/{build,install}/micro_ros_setup > /dev/null 2>&1
+  rm "$WORKSPACEPATH/src/micro_ros_setup"/COLCON_IGNORE > /dev/null 2>&1
+  cd "$WORKSPACEPATH"
   colcon build --packages-select micro_ros_setup
   check_last_command || return 1
   return 0
@@ -132,6 +135,7 @@ stage5() {
 stage6_description="Setup micro-ROS agent"
 stage6() {
   source "$WORKSPACEPATH"/install/setup.bash
+  rm -rf "$WORKSPACEPATH"/{build,install}/micro_ros_msgs > /dev/null 2>&1
   ros2 run micro_ros_setup create_agent_ws.sh
   check_last_command || return 1
   ros2 run micro_ros_setup build_agent.sh
@@ -143,9 +147,11 @@ stage7_description="Build zbot_lino"
 stage7() {
   source "$WORKSPACEPATH"/install/setup.bash
   touch "$WORKSPACEPATH/src/zbot_lino/linorobot2/linorobot2_gazebo"/COLCON_IGNORE
+  touch "$WORKSPACEPATH/src/{micro_ros_setup,micro_ros_msgs}"/COLCON_IGNORE
   cd "$WORKSPACEPATH" && colcon build --symlink-install
-  check_last_command || return 1
-  return 0
+  rtn=$(check_last_command)
+  rm "$WORKSPACEPATH/src/{micro_ros_setup,micro_ros_msgs}"/COLCON_IGNORE > /dev/null 2>&1
+  return rtn
 }
 
 stage8_description="Use newest nav2 mppi_controllers"
