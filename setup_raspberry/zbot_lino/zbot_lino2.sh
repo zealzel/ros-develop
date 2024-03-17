@@ -147,10 +147,12 @@ stage7_description="Build zbot_lino"
 stage7() {
   source "$WORKSPACEPATH"/install/setup.bash
   touch "$WORKSPACEPATH/src/zbot_lino/linorobot2/linorobot2_gazebo"/COLCON_IGNORE
-  touch "$WORKSPACEPATH/src/{micro_ros_setup,micro_ros_msgs}"/COLCON_IGNORE
+  touch "$WORKSPACEPATH/src/micro_ros_setup"/COLCON_IGNORE
+  touch "$WORKSPACEPATH/src/uros"/COLCON_IGNORE
   cd "$WORKSPACEPATH" && colcon build --symlink-install
   rtn=$(check_last_command)
-  rm "$WORKSPACEPATH/src/{micro_ros_setup,micro_ros_msgs}"/COLCON_IGNORE > /dev/null 2>&1
+  rm "$WORKSPACEPATH/src/micro_ros_setup"/COLCON_IGNORE > /dev/null 2>&1
+  rm "$WORKSPACEPATH/src/uros"/COLCON_IGNORE > /dev/null 2>&1
   return rtn
 }
 
