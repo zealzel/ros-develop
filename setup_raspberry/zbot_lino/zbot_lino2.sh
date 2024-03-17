@@ -101,7 +101,7 @@ stage3() {
 }
 
 
-stage4="Install rosdep dependencies"
+stage4_description="Install rosdep dependencies"
 stage4() {
   vcs_repo_path="$script_dir/zbot_linov2_$ROS_DISTRO.repos"
   "$prepare_vcs_sh" "$WORKSPACE" "$vcs_repo_path"
@@ -114,14 +114,14 @@ stage4() {
   return 0
 }
 
-stage5="Install micro_ros_setup"
+stage5_description="Install micro_ros_setup"
 stage5() {
   colcon build --packages-select micro_ros_setup
   check_last_command || return 1
   return 0
 }
 
-stage6="Setup micro-ROS agent"
+stage6_description="Setup micro-ROS agent"
 stage6() {
   source "$WORKSPACEPATH"/install/setup.bash
   ros2 run micro_ros_setup create_agent_ws.sh
@@ -131,7 +131,7 @@ stage6() {
   return 0
 }
 
-stage7="Build zbot_lino"
+stage7_description="Build zbot_lino"
 stage7() {
   source "$WORKSPACEPATH"/install/setup.bash
   touch "$WORKSPACEPATH/src/zbot_lino/linorobot2/linorobot2_gazebo"/COLCON_IGNORE
@@ -140,21 +140,21 @@ stage7() {
   return 0
 }
 
-stage8="Use newest nav2 mppi_controllers"
+stage8_description="Use newest nav2 mppi_controllers"
 stage8() {
   $script_dir/../../ros2/scripts/install_mppi_controllers.sh -r "$ROS_DISTRO" -w "$WORKSPACE"
   check_last_command || return 1
   return 0
 }
 
-stage9="Setup audio"
+stage9_description="Setup audio"
 stage9() {
   $script_dir/setup_audio.sh
   check_last_command || return 1
   return 0
 }
 
-stage10="Setup network including additional wifi driver"
+stage10_description="Setup network including additional wifi driver"
 stage10() {
   $script_dir/overclock.sh # for pi4
   $script_dir/install_rtl88x2bu.sh

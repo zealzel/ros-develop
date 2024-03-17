@@ -18,6 +18,7 @@ check_exit_code() {
   description=$2
   if [[ $exit_code -ne 0 ]]; then
     echo "$description failed with exit code $exit_code"
+    print_elapsed_summary
     exit
   fi
 }
