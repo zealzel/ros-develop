@@ -153,7 +153,7 @@ stage7() {
   rtn=$(check_last_command)
   rm "$WORKSPACEPATH/src/micro_ros_setup"/COLCON_IGNORE > /dev/null 2>&1
   rm "$WORKSPACEPATH/src/uros"/COLCON_IGNORE > /dev/null 2>&1
-  return rtn
+  return $rtn
 }
 
 stage8_description="Use newest nav2 mppi_controllers"
