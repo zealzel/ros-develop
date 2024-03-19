@@ -27,7 +27,7 @@ case $VERSION_CODENAME in
     ORIGINAL_IMAGE="[1ebe853ca69ce507a69f97bb70f13bc1ffcfa7a2]ubuntu-22.04.2-preinstalled-server-arm64+raspi.img.xz"
     ;;
   bookwarm)
-    ROSDISTRO="iron"
+    ROSDISTRO="humble"
     ORIGINAL_IMAGE="Raspberry Pi OS 64-bit"
     ;;
   # mantic)
@@ -39,7 +39,7 @@ case $VERSION_CODENAME in
     exit 1
     ;;
 esac
-#
+
 # Common setup for all supported Ubuntu versions
 echo "Setting up for ROS Distro: $ROSDISTRO"
 WORKSPACE="zbotlino_ws"
@@ -93,7 +93,7 @@ stage_general() {
 
 stage1_description="Prepare ROS2 environment and workspace"
 stage1() {
-  $script_dir/../../ros2/scripts/prepare_ros2_workspace.sh -u "$UBUNTU_CODENAME" -r "$ROSDISTRO" -w "$WORKSPACE"
+  $script_dir/../../ros2/scripts/prepare_ros2_workspace_pi.sh -u "$UBUNTU_CODENAME" -r "$ROSDISTRO" -w "$WORKSPACE"
   check_last_command || return 1
   return 0
 }
