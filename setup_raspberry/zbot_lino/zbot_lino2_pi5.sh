@@ -93,7 +93,7 @@ stage_general() {
 
 stage1_description="Prepare ROS2 environment and workspace"
 stage1() {
-  $script_dir/../../ros2/scripts/prepare_ros2_workspace_pi.sh -u "$UBUNTU_CODENAME" -r "$ROSDISTRO" -w "$WORKSPACE"
+  $script_dir/../../ros2/scripts/prepare_ros2_workspace_pi5.sh -u "$UBUNTU_CODENAME" -r "$ROSDISTRO" -w "$WORKSPACE"
   check_last_command || return 1
   return 0
 }
@@ -195,6 +195,7 @@ if [[ "$ROS_DISTRO" == "" || "$ROS_DISTRO" == "<unknown>" ]]; then
   echo "Try running $ source /opt/ros/<ros_distro>/setup.bash and try again."
   exit 1
 fi
+exit
 
 stage_general "$stage2_description" stage2
 stage_general "$stage3_description" stage3
