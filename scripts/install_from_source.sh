@@ -53,7 +53,12 @@ for pkg in "${ignored_ros_packages[@]}"; do
 done
 
 rosdep install --from-paths src --ignore-src -r -y
-colcon build --symlink-install
+
+# colcon build --symlink-install
+
+# This is only for avoiding dwb_critics build error, temp
+colcon build --symlink-install --cmake-args -DCMAKE_CXX_FLAGS="-w"
+
 
 echo ====================================================================
 echo Append bashrc file
