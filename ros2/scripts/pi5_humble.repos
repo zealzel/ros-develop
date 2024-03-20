@@ -39,6 +39,10 @@ repositories:
     type: git
     url: https://github.com/ros-simulation/gazebo_ros_pkgs
     version: ros2
+  geographic_info:
+    type: git
+    url: https://github.com/ros-geographic-info/geographic_info
+    version: ros2
   robot_localization:
     type: git
     url: https://github.com/cra-ros-pkg/robot_localization
