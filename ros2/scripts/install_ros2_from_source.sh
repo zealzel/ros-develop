@@ -22,7 +22,10 @@ echo =======================
 echo set locale
 echo =======================
 locale # check for UTF-8
+# sudo sed -i '/^en_US.UTF-8 UTF-8/s/^/#/' /etc/locale.gen
+sudo sed -i '/^#\s*en_US.UTF-8 UTF-8/s/^#\s*//' /etc/locale.gen
 sudo apt install locales
+sudo locale-gen
 sudo locale-gen en_US en_US.UTF-8
 sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 export LANG=en_US.UTF-8
