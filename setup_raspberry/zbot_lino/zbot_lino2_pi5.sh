@@ -110,7 +110,8 @@ stage2() {
 
 stage3_description="Install apt packages"
 stage3() {
-  sudo apt install -y python3-vcstool build-essential ros-"$ROS_DISTRO"-robot-localization ros-"$ROS_DISTRO"-rosbridge-server
+  # sudo apt install -y python3-vcstool build-essential ros-"$ROS_DISTRO"-robot-localization ros-"$ROS_DISTRO"-rosbridge-server
+  sudo apt install -y python3-vcstool build-essential
   check_last_command || return 1
   sudo apt install -y python3-websocket # for fitrobot_lino.status.service
   check_last_command || return 1

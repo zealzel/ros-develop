@@ -18,7 +18,11 @@ echo ====================================================================
 
 install_script=$(readlink -f "$script_dir/../../scripts/install_from_source.sh")
 $install_script -w $WORKSPACE -v "pi5_$ROSDISTRO.repos"
+
+# only need cv_bridge
 touch $HOME/$WORKSPACE/src/vision_opencv/{image_geometry,opencv_tests}/COLCON_IGNORE
+
+# only need gazebo_ros_pkgs
 touch $HOME/$WORKSPACE/src/gazebo_ros_pkgs/{gazebo_dev,gazebo_msgs,gazebo_plugins,gazebo_ros,gazebo_ros_control}/COLCON_IGNORE
 
 # export UBUNTU_CODENAME=$UBUNTU_CODENAME
