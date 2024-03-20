@@ -190,7 +190,10 @@ stage10() {
 
 stage_general "$stage1_description" stage1
 
-source /opt/ros/"$ROSDISTRO"/setup.bash
+# source /opt/ros/"$ROSDISTRO"/setup.bash
+source $HOME/ros2_$ROSDISTRO/install/setup.bash
+source $HOME/$WORKSPACE/install/setup.bash
+
 ROS_DISTRO="$(printenv ROS_DISTRO)"
 if [[ "$ROS_DISTRO" == "" || "$ROS_DISTRO" == "<unknown>" ]]; then
   echo "No ROS2 distro detected"
