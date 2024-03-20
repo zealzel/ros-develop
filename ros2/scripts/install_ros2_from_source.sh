@@ -67,9 +67,9 @@ echo
 echo ====================================================================
 echo Get ROS2 code
 echo ====================================================================
-mkdir -p ~/ros2_iron/src
-cd ~/ros2_iron
-vcs import --input https://raw.githubusercontent.com/ros2/ros2/iron/ros2.repos src
+mkdir -p ~/ros2_$ROSDISTRO/src
+cd ~/ros2_$ROSDISTRO
+vcs import --input https://raw.githubusercontent.com/ros2/ros2/$ROSDISTRO/ros2.repos src
 
 echo
 echo ====================================================================
@@ -84,11 +84,11 @@ echo
 echo ====================================================================
 echo Build the code in the workspace
 echo ====================================================================
-cd ~/ros2_iron/
+cd ~/ros2_$ROSDISTRO/
 colcon build --symlink-install
 
 # echo
 # echo ====================================================================
 # echo Sourcing the setup script
 # echo ====================================================================
-# append_bashrc "source /opt/ros/${ROSDISTRO}/setup.bash"
+append_bashrc "source ~/ros2_${ROSDISTRO}/install/setup.bash"

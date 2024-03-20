@@ -14,17 +14,20 @@ echo ====================================================================
 echo Install ROS2
 echo ====================================================================
 "$script_dir/install_ros2_from_source.sh" -u $UBUNTU_CODENAME -r $ROSDISTRO
-"$script_dir/install_ros2_packages.sh" -u $UBUNTU_CODENAME -r $ROSDISTRO
+# "$script_dir/install_ros2_packages_from_source.sh" -u $UBUNTU_CODENAME -r $ROSDISTRO
 
-echo
-echo ====================================================================
-echo Ensure rosdep is initialized
-echo ====================================================================
-rosdep update || exit_code=$?
-if [[ $exit_code -ne 0 ]]; then
-  sudo rosdep init
-  rosdep update --include-eol-distros
-fi
+install_script=$(readlink -f "$script_dir/../../scripts/install_from_source.sh"))
+$install_script -w $WORKSPACE -v "p5_$ROSDISTRO.repos"
+
+# echo
+# echo ====================================================================
+# echo Ensure rosdep is initialized
+# echo ====================================================================
+# rosdep update || exit_code=$?
+# if [[ $exit_code -ne 0 ]]; then
+#   sudo rosdep init
+#   rosdep update --include-eol-distros
+# fi
 
 export UBUNTU_CODENAME=$UBUNTU_CODENAME
 export ROSDISTRO=$ROSDISTRO
