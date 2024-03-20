@@ -26,7 +26,7 @@ case $VERSION_CODENAME in
     ROSDISTRO="humble"
     ORIGINAL_IMAGE="[1ebe853ca69ce507a69f97bb70f13bc1ffcfa7a2]ubuntu-22.04.2-preinstalled-server-arm64+raspi.img.xz"
     ;;
-  bookwarm)
+  bookworm)
     ROSDISTRO="humble"
     ORIGINAL_IMAGE="Raspberry Pi OS 64-bit"
     ;;
