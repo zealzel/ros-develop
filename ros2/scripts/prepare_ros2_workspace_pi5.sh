@@ -11,25 +11,17 @@ fi
 
 echo
 echo ====================================================================
-echo Install ROS2
+echo Install ROS2 from source
 echo ====================================================================
 "$script_dir/install_ros2_from_source.sh" -u $UBUNTU_CODENAME -r $ROSDISTRO
 # "$script_dir/install_ros2_packages_from_source.sh" -u $UBUNTU_CODENAME -r $ROSDISTRO
 
 install_script=$(readlink -f "$script_dir/../../scripts/install_from_source.sh")
 $install_script -w $WORKSPACE -v "pi5_$ROSDISTRO.repos"
+touch $HOME/$WORKSPACE/src/vision_opencv/{image_geometry,opencv_tests}/COLCON_IGNORE
+touch $HOME/$WORKSPACE/src/gazebo_ros_pkgs/{gazebo_dev,gazebo_msgs,gazebo_plugins,gazebo_ros,gazebo_ros_control}/COLCON_IGNORE
 
-# echo
-# echo ====================================================================
-# echo Ensure rosdep is initialized
-# echo ====================================================================
-# rosdep update || exit_code=$?
-# if [[ $exit_code -ne 0 ]]; then
-#   sudo rosdep init
-#   rosdep update --include-eol-distros
-# fi
-
-export UBUNTU_CODENAME=$UBUNTU_CODENAME
-export ROSDISTRO=$ROSDISTRO
-export WORKSPACE=$WORKSPACE
-export ROS_INSTALL_TYPE=$ROS_INSTALL_TYPE
+# export UBUNTU_CODENAME=$UBUNTU_CODENAME
+# export ROSDISTRO=$ROSDISTRO
+# export WORKSPACE=$WORKSPACE
+# export ROS_INSTALL_TYPE=$ROS_INSTALL_TYPE
