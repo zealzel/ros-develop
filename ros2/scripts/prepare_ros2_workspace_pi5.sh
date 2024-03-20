@@ -17,7 +17,7 @@ echo ====================================================================
 # "$script_dir/install_ros2_packages_from_source.sh" -u $UBUNTU_CODENAME -r $ROSDISTRO
 
 install_script=$(readlink -f "$script_dir/../../scripts/install_from_source.sh"))
-$install_script -w $WORKSPACE -v "p5_$ROSDISTRO.repos"
+$install_script -w $WORKSPACE -v "pi5_$ROSDISTRO.repos"
 
 # echo
 # echo ====================================================================
