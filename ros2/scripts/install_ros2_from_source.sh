@@ -24,7 +24,7 @@ echo =======================
 locale # check for UTF-8
 # sudo sed -i '/^en_US.UTF-8 UTF-8/s/^/#/' /etc/locale.gen
 sudo sed -i '/^#\s*en_US.UTF-8 UTF-8/s/^#\s*//' /etc/locale.gen
-sudo apt install locales
+sudo apt-get install locales
 sudo locale-gen
 sudo locale-gen en_US en_US.UTF-8
 sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
@@ -39,7 +39,7 @@ echo
 echo =============================
 echo Setup Sources
 echo =============================
-sudo apt install -y software-properties-common
+sudo apt-get install -y software-properties-common
 sudo add-apt-repository universe -y
 sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo "$UBUNTU_CODENAME") main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
@@ -48,7 +48,7 @@ echo
 echo =============================
 echo Install development tools
 echo =============================
-sudo apt install -y \
+sudo apt-get install -y \
   python3-flake8-docstrings \
   python3-pip \
   python3-pytest-cov \
