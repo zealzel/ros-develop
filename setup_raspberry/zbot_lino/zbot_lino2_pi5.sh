@@ -142,6 +142,7 @@ stage5_description="Install micro_ros_setup"
 stage5() {
   rm -rf "$WORKSPACEPATH"/{build,install}/micro_ros_setup > /dev/null 2>&1
   rm "$WORKSPACEPATH/src/micro_ros_setup"/COLCON_IGNORE > /dev/null 2>&1
+  git clone https://github.com/micro-ROS/micro_ros_setup -b humble src/micro_ros_setup
   cd "$WORKSPACEPATH"
   colcon build --packages-select micro_ros_setup
   check_last_command || return 1
@@ -211,9 +212,9 @@ exit
 
 stage_general "$stage2_description" stage2
 stage_general "$stage3_description" stage3
-stage_general "$stage4_description" stage4
 stage_general "$stage5_description" stage5
 stage_general "$stage6_description" stage6
+stage_general "$stage4_description" stage4
 stage_general "$stage7_description" stage7
 stage_general "$stage8_description" stage8
 stage_general "$stage9_description" stage9
