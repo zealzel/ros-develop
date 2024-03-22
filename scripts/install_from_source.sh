@@ -46,7 +46,8 @@ WORKSPACEPATH="$HOME/$WORKSPACE"
 cd "$WORKSPACEPATH"
 vcs import src < "$VCS_REPOS"
 for pkg in "${ignored_ros_packages[@]}"; do
-    pkg_path=$(find src -type d -name $pkg)
+    # pkg_path=$(find src -type d -name $pkg)
+    pkg_path=$(find src -type d -name $pkg | head -n 1)
     echo "$pkg --> $pkg_path"
     cd "$WORKSPACEPATH/$pkg_path" && touch COLCON_IGNORE
     cd "$WORKSPACEPATH"
