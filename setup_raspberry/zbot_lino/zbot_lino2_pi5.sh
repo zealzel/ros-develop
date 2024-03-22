@@ -153,7 +153,11 @@ stage6() {
   cd "$WORKSPACEPATH"
   vcs import src < "$vcs_repo_path"
   check_last_command || return 1
-  rosdep install --from-path src --ignore-src -y
+  # rosdep install --from-path src --ignore-src -y
+
+  # temporarily ignore some packages in order to build
+  rosdep install --from-path src --ignore-src -y --skip-keys "depthimage_to_laserscan librealsense2 teleop_twist_keyboard teleop_twist_joy joy_linux"
+
   # check_last_command || return 1
   return 0
 }
