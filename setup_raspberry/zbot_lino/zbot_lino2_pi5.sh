@@ -113,10 +113,8 @@ stage2() {
   return 0
 }
 
-
 stage3_description="Install apt packages"
 stage3() {
-  # sudo apt install -y python3-vcstool build-essential ros-"$ROS_DISTRO"-robot-localization ros-"$ROS_DISTRO"-rosbridge-server
   sudo apt install -y python3-vcstool build-essential
   check_last_command || return 1
   sudo apt install -y python3-websocket # for fitrobot_lino.status.service
@@ -124,22 +122,8 @@ stage3() {
   return 0
 }
 
-
-stage4_description="Install rosdep dependencies"
+stage4_description="Install micro_ros_setup"
 stage4() {
-  vcs_repo_path="$script_dir/zbot_linov2_$ROS_DISTRO.repos"
-  "$prepare_vcs_sh" "$WORKSPACE" "$vcs_repo_path"
-  check_last_command || return 1
-  cd "$WORKSPACEPATH"
-  vcs import src < "$vcs_repo_path"
-  check_last_command || return 1
-  rosdep install --from-path src --ignore-src -y
-  # check_last_command || return 1
-  return 0
-}
-
-stage5_description="Install micro_ros_setup"
-stage5() {
   rm -rf "$WORKSPACEPATH"/{build,install}/micro_ros_setup > /dev/null 2>&1
   rm "$WORKSPACEPATH/src/micro_ros_setup"/COLCON_IGNORE > /dev/null 2>&1
   git clone https://github.com/micro-ROS/micro_ros_setup -b humble $WORKSPACEPATH/src/micro_ros_setup
@@ -149,8 +133,8 @@ stage5() {
   return 0
 }
 
-stage6_description="Setup micro-ROS agent"
-stage6() {
+stage5_description="Setup micro-ROS agent"
+stage5() {
   source "$WORKSPACEPATH"/install/setup.bash
   rm -rf "$WORKSPACEPATH"/{build,install}/micro_ros_msgs > /dev/null 2>&1
   cd "$WORKSPACEPATH"
@@ -158,6 +142,19 @@ stage6() {
   check_last_command || return 1
   ros2 run micro_ros_setup build_agent.sh
   check_last_command || return 1
+  return 0
+}
+
+stage6_description="Install rosdep dependencies"
+stage6() {
+  vcs_repo_path="$script_dir/zbot_linov2_$ROS_DISTRO.repos"
+  "$prepare_vcs_sh" "$WORKSPACE" "$vcs_repo_path"
+  check_last_command || return 1
+  cd "$WORKSPACEPATH"
+  vcs import src < "$vcs_repo_path"
+  check_last_command || return 1
+  rosdep install --from-path src --ignore-src -y
+  # check_last_command || return 1
   return 0
 }
 
@@ -212,9 +209,9 @@ exit
 
 stage_general "$stage2_description" stage2
 stage_general "$stage3_description" stage3
+stage_general "$stage4_description" stage4
 stage_general "$stage5_description" stage5
 stage_general "$stage6_description" stage6
-stage_general "$stage4_description" stage4
 stage_general "$stage7_description" stage7
 stage_general "$stage8_description" stage8
 stage_general "$stage9_description" stage9
