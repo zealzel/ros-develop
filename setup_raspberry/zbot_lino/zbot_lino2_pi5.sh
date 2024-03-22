@@ -100,6 +100,11 @@ stage1() {
   return 0
 }
 
+"$script_dir/../../scripts/create_workspace.sh" $WORKSPACE || exit_code=$?
+if [[ $exit_code -ne 0 ]]; then
+  exit
+fi
+
 stage2_description="Install LIDAR/Depth Sensor ROS2 drivers"
 stage2() {
   # install_rplidar

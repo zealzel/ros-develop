@@ -160,3 +160,37 @@ disable_needrestart() {
     sudo sed -i "s/#\$nrconf{kernelhints} = -1;/\$nrconf{kernelhints} = -1;/g" /etc/needrestart/needrestart.conf
   fi
 }
+
+ros2_colcon_ignore() {
+    WORKSPACE=$1
+    touch $HOME/$WORKSPACE/src/ament/COLCON_IGNORE
+    touch $HOME/$WORKSPACE/src/eclipse-cyclonedds/COLCON_IGNORE
+    touch $HOME/$WORKSPACE/src/eclipse-iceoryx/COLCON_IGNORE
+    touch $HOME/$WORKSPACE/src/eProsima/COLCON_IGNORE
+    touch $HOME/$WORKSPACE/src/ignition/COLCON_IGNORE
+    touch $HOME/$WORKSPACE/src/joint_state_publisher/COLCON_IGNORE
+    touch $HOME/$WORKSPACE/src/osrf/COLCON_IGNORE
+    touch $HOME/$WORKSPACE/src/ros/COLCON_IGNORE
+    touch $HOME/$WORKSPACE/src/ros2/COLCON_IGNORE
+    touch $HOME/$WORKSPACE/src/ros-perception/COLCON_IGNORE
+    touch $HOME/$WORKSPACE/src/ros-planning/COLCON_IGNORE
+    touch $HOME/$WORKSPACE/src/ros-tooling/COLCON_IGNORE
+    touch $HOME/$WORKSPACE/src/ros-visualization/COLCON_IGNORE
+}
+
+ros2_colcon_rm_ignore() {
+    WORKSPACE=$1
+    rm $HOME/$WORKSPACE/src/ament/COLCON_IGNORE > /dev/null 2>&1
+    rm $HOME/$WORKSPACE/src/eclipse-cyclonedds/COLCON_IGNORE > /dev/null 2>&1
+    rm $HOME/$WORKSPACE/src/eclipse-iceoryx/COLCON_IGNORE > /dev/null 2>&1
+    rm $HOME/$WORKSPACE/src/eProsima/COLCON_IGNORE > /dev/null 2>&1
+    rm $HOME/$WORKSPACE/src/ignition/COLCON_IGNORE > /dev/null 2>&1
+    rm $HOME/$WORKSPACE/src/joint_state_publisher/COLCON_IGNORE > /dev/null 2>&1
+    rm $HOME/$WORKSPACE/src/osrf/COLCON_IGNORE > /dev/null 2>&1
+    rm $HOME/$WORKSPACE/src/ros/COLCON_IGNORE > /dev/null 2>&1
+    rm $HOME/$WORKSPACE/src/ros2/COLCON_IGNORE > /dev/null 2>&1
+    rm $HOME/$WORKSPACE/src/ros-perception/COLCON_IGNORE > /dev/null 2>&1
+    rm $HOME/$WORKSPACE/src/ros-planning/COLCON_IGNORE > /dev/null 2>&1
+    rm $HOME/$WORKSPACE/src/ros-tooling/COLCON_IGNORE > /dev/null 2>&1
+    rm $HOME/$WORKSPACE/src/ros-visualization/COLCON_IGNORE > /dev/null 2>&1
+}

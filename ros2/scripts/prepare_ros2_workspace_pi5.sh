@@ -13,7 +13,9 @@ echo
 echo ====================================================================
 echo Install ROS2 from source
 echo ====================================================================
+ros2_colcon_rm_ignore $WORKSPACE
 "$script_dir/install_ros2_from_source.sh" -u $UBUNTU_CODENAME -r $ROSDISTRO -w $WORKSPACE
+ros2_colcon_ignore $WORKSPACE
 
 echo
 echo ====================================================================
