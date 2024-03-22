@@ -93,8 +93,9 @@ stage_general() {
 }
 
 stage1_description="Prepare ROS2 environment and workspace"
+ROS2_WORKSPACE="ros2_$ROSDISTRO"
 stage1() {
-  $script_dir/../../ros2/scripts/prepare_ros2_workspace_pi5.sh -u "$UBUNTU_CODENAME" -r "$ROSDISTRO" -w "$WORKSPACE"
+  $script_dir/../../ros2/scripts/prepare_ros2_workspace_pi5.sh -u "$UBUNTU_CODENAME" -r "$ROSDISTRO" -w "$ROS2_WORKSPACE"
   check_last_command || return 1
   return 0
 }
@@ -146,6 +147,7 @@ stage6_description="Setup micro-ROS agent"
 stage6() {
   source "$WORKSPACEPATH"/install/setup.bash
   rm -rf "$WORKSPACEPATH"/{build,install}/micro_ros_msgs > /dev/null 2>&1
+  cd "$WORKSPACEPATH"
   ros2 run micro_ros_setup create_agent_ws.sh
   check_last_command || return 1
   ros2 run micro_ros_setup build_agent.sh
