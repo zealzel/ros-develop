@@ -21,6 +21,8 @@ echo
 echo ====================================================================
 echo Install ROS2 related packages from source
 echo ====================================================================
+sudo apt-get install -y xtensor-dev libompl-dev # for mppi_controller
+
 install_script=$(readlink -f "$script_dir/../../scripts/install_from_source.sh")
 $install_script -w $WORKSPACE -v "$script_dir/pi5_$ROSDISTRO.repos" -i \
     "image_geometry,opencv_tests,gazebo_dev,gazebo_msgs,gazebo_plugins,gazebo_ros,gazebo_ros_control"
