@@ -48,7 +48,7 @@ echo
 echo =============================
 echo Install development tools
 echo =============================
-sudo apt-get install -y \
+sudo apt-get update && apt-get install -y \
   python3-flake8-docstrings \
   python3-pip \
   python3-pytest-cov \
