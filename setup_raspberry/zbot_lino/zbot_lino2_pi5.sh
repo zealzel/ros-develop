@@ -217,7 +217,7 @@ stage_general "$stage4_description" stage4
 stage_general "$stage5_description" stage5
 stage_general "$stage6_description" stage6
 stage_general "$stage7_description" stage7
-stage_general "$stage8_description" stage8
+#stage_general "$stage8_description" stage8
 stage_general "$stage9_description" stage9
 stage_general "$stage10_description" stage10
 
