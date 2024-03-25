@@ -1,0 +1,27 @@
+network:
+  version: 2
+  renderer: NetworkManager
+  wifis:
+    wlan1:
+      access-points:
+        deco-cpd-x:
+          password: fitfab8888
+        iPhone:
+          password: d5b844519e44666bc253ef364b5465a9e97597e3c6c515e792741a60dd6af62c
+        gp6p2:
+          password: fitfabtest
+      dhcp4: true
+      optional: true
+  ethernets:
+    eth0:
+      dhcp4: false
+      addresses: [192.168.1.3/24]
+      routes:
+        - to: 192.168.1.2/32
+          via: 192.168.1.3
+    eth1:
+      dhcp4: false
+      addresses: [192.168.1.12/24]
+      routes:
+        - to: 192.168.1.4/32
+          via: 192.168.1.12
