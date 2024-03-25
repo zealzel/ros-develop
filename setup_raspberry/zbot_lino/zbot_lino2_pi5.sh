@@ -245,6 +245,6 @@ sudo systemctl enable fitrobot_lino.status.service
 print_elapsed_summary
 
 # better to run this script manually
-# ./set_network.sh
+# ./set_network_pi5.sh
 
 } 2>&1 | log_and_echo
