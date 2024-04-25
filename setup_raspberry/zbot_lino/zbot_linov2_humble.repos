@@ -29,5 +29,5 @@ repositories:
     version: master
   realsense-ros:
     type: git
-    url: https://github.com/IntelRealSense/realsense-ros
-    version: ros2-development
+    url: https://github.com/fitfabsw/realsense-ros
+    version: fitrobot
