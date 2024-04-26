@@ -31,3 +31,7 @@ repositories:
     type: git
     url: https://github.com/fitfabsw/realsense-ros
     version: fitrobot
+  rosboard:
+    type: git
+    url: https://github.com/jasonke1025/rosboard.git
+    version: fitrobot

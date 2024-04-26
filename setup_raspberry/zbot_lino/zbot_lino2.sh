@@ -113,6 +113,8 @@ stage3() {
   check_last_command || return 1
   sudo apt install -y python3-websocket # for fitrobot_lino.status.service
   check_last_command || return 1
+  sudo apt install -y python3-tornado # for rosboard
+  check_last_command || return 1
   return 0
 }
 
