@@ -42,7 +42,7 @@ echo ===============================================
 ../../scripts/install_from_apt.sh $WORKSPACE $ROSDISTRO "ros_packages.sh" "false"
 
 # Temporarily. Needed by usb_cam. Need to be handled more systematically
-sudo apt install python3-pip -y
+sudo apt install python3-pip python3-websocket -y
 ../../scripts/install_python_packages.sh pydantic
 
 echo
