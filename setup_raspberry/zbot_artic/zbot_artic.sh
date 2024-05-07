@@ -49,7 +49,7 @@ echo
 echo ===============================================
 echo Build/Install robots packages from source
 echo ===============================================
-source "/opt/ros/${ROSDISTRO}/setup.bash" && ../../scripts/install_from_source.sh $WORKSPACE "$script_dir/zbot_artic_$ROSDISTRO.repos"
+source "/opt/ros/${ROSDISTRO}/setup.bash" && ../../scripts/install_from_source.sh -w $WORKSPACE -v "$script_dir/zbot_artic_$ROSDISTRO.repos"
 
 echo ======== Env Variables ========
 if [[ "$ROS_DISTRO" == "galactic" ]]; then
