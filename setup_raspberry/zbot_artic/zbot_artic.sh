@@ -57,6 +57,7 @@ if [[ "$ROS_DISTRO" == "galactic" ]]; then
 elif [[ "$ROS_DISTRO" == "humble" ]]; then
     append_bashrc "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp"
 fi
+append_bashrc "export ROBOT_TYPE=artic"
 echo
 echo "Do you want to add sourcing of $WORKSPACE on your ~/.bashrc?"
 echo -n "Yes [y] or No [n]: "
