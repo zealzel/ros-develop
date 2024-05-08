@@ -10,7 +10,7 @@ repositories:
   articubot_one:
     type: git
     url: https://github.com/zealzel/articubot_one.git
-    version: main
+    version: humble
   fitrobot_interfaces:
     type: git
     url: https://github.com/fitfabsw/fitrobot_interfaces
@@ -21,8 +21,8 @@ repositories:
     version: dev
   rosboard:
     type: git
-    url: https://github.com/dheera/rosboard
-    version: main
+    url: https://github.com/jasonke1025/rosboard.git
+    version: fitrobot
   usb_cam:
     type: git
     url: https://github.com/ros-drivers/usb_cam
