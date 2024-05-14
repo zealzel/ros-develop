@@ -28,7 +28,7 @@ echo "WORKSPACE=$WORKSPACE"
 ../../ros2/scripts/prepare_ros2_workspace.sh -u $UBUNTU_CODENAME -r $ROSDISTRO -w $WORKSPACE
 
 # Added temporarily for testing
-../ros2/scripts/install_mppi_controllers.sh -r $ROS_DISTRO -w $WORKSPACE
+../../ros2/scripts/install_mppi_controllers.sh -r $ROS_DISTRO -w $WORKSPACE
 
 echo
 echo ====================================================================
