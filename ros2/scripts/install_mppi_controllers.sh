@@ -5,11 +5,11 @@ source "$script_dir/../../scripts/argparse_ros.sh"
 
 UBUNTU_CODENAME=$(cat /etc/os-release |grep VERSION_CODENAME|cut -d"=" -f2)
 if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
-  echo "Ubuntu 20.04 detected. Set defualt ROSDISTRO to galactic."
-  ROSDISTRO="galactic"
+  echo "Ubuntu 20.04 detected. Set defualt ROS_DISTRO to galactic."
+  ROS_DISTRO="galactic"
 elif [[ "$UBUNTU_CODENAME" == "jammy" ]]; then
-  echo "Ubuntu 22.04 detected. Set defualt ROSDISTRO to humble."
-  ROSDISTRO="humble"
+  echo "Ubuntu 22.04 detected. Set defualt ROS_DISTRO to humble."
+  ROS_DISTRO="humble"
 else
   echo "Ubuntu $UBUNTU_CODENAME is not supported"
   exit 1
@@ -22,7 +22,7 @@ parse_args "$@"
 LATEST_WORKED_COMMIT="a45b151c" # 2024/3/3
 # LATEST_WORKED_COMMIT="3ed4c2df" # including BIG improvements in MPPI !! must have !!!
 
-echo "ROSDISTRO=$ROSDISTRO"
+echo "ROS_DISTRO=$ROS_DISTRO"
 echo "WORKSPACE=$WORKSPACE"
 echo "LATEST_WORKED_COMMIT=$LATEST_WORKED_COMMIT"
 
@@ -57,16 +57,16 @@ fi
 # ref: MPPI crashing on loading plug-ings #3767
 # https://github.com/ros-planning/navigation2/issues/3767
 
-if [[ $ROSDISTRO == "humble" ]]; then
+if [[ $ROS_DISTRO == "humble" ]]; then
   echo "Install mppi_controllers from source."
   #
   echo "1. remove the mppi_controllers binary package"
-  sudo apt remove ros-$ROSDISTRO-nav2-mppi-controller -y
+  sudo apt remove ros-$ROS_DISTRO-nav2-mppi-controller -y
   #
   #
   echo "2. copy the nav2_mppi_controller source from navigation2 repo into workspace"
   rm -rf /tmp/navigation2 > /dev/null 2>&1
-  git clone https://github.com/ros-planning/navigation2 /tmp/navigation2 -b "$ROSDISTRO"
+  git clone https://github.com/ros-planning/navigation2 /tmp/navigation2 -b "$ROS_DISTRO"
   cd /tmp/navigation2 && git checkout $LATEST_WORKED_COMMIT
   cp -R /tmp/navigation2/nav2_mppi_controller "$HOME/$WORKSPACE/src"
   # cp -R /tmp/navigation2/nav2_amcl "$HOME/$WORKSPACE/src"
@@ -79,5 +79,5 @@ if [[ $ROSDISTRO == "humble" ]]; then
   # colcon build --symlink-install --packages-select nav2_mppi_controller nav2_amcl
   #
   echo "4. re-install ros-humble-nav2-bringup"
-  sudo apt install ros-$ROSDISTRO-nav2-bringup -y
+  sudo apt install ros-$ROS_DISTRO-nav2-bringup -y
 fi

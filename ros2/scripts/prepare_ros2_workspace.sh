@@ -13,8 +13,8 @@ echo
 echo ====================================================================
 echo Install ROS2
 echo ====================================================================
-"$script_dir/install_ros2.sh" -u $UBUNTU_CODENAME -r $ROSDISTRO
-"$script_dir/install_ros2_packages.sh" -u $UBUNTU_CODENAME -r $ROSDISTRO
+"$script_dir/install_ros2.sh" -u $UBUNTU_CODENAME -r $ROS_DISTRO
+"$script_dir/install_ros2_packages.sh" -u $UBUNTU_CODENAME -r $ROS_DISTRO
 
 echo
 echo ====================================================================
@@ -27,6 +27,6 @@ if [[ $exit_code -ne 0 ]]; then
 fi
 
 export UBUNTU_CODENAME=$UBUNTU_CODENAME
-export ROSDISTRO=$ROSDISTRO
+export ROS_DISTRO=$ROS_DISTRO
 export WORKSPACE=$WORKSPACE
 export ROS_INSTALL_TYPE=$ROS_INSTALL_TYPE

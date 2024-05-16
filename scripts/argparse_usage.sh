@@ -20,14 +20,14 @@ parse_args "$@"
 #print_usage
 
 UBUNTU_CODENAME=${parsed_args["ubuntu_codename"]-focal}
-ROSDISTRO=${parsed_args["rosdistro"]-galactic}
+ROS_DISTRO=${parsed_args["rosdistro"]-galactic}
 WORKSPACE=${parsed_args["workspace"]-ros2_ws}
 APPENDBASHRC=${parsed_args["appendbashrc"]-true}
 EXCLUDES=${parsed_args["excludes"]}
 IFS=',' read -ra EXCLUDES_ARRAY <<< "$EXCLUDES"
 
 echo "UBUNTU_CODENAME: $UBUNTU_CODENAME"
-echo "ROSDISTRO: $ROSDISTRO"
+echo "ROS_DISTRO: $ROS_DISTRO"
 echo "WORKSPACE: $WORKSPACE"
 echo "APPENDBASHRC: $APPENDBASHRC"
 echo "EXCLUDES: $EXCLUDES"

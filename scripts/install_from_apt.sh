@@ -4,7 +4,7 @@ install_ros_package_sh="$(readlink -f $script_dir/install_ros_packages.sh)"
 source "$script_dir/../scripts/utils.sh"
 
 WORKSPACE="${1:-colcon_ws}"
-ROSDISTRO="${2:-galactic}"
+ROS_DISTRO="${2:-galactic}"
 APT_PACKAGE_FILE=$3
 
 echo
@@ -28,8 +28,8 @@ fi
 
 echo
 echo ====================================================================
-echo Install ROS packages for ROSDISTRO "$ROSDISTRO"
+echo Install ROS packages for ROS_DISTRO "$ROS_DISTRO"
 echo ====================================================================
-"$install_ros_package_sh" "$ROSDISTRO" "${ros_packages[@]}"
+"$install_ros_package_sh" "$ROS_DISTRO" "${ros_packages[@]}"
 
 append_bashrc "CYCLONEDDS_URI=/etc/turtlebot4/cyclonedds_pc.xml"

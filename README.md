@@ -28,12 +28,12 @@ $ git clone https://github.com/zealzel/ros-develop.git $HOME
 $ cd $HOME/ros-develop/ros2/scripts
 
 # install ROS2
-$ ./install_ros2.sh --ROSDISTRO=galactic --ROS_INSTALL_TYPE=desktop --APPEND_SOURCE_SCRIPT_TO_BASHRC=true
+$ ./install_ros2.sh --ROS_DISTRO=galactic --ROS_INSTALL_TYPE=desktop --APPEND_SOURCE_SCRIPT_TO_BASHRC=true
 or
 $ ./install_ros2.sh -r galactic -i desktop -a
 
 # install colcon
-$ ./install_colcon.sh --ROSDISTRO=galactic
+$ ./install_colcon.sh --ROS_DISTRO=galactic
 ```
 
 ### Setup simulation envirnoment

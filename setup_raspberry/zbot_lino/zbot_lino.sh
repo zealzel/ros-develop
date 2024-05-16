@@ -5,13 +5,13 @@ prepare_vcs_sh="$(readlink -f $script_dir/../../scripts/prepare_vcs.sh)"
 UBUNTU_CODENAME=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d"=" -f2)
 
 if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
-  echo "Ubuntu 20.04 detected. Set ROSDISTRO to galactic."
-  ROSDISTRO="galactic"
+  echo "Ubuntu 20.04 detected. Set ROS_DISTRO to galactic."
+  ROS_DISTRO="galactic"
   ORIGINAL_IMAGE="[488d07354c8b92592c3c0e759b0f4730dce21dce]ubuntu-20.04.5-preinstalled-server-arm64+raspi.img.xz"
   IMAGE_DOWNLOAD_SITE=
 elif [[ "$UBUNTU_CODENAME" == "jammy" ]]; then
-  echo "Ubuntu 22.04 detected. Set ROSDISTRO to humble."
-  ROSDISTRO="humble"
+  echo "Ubuntu 22.04 detected. Set ROS_DISTRO to humble."
+  ROS_DISTRO="humble"
   ORIGINAL_IMAGE="[1ebe853ca69ce507a69f97bb70f13bc1ffcfa7a2]ubuntu-22.04.2-preinstalled-server-arm64+raspi.img.xz"
   IMAGE_DOWNLOAD_SITE=
 else
@@ -28,11 +28,11 @@ echo "The original image download site: $IMAGE_DOWNLOAD_SITE"
 
 WORKSPACE="zbotlino_ws"
 echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
-echo "ROSDISTRO=$ROSDISTRO"
+echo "ROS_DISTRO=$ROS_DISTRO"
 echo "WORKSPACE=$WORKSPACE"
-../../ros2/scripts/prepare_ros2_workspace.sh -u "$UBUNTU_CODENAME" -r "$ROSDISTRO" -w "$WORKSPACE"
+../../ros2/scripts/prepare_ros2_workspace.sh -u "$UBUNTU_CODENAME" -r "$ROS_DISTRO" -w "$WORKSPACE"
 
-source /opt/ros/"$ROSDISTRO"/setup.bash
+source /opt/ros/"$ROS_DISTRO"/setup.bash
 ROS_DISTRO="$(printenv ROS_DISTRO)"
 
 # choose from zbotlino, zbotlinoinvert, zbotlinosick1, zbotlinosick2, zbotlino2
@@ -113,8 +113,8 @@ echo
 echo ====================================================================
 echo Prepare VCS sources
 echo ====================================================================
-# vcs_repo_path="$script_dir/zbot_lino_$ROSDISTRO.repos"
-vcs_repo_path="$script_dir/zbot_linov2_$ROSDISTRO.repos"
+# vcs_repo_path="$script_dir/zbot_lino_$ROS_DISTRO.repos"
+vcs_repo_path="$script_dir/zbot_linov2_$ROS_DISTRO.repos"
 "$prepare_vcs_sh" $WORKSPACE $vcs_repo_path
 
 echo

@@ -6,7 +6,7 @@ source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/argparse_r
 
 parse_args "$@"
 echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
-echo "ROSDISTRO=$ROSDISTRO"
+echo "ROS_DISTRO=$ROS_DISTRO"
 #
 # references:
 # 1. https://colcon.readthedocs.io/en/released/user/installation.html
@@ -28,7 +28,7 @@ echo =============================
 echo Install colcon
 echo =============================
 sudo apt update
-sudo apt install -y python3-colcon-common-extensions ros-$ROSDISTRO-ament-cmake python3-pip
+sudo apt install -y python3-colcon-common-extensions ros-$ROS_DISTRO-ament-cmake python3-pip
 
 echo ====================================================================
 echo Sourcing the colcon-argcomplete setup script

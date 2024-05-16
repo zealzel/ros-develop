@@ -19,20 +19,20 @@ elapsed_times=()
 . /etc/os-release
 case $VERSION_CODENAME in
   focal)
-    ROSDISTRO="galactic"
+    ROS_DISTRO="galactic"
     ORIGINAL_IMAGE="[488d07354c8b92592c3c0e759b0f4730dce21dce]ubuntu-20.04.5-preinstalled-server-arm64+raspi.img.xz"
     ;;
   jammy)
-    ROSDISTRO="humble"
+    ROS_DISTRO="humble"
     ORIGINAL_IMAGE="[1ebe853ca69ce507a69f97bb70f13bc1ffcfa7a2]ubuntu-22.04.2-preinstalled-server-arm64+raspi.img.xz"
     ;;
   bookworm)
-    # ROSDISTRO="iron"
-    ROSDISTRO="humble"
+    # ROS_DISTRO="iron"
+    ROS_DISTRO="humble"
     ORIGINAL_IMAGE="Raspberry Pi OS 64-bit"
     ;;
   # mantic)
-  #   ROSDISTRO="humble"
+  #   ROS_DISTRO="humble"
   #   ORIGINAL_IMAGE="[1ebe853ca69ce507a69f97bb70f13bc1ffcfa7a2]ubuntu-22.04.2-preinstalled-server-arm64+raspi.img.xz"
   #   ;;
   *)
@@ -42,13 +42,13 @@ case $VERSION_CODENAME in
 esac
 
 # Common setup for all supported Ubuntu versions
-echo "Setting up for ROS Distro: $ROSDISTRO"
+echo "Setting up for ROS Distro: $ROS_DISTRO"
 WORKSPACE="zbotlino_ws"
 WORKSPACEPATH="$HOME/$WORKSPACE"
 disable_needrestart # Workaround for the needrestart issue
 
 echo "UBUNTU_CODENAME=$VERSION_CODENAME"
-echo "ROSDISTRO=$ROSDISTRO"
+echo "ROS_DISTRO=$ROS_DISTRO"
 echo "WORKSPACE=$WORKSPACE"
 
 BASE=zbotlino2
@@ -93,9 +93,9 @@ stage_general() {
 }
 
 stage1_description="Prepare ROS2 environment and workspace"
-ROS2_WORKSPACE="ros2_$ROSDISTRO"
+ROS2_WORKSPACE="ros2_$ROS_DISTRO"
 stage1() {
-  $script_dir/../../ros2/scripts/prepare_ros2_workspace_pi5.sh -u "$UBUNTU_CODENAME" -r "$ROSDISTRO" -w "$ROS2_WORKSPACE"
+  $script_dir/../../ros2/scripts/prepare_ros2_workspace_pi5.sh -u "$UBUNTU_CODENAME" -r "$ROS_DISTRO" -w "$ROS2_WORKSPACE"
   check_last_command || return 1
   return 0
 }
@@ -199,8 +199,8 @@ stage10() {
 
 stage_general "$stage1_description" stage1
 
-# source /opt/ros/"$ROSDISTRO"/setup.bash
-source $HOME/ros2_$ROSDISTRO/install/setup.bash
+# source /opt/ros/"$ROS_DISTRO"/setup.bash
+source $HOME/ros2_$ROS_DISTRO/install/setup.bash
 # source $HOME/$WORKSPACE/install/setup.bash
 
 ROS_DISTRO="$(printenv ROS_DISTRO)"

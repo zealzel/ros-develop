@@ -8,11 +8,11 @@ source "$script_dir/../scripts/argparse_ros.sh"
 WORKSPACE="simulations"
 UBUNTU_CODENAME=$(cat /etc/os-release |grep VERSION_CODENAME|cut -d"=" -f2)
 if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
-  echo "Ubuntu 20.04 detected. Set defualt ROSDISTRO to galactic."
-  ROSDISTRO="galactic"
+  echo "Ubuntu 20.04 detected. Set defualt ROS_DISTRO to galactic."
+  ROS_DISTRO="galactic"
 elif [[ "$UBUNTU_CODENAME" == "jammy" ]]; then
-  echo "Ubuntu 22.04 detected. Set defualt ROSDISTRO to humble."
-  ROSDISTRO="humble"
+  echo "Ubuntu 22.04 detected. Set defualt ROS_DISTRO to humble."
+  ROS_DISTRO="humble"
 else
   echo "Ubuntu $UBUNTU_CODENAME is not supported"
   exit 1
@@ -20,18 +20,18 @@ fi
 
 parse_args "$@"
 echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
-echo "ROSDISTRO=$ROSDISTRO"
+echo "ROS_DISTRO=$ROS_DISTRO"
 echo "WORKSPACE=$WORKSPACE"
 
 echo ===============================================
 echo Prepare workspace for ROS2 development
 echo ===============================================
-../ros2/scripts/prepare_ros2_workspace.sh -u $UBUNTU_CODENAME -r $ROSDISTRO -w $WORKSPACE
+../ros2/scripts/prepare_ros2_workspace.sh -u $UBUNTU_CODENAME -r $ROS_DISTRO -w $WORKSPACE
 
 ROS_DISTRO="$(printenv ROS_DISTRO)"
-source /opt/ros/${ROSDISTRO}/setup.bash >/dev/null 2>&1 || exit_code=$?
+source /opt/ros/${ROS_DISTRO}/setup.bash >/dev/null 2>&1 || exit_code=$?
 if [[ $exit_code -ne 0 ]]; then
-  echo "/opt/ros/$ROSDISTRO/setup.sh does not exist."
+  echo "/opt/ros/$ROS_DISTRO/setup.sh does not exist."
   print_usage
   exit
 fi
@@ -61,7 +61,7 @@ echo ===============================================
 echo 3. Build/Install robots by customed scripts
 echo ===============================================
 # ./simulations_tiago/tiago.sh $WORKSPACE
-./install_rmf.sh -w $WORKSPACE -r $ROSDISTRO
+./install_rmf.sh -w $WORKSPACE -r $ROS_DISTRO
 
 WORKSPACEPATH="$HOME/$WORKSPACE"
 rm -f $WORKSPACEPATH/*.repos

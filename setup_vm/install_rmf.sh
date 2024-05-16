@@ -8,9 +8,9 @@ source "$script_dir/../scripts/argparse_ros.sh"
 WORKSPACE="simulations"
 UBUNTU_CODENAME=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d"=" -f2)
 if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
-  ROSDISTRO="galactic"
+  ROS_DISTRO="galactic"
 elif [[ "$UBUNTU_CODENAME" == "jammy" ]]; then
-  ROSDISTRO="humble"
+  ROS_DISTRO="humble"
 else
   echo "Ubuntu $UBUNTU_CODENAME is not supported"
   exit 1
@@ -18,17 +18,17 @@ fi
 
 parse_args "$@"
 # echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
-# echo "ROSDISTRO=$ROSDISTRO"
+# echo "ROS_DISTRO=$ROS_DISTRO"
 # echo "WORKSPACE=$WORKSPACE"
 
 ros_packages=(
   # rmf
-  "ros-$ROSDISTRO-rmf-dev"
+  "ros-$ROS_DISTRO-rmf-dev"
   # traffic-editor
-  "ros-$ROSDISTRO-rmf-traffic-editor"
-  "ros-$ROSDISTRO-rmf-building-map-tools"
-  "ros-$ROSDISTRO-rmf-traffic-editor-assets"
-  "ros-$ROSDISTRO-rmf-traffic-editor-test-maps"
+  "ros-$ROS_DISTRO-rmf-traffic-editor"
+  "ros-$ROS_DISTRO-rmf-building-map-tools"
+  "ros-$ROS_DISTRO-rmf-traffic-editor-assets"
+  "ros-$ROS_DISTRO-rmf-traffic-editor-test-maps"
 )
 
 echo ===============================================
@@ -41,7 +41,7 @@ echo Build/Install from source
 echo ===============================================
 # "$install_from_source_sh" "$WORKSPACE" "$script_dir/rmf/rmf_$ROS_DISTRO.repos"
 
-if [[ "$ROSDISTRO" == "humble" ]]; then
+if [[ "$ROS_DISTRO" == "humble" ]]; then
   # temporary ignore ignition related packages since they will fail during building
   "$install_from_source_sh" -w "$WORKSPACE" -v "$script_dir/rmf/rmf_$ROS_DISTRO.repos" -i rmf_building_sim_gz_plugins,rmf_robot_sim_gz_plugins
 fi

@@ -5,7 +5,7 @@ function print_usage {
   echo ""
   echo "OPTIONS:"
   echo "  -u, --UBUNTU_CODENAME  the codename of Ubuntu LTS (focal|jammy) (default: focal)"
-  echo "  -r, --ROSDISTRO        the ROS distribution to install (noetic|galactic|foxy|humble) (default: galactic)"
+  echo "  -r, --ROS_DISTRO        the ROS distribution to install (noetic|galactic|foxy|humble) (default: galactic)"
   echo "  -i, --ROS_INSTALL_TYPE the type of ROS installation (desktop|ros-base) (default: desktop)"
   echo "  -w, --WORKSPACE the workspace to install ROS2 (default: ros2_ws)"
   echo "  -a, --APPEND_SOURCE_SCRIPT_TO_BASHRC"
@@ -16,7 +16,7 @@ function print_usage {
 function parse_args {
   # 将命令行参数转换为短选项和长选项
   OPTIONS=u:r:i:w:ah
-  LONGOPTIONS=UBUNTU_CODENAME:,ROSDISTRO:,ROS_INSTALL_TYPE:,WORKSPACE:,APPEND_SOURCE_SCRIPT_TO_BASHRC,help
+  LONGOPTIONS=UBUNTU_CODENAME:,ROS_DISTRO:,ROS_INSTALL_TYPE:,WORKSPACE:,APPEND_SOURCE_SCRIPT_TO_BASHRC,help
 
   # 解析命令行参数
   PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTIONS --name "$0" -- "$@")
@@ -35,8 +35,8 @@ function parse_args {
         UBUNTU_CODENAME="${2#*=}"
         shift 2
         ;;
-      -r|--ROSDISTRO)
-        ROSDISTRO="${2#*=}"
+      -r|--ROS_DISTRO)
+        ROS_DISTRO="${2#*=}"
         shift 2
         ;;
       -i|--ROS_INSTALL_TYPE)
@@ -69,8 +69,8 @@ function parse_args {
   # 处理短选项 + 空格的情况
   while [[ $# -gt 0 ]]; do
     case "$1" in
-      -r|--ROSDISTRO)
-        ROSDISTRO="$2"
+      -r|--ROS_DISTRO)
+        ROS_DISTRO="$2"
         shift 2
         ;;
       *)
@@ -83,8 +83,8 @@ function parse_args {
   # 设置默认参数值
   # UBUNTU_CODENAME="${UBUNTU_CODENAME:-focal}"
   UBUNTU_CODENAME="${UBUNTU_CODENAME:-jammy}"
-  # ROSDISTRO="${ROSDISTRO:-galactic}"
-  ROSDISTRO="${ROSDISTRO:-humble}"
+  # ROS_DISTRO="${ROS_DISTRO:-galactic}"
+  ROS_DISTRO="${ROS_DISTRO:-humble}"
   ROS_INSTALL_TYPE="${ROS_INSTALL_TYPE:-desktop}"
   WORKSPACE="${WORKSPACE:-ros2_ws}"
   APPEND_SOURCE_SCRIPT_TO_BASHRC="${APPEND_SOURCE_SCRIPT_TO_BASHRC:-false}"

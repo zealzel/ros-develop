@@ -3,38 +3,38 @@ source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
 source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/argparse_ros.sh"
 parse_args "$@"
 
-echo "ROSDISTRO=$ROSDISTRO"
+echo "ROS_DISTRO=$ROS_DISTRO"
 
 ros_packages=(
   # basic
-  "ros-$ROSDISTRO-xacro"
-  "ros-$ROSDISTRO-joy-teleop"
+  "ros-$ROS_DISTRO-xacro"
+  "ros-$ROS_DISTRO-joy-teleop"
   # tools
-  "ros-$ROSDISTRO-joint-state-publisher-gui"
-  "ros-$ROSDISTRO-twist-mux"
+  "ros-$ROS_DISTRO-joint-state-publisher-gui"
+  "ros-$ROS_DISTRO-twist-mux"
   # rqt
-  "ros-$ROSDISTRO-rqt-tf-tree"
+  "ros-$ROS_DISTRO-rqt-tf-tree"
   # gazebo
-  "ros-$ROSDISTRO-gazebo-plugins"
+  "ros-$ROS_DISTRO-gazebo-plugins"
   # learning
-  "ros-$ROSDISTRO-turtlesim"
+  "ros-$ROS_DISTRO-turtlesim"
   # ros2_control stack
-  "ros-$ROSDISTRO-ros2-control"
-  "ros-$ROSDISTRO-ros2-controllers"
-  "ros-$ROSDISTRO-control-toolbox"
-  "ros-$ROSDISTRO-control-msgs"
-  "ros-$ROSDISTRO-gazebo-ros2-control"
+  "ros-$ROS_DISTRO-ros2-control"
+  "ros-$ROS_DISTRO-ros2-controllers"
+  "ros-$ROS_DISTRO-control-toolbox"
+  "ros-$ROS_DISTRO-control-msgs"
+  "ros-$ROS_DISTRO-gazebo-ros2-control"
   # slam/nav
-  "ros-$ROSDISTRO-slam-toolbox"
-  "ros-$ROSDISTRO-navigation2"
-  "ros-$ROSDISTRO-nav2-bringup"
+  "ros-$ROS_DISTRO-slam-toolbox"
+  "ros-$ROS_DISTRO-navigation2"
+  "ros-$ROS_DISTRO-nav2-bringup"
   # dds
-  "ros-$ROSDISTRO-rmw-cyclonedds-cpp"
+  "ros-$ROS_DISTRO-rmw-cyclonedds-cpp"
   # rmf
-  # "ros-$ROSDISTRO-rmf-traffic-editor"
-  # "ros-$ROSDISTRO-rmf-building-map-tools"
-  # "ros-$ROSDISTRO-rmf-traffic-editor-assets"
-  # "ros-$ROSDISTRO-rmf-traffic-editor-test-maps"
+  # "ros-$ROS_DISTRO-rmf-traffic-editor"
+  # "ros-$ROS_DISTRO-rmf-building-map-tools"
+  # "ros-$ROS_DISTRO-rmf-traffic-editor-assets"
+  # "ros-$ROS_DISTRO-rmf-traffic-editor-test-maps"
   # robot
   # "ros-$ROS_DISTRO-turtlebot3-simulation"
 )

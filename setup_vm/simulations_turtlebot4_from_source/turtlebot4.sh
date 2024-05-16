@@ -5,7 +5,7 @@ source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
 WORKSPACE="${1:-colcon_ws}"
 
 if [ "$ROS_DISTRO" = "" ]; then
-  echo "ERROR: ROSDISTRO is not set"
+  echo "ERROR: ROS_DISTRO is not set"
   exit 1
 fi
 

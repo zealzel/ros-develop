@@ -11,7 +11,7 @@ source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/argparse_r
 parse_args "$@"
 
 echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
-echo "ROSDISTRO=$ROSDISTRO"
+echo "ROS_DISTRO=$ROS_DISTRO"
 echo "ROS_INSTALL_TYPE=$ROS_INSTALL_TYPE"
 
 ensure_sudo
@@ -67,9 +67,9 @@ echo
 echo ====================================================================
 echo Get ROS2 code
 echo ====================================================================
-mkdir -p ~/ros2_$ROSDISTRO/src
-cd ~/ros2_$ROSDISTRO
-vcs import --input https://raw.githubusercontent.com/ros2/ros2/$ROSDISTRO/ros2.repos src
+mkdir -p ~/ros2_$ROS_DISTRO/src
+cd ~/ros2_$ROS_DISTRO
+vcs import --input https://raw.githubusercontent.com/ros2/ros2/$ROS_DISTRO/ros2.repos src
 
 echo
 echo ====================================================================
@@ -84,11 +84,11 @@ echo
 echo ====================================================================
 echo Build the code in the workspace
 echo ====================================================================
-cd ~/ros2_$ROSDISTRO/
+cd ~/ros2_$ROS_DISTRO/
 colcon build --symlink-install
 
 # echo
 # echo ====================================================================
 # echo Sourcing the setup script
 # echo ====================================================================
-append_bashrc "source ~/ros2_${ROSDISTRO}/install/setup.bash"
+append_bashrc "source ~/ros2_${ROS_DISTRO}/install/setup.bash"

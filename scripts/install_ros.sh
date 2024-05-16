@@ -16,7 +16,7 @@ source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/argparse_ros.sh"
 parse_args "$@"
 
 echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
-echo "ROSDISTRO=$ROSDISTRO"
+echo "ROS_DISTRO=$ROS_DISTRO"
 echo "ROS_INSTALL_TYPE=$ROS_INSTALL_TYPE"
 echo "APPEND_SOURCE_SCRIPT_TO_BASHRC=$APPEND_SOURCE_SCRIPT_TO_BASHRC"
 ROS1DISTRO_ARRY=("melodic" "noetic")
@@ -45,16 +45,16 @@ echo =============================
 echo Setup Sources
 echo =============================
 # based on ROS1 and ROS2 distro, setup different sources
-if [[ " ${ROS1DISTRO_ARRY[@]} " =~ " ${ROSDISTRO} " ]]; then
+if [[ " ${ROS1DISTRO_ARRY[@]} " =~ " ${ROS_DISTRO} " ]]; then
   sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
   curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
-elif [[ " ${ROS2DISTRO_ARRY[@]} " =~ " ${ROSDISTRO} " ]]; then
+elif [[ " ${ROS2DISTRO_ARRY[@]} " =~ " ${ROS_DISTRO} " ]]; then
   sudo apt install -y software-properties-common
   sudo add-apt-repository universe -y
   sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo "$UBUNTU_CODENAME") main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 else
-  echo "ROS distro: $ROSDISTRO is not supported"
+  echo "ROS distro: $ROS_DISTRO is not supported"
   exit 1
 fi
 
@@ -64,8 +64,8 @@ echo Install ROS packages
 echo =============================
 sudo apt update
 sudo apt upgrade -y
-sudo apt install -y ros-"$ROSDISTRO-$ROS_INSTALL_TYPE"
-if [[ " ${ROS2DISTRO_ARRY[@]} " =~ " ${ROSDISTRO} " ]]; then
+sudo apt install -y ros-"$ROS_DISTRO-$ROS_INSTALL_TYPE"
+if [[ " ${ROS2DISTRO_ARRY[@]} " =~ " ${ROS_DISTRO} " ]]; then
   sudo apt install -y ros-dev-tools
 fi
 
@@ -74,6 +74,6 @@ if [ "$APPEND_SOURCE_SCRIPT_TO_BASHRC" = "true" ]; then
   echo ====================================================================
   echo Sourcing the setup script
   echo ====================================================================
-  source "/opt/ros/${ROSDISTRO}/setup.bash"
-  append_bashrc "source /opt/ros/${ROSDISTRO}/setup.bash"
+  source "/opt/ros/${ROS_DISTRO}/setup.bash"
+  append_bashrc "source /opt/ros/${ROS_DISTRO}/setup.bash"
 fi
