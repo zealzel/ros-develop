@@ -23,7 +23,7 @@ repositories:
     type: git
     url: https://github.com/jasonke1025/rosboard.git
     version: fitrobot
-  usb_cam:
+  ros2_v4l2_camera:
     type: git
-    url: https://github.com/ros-drivers/usb_cam
-    version: ros2
+    url: https://github.com/tier4/ros2_v4l2_camera.git
+    version: galactic
