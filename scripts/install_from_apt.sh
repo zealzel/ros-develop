@@ -32,4 +32,6 @@ echo Install ROS packages for ROS_DISTRO "$ROS_DISTRO"
 echo ====================================================================
 "$install_ros_package_sh" "$ROS_DISTRO" "${ros_packages[@]}"
 
-append_bashrc "CYCLONEDDS_URI=/etc/turtlebot4/cyclonedds_pc.xml"
+# copy cyclonedds config file
+cp "cyclonedds.xml" $HOME/cyclonedds.xml
+append_bashrc 'export CYCLONEDDS_URI=$HOME/cyclonedds.xml'
