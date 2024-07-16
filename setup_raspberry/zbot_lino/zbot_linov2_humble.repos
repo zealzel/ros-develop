@@ -1,7 +1,7 @@
 repositories:
   zbot_lino:
     type: git
-    url: https://github.com/zealzel/zbot_lino
+    url: https://github.com/fitfabsw/zbot_lino
     version: humble
   fitrobot_interfaces:
     type: git
