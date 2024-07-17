@@ -22,9 +22,7 @@ install_ubuntu_packages "${ros_packages[@]}"
 echo ===============================================
 echo Build/Install from source
 echo ===============================================
-# "$install_from_source_sh" "$WORKSPACE" "$script_dir/rmf/rmf_$ROSDISTRO.repos"
-
 if [[ "$ROSDISTRO" == "humble" ]]; then
   # temporary ignore ignition related packages since they will fail during building
-  "$install_from_source_sh" -w "$WORKSPACE" -v "$script_dir/rmf/rmf_$ROSDISTRO.repos" -i rmf_building_sim_gz_plugins,rmf_robot_sim_gz_plugins
+  "$install_from_source_sh" -w "$WORKSPACE" -v "$script_dir/rmf/rmf_$ROSDISTRO.repos" ${FORCE:+-f} -i rmf_building_sim_gz_plugins,rmf_robot_sim_gz_plugins
 fi
