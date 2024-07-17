@@ -24,5 +24,5 @@ echo Build/Install from source
 echo ===============================================
 if [[ "$ROSDISTRO" == "humble" ]]; then
   # temporary ignore ignition related packages since they will fail during building
-  "$install_from_source_sh" -w "$WORKSPACE" -v "$script_dir/rmf/rmf_$ROSDISTRO.repos" ${FORCE:+-f} -i rmf_building_sim_gz_plugins,rmf_robot_sim_gz_plugins
+  "$install_from_source_sh" -w "$WORKSPACE" -v "$script_dir/rmf/rmf_$ROSDISTRO.repos" $([ $FORCE == true ] && echo "-f") -i rmf_building_sim_gz_plugins,rmf_robot_sim_gz_plugins
 fi
