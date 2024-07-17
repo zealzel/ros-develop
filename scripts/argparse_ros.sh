@@ -50,10 +50,10 @@ ROS_INSTALL_TYPE=${parsed_args["ros_install_type"]:-desktop}
 
 UBUNTU_CODENAME=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d"=" -f2)
 if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
-  echo "Ubuntu 20.04 detected. Set ROSDISTRO to galactic."
+  # echo "Ubuntu 20.04 detected. Set ROSDISTRO to galactic."
   ROSDISTRO="galactic"
 elif [[ "$UBUNTU_CODENAME" == "jammy" ]]; then
-  echo "Ubuntu 22.04 detected. Set ROSDISTRO to humble."
+  # echo "Ubuntu 22.04 detected. Set ROSDISTRO to humble."
   ROSDISTRO="humble"
 else
   if [ ! -n $UBUNTU_CODENAME ]; then
@@ -61,7 +61,7 @@ else
   else
     echo "No Ubuntu version detected"
   fi
-  # exit 1
+  exit 1
 fi
 
 export UBUNTU_CODENAME ROSDISTRO WORKSPACE TOKEN

@@ -7,6 +7,12 @@ parse_args "$@"
 WORKSPACE=${parsed_args["workspace"]-simulations}
 [ $VERBOSE == true ] && print_args
 
+if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
+  echo "Ubuntu 20.04 detected. Set ROSDISTRO to galactic."
+elif [[ "$UBUNTU_CODENAME" == "jammy" ]]; then
+  echo "Ubuntu 22.04 detected. Set ROSDISTRO to humble."
+fi
+
 echo ===============================================
 echo Prepare workspace
 echo ===============================================
