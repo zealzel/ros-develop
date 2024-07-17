@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
-install_from_source_sh="$(readlink -f $script_dir/../../scripts/install_from_source.sh)"
-source "$(readlink -f "$script_dir/../../scripts/argparse_ros.sh")"
+script_dir="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
+install_from_source_sh="$(realpath $script_dir/../../scripts/install_from_source.sh)"
+source "$(realpath "$script_dir/../../scripts/argparse_ros.sh")"
 parse_args "$@"
 WORKSPACE=${parsed_args["workspace"]-simulations}
 [ "$VERBOSE" == true ] && print_args
@@ -13,8 +13,8 @@ if [[ $exit_code -ne 0 ]]; then
   exit
 fi
 
-../../ros2/scripts/install_mppi_controllers.sh -w $WORKSPACE
-../install_rmf.sh -w $WORKSPACE
+"$(realpath $script_dir/../../ros2/scripts/install_mppi_controllers.sh)" -w $WORKSPACE
+"$(realpath $script_dir/../install_rmf.sh)" -w $WORKSPACE
 
 cp "$script_dir/zbot_lino_$ROSDISTRO.repos" "$script_dir/zbot_lino_$ROSDISTRO.repos.token"
 
