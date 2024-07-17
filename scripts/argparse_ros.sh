@@ -52,6 +52,7 @@ platform=$(uname)
 if [[ $platform == "Darwin" ]]; then
   # macOS
   echo "No Ubuntu version detected"
+  exit 1
 else
   # 假定為 Linux/Ubuntu
   UBUNTU_CODENAME=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d"=" -f2)
