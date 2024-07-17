@@ -23,7 +23,7 @@ if [ -n "$TOKEN" ]; then
   sed -i "s/github/$TOKEN@github/g" "$script_dir/zbot_lino_$ROSDISTRO.repos.token"
 fi
 
-"$install_from_source_sh" -w $WORKSPACE -v "$script_dir/zbot_lino_$ROSDISTRO.repos.token" ${FORCE:+-f} -i linorobot2_bringup
+"$install_from_source_sh" -w $WORKSPACE -v "$script_dir/zbot_lino_$ROSDISTRO.repos.token" $([ $FORCE == true ] && echo "-f") -i linorobot2_bringup
 
 # if [ $FORCE == true ]; then
 #   "$install_from_source_sh" -w $WORKSPACE -v "$script_dir/zbot_lino_$ROSDISTRO.repos.token" --force -i linorobot2_bringup

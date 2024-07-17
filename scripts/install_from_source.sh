@@ -52,8 +52,10 @@ echo ====================================================================
 WORKSPACEPATH="$HOME/$WORKSPACE"
 cd "$WORKSPACEPATH"
 if [ $FORCE == true ]; then
+  echo "vcs import --force src <"$VCS_REPOS""
   vcs import --force src <"$VCS_REPOS"
 else
+  echo "vcs import src <"$VCS_REPOS""
   vcs import src <"$VCS_REPOS"
 fi
 
