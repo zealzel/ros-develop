@@ -1,19 +1,17 @@
 #!/usr/bin/env bash
-script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
-install_from_source_sh="$(readlink -f $script_dir/../../scripts/install_from_source.sh)"
+script_dir="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
+install_from_source_sh="$(realpath $script_dir/../scripts/install_from_source.sh)"
 source "$script_dir/../scripts/utils.sh"
-source "$(readlink -f "$script_dir/../scripts/argparse_ros.sh")"
-# parse_args "$@"
-# WORKSPACE=${parsed_args["workspace"]-simulations}
+source "$(realpath "$script_dir/../scripts/argparse_ros.sh")"
 
 ros_packages=(
   # rmf
-  "ros-$ROS_DISTRO-rmf-dev"
+  "ros-$ROSDISTRO-rmf-dev"
   # traffic-editor
-  "ros-$ROS_DISTRO-rmf-traffic-editor"
-  "ros-$ROS_DISTRO-rmf-building-map-tools"
-  "ros-$ROS_DISTRO-rmf-traffic-editor-assets"
-  "ros-$ROS_DISTRO-rmf-traffic-editor-test-maps"
+  "ros-$ROSDISTRO-rmf-traffic-editor"
+  "ros-$ROSDISTRO-rmf-building-map-tools"
+  "ros-$ROSDISTRO-rmf-traffic-editor-assets"
+  "ros-$ROSDISTRO-rmf-traffic-editor-test-maps"
 )
 
 echo ===============================================
@@ -24,9 +22,9 @@ install_ubuntu_packages "${ros_packages[@]}"
 echo ===============================================
 echo Build/Install from source
 echo ===============================================
-# "$install_from_source_sh" "$WORKSPACE" "$script_dir/rmf/rmf_$ROS_DISTRO.repos"
+# "$install_from_source_sh" "$WORKSPACE" "$script_dir/rmf/rmf_$ROSDISTRO.repos"
 
-if [[ "$ROS_DISTRO" == "humble" ]]; then
+if [[ "$ROSDISTRO" == "humble" ]]; then
   # temporary ignore ignition related packages since they will fail during building
-  "$install_from_source_sh" -w "$WORKSPACE" -v "$script_dir/rmf/rmf_$ROS_DISTRO.repos" -i rmf_building_sim_gz_plugins,rmf_robot_sim_gz_plugins
+  "$install_from_source_sh" -w "$WORKSPACE" -v "$script_dir/rmf/rmf_$ROSDISTRO.repos" -i rmf_building_sim_gz_plugins,rmf_robot_sim_gz_plugins
 fi
