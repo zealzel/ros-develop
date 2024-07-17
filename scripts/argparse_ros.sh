@@ -1,91 +1,56 @@
-#!/bin/bash
+#!/usr/bin/env bash
+current_script="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+source "$(readlink -f "$current_script/argparse.sh")"
 
-function print_usage {
-  echo "Usage: $0 [OPTIONS]"
-  echo ""
-  echo "OPTIONS:"
-  echo "  -u, --UBUNTU_CODENAME  the codename of Ubuntu LTS (focal|jammy) (default: focal)"
-  echo "  -r, --ROS_DISTRO        the ROS distribution to install (noetic|galactic|foxy|humble) (default: galactic)"
-  echo "  -i, --ROS_INSTALL_TYPE the type of ROS installation (desktop|ros-base) (default: desktop)"
-  echo "  -w, --WORKSPACE the workspace to install ROS2 (default: ros2_ws)"
-  echo "  -a, --APPEND_SOURCE_SCRIPT_TO_BASHRC"
-  echo "                         whether to append the setup script to ~/.bashrc (default: false)"
-  echo "  -h, --help             print this help message and exit"
+# 選項描述
+declare -A arg_desc=(
+  # ["-u,--ubuntu-codename"]="Ubuntu codename (default: focal)"
+  # ["-r,--rosdistro"]="ROS distribution (default: noetic)"
+  ["-w,--workspace"]="Workspace name (default: my_ws)"
+  ["-t,--token"]="github token"
+  ["-v,--verbose"]="verbose (flag)"
+  ["-h,--help"]="help"
+)
+
+# 用於存儲解析後的參數
+declare -A parsed_args
+
+# 解析參數
+parse_args "$@"
+
+declare -A default_flags=(
+  ["--verbose"]=false
+)
+VERBOSE=$(parse_flag "verbose")
+
+# UBUNTU_CODENAME=${parsed_args["ubuntu_codename"]-focal}
+# ROSDISTRO=${parsed_args["rosdistro"]-galactic}
+WORKSPACE=${parsed_args["workspace"]-ros2_ws}
+TOKEN=${parsed_args["token"]-}
+
+UBUNTU_CODENAME=$(cat /etc/os-release |grep VERSION_CODENAME|cut -d"=" -f2)
+if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
+  echo "Ubuntu 20.04 detected. Set ROSDISTRO to galactic."
+  ROSDISTRO="galactic"
+elif [[ "$UBUNTU_CODENAME" == "jammy" ]]; then
+  echo "Ubuntu 22.04 detected. Set ROSDISTRO to humble."
+  ROSDISTRO="humble"
+else
+  echo "Ubuntu $UBUNTU_CODENAME is not supported"
+  exit 1
+fi
+
+export UBUNTU_CODENAME ROS_DISTRO WORKSPACE TOKEN
+
+
+print_args() {
+  echo ===============================
+  echo "UBUNTU_CODENAME: $UBUNTU_CODENAME"
+  echo "ROSDISTRO: $ROSDISTRO"
+  echo "WORKSPACE: $WORKSPACE"
+  echo "TOKEN: $TOKEN"
 }
 
-function parse_args {
-  # 将命令行参数转换为短选项和长选项
-  OPTIONS=u:r:i:w:ah
-  LONGOPTIONS=UBUNTU_CODENAME:,ROS_DISTRO:,ROS_INSTALL_TYPE:,WORKSPACE:,APPEND_SOURCE_SCRIPT_TO_BASHRC,help
-
-  # 解析命令行参数
-  PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTIONS --name "$0" -- "$@")
-
-  if [[ $? -ne 0 ]]; then
-    # 解析失败，输出错误信息并退出
-    print_usage
-    exit 1
-  fi
-
-  # 将解析后的命令行参数存储到相应的变量中
-  eval set -- "$PARSED"
-  while true; do
-    case "$1" in
-      -u|--UBUNTU_CODENAME)
-        UBUNTU_CODENAME="${2#*=}"
-        shift 2
-        ;;
-      -r|--ROS_DISTRO)
-        ROS_DISTRO="${2#*=}"
-        shift 2
-        ;;
-      -i|--ROS_INSTALL_TYPE)
-        ROS_INSTALL_TYPE="${2#*=}"
-        shift 2
-        ;;
-      -w|--WORKSPACE)
-        WORKSPACE="${2#*=}"
-        shift 2
-        ;;
-      -a|--APPEND_SOURCE_SCRIPT_TO_BASHRC)
-        APPEND_SOURCE_SCRIPT_TO_BASHRC=true
-        shift
-        ;;
-      -h|--help)
-        print_usage
-        exit 0
-        ;;
-      --)
-        shift
-        break
-        ;;
-      *)
-        echo "Unknown option: $1"
-        exit 1
-        ;;
-    esac
-  done
-
-  # 处理短选项 + 空格的情况
-  while [[ $# -gt 0 ]]; do
-    case "$1" in
-      -r|--ROS_DISTRO)
-        ROS_DISTRO="$2"
-        shift 2
-        ;;
-      *)
-        echo "Unknown argument: $1"
-        exit 1
-        ;;
-    esac
-  done
-
-  # 设置默认参数值
-  # UBUNTU_CODENAME="${UBUNTU_CODENAME:-focal}"
-  UBUNTU_CODENAME="${UBUNTU_CODENAME:-jammy}"
-  # ROS_DISTRO="${ROS_DISTRO:-galactic}"
-  ROS_DISTRO="${ROS_DISTRO:-humble}"
-  ROS_INSTALL_TYPE="${ROS_INSTALL_TYPE:-desktop}"
-  WORKSPACE="${WORKSPACE:-ros2_ws}"
-  APPEND_SOURCE_SCRIPT_TO_BASHRC="${APPEND_SOURCE_SCRIPT_TO_BASHRC:-false}"
-}
+if [ "$VERBOSE" == true ]; then
+  print_args
+fi
