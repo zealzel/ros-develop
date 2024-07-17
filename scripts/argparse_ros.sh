@@ -10,6 +10,8 @@ declare -A arg_desc=(
   ["-t,--token"]="github token"
   ["-i,--ros_install_type"]="the type of ROS installation (desktop|ros-base) (default: desktop)"
   ["-v,--verbose"]="verbose (flag)"
+  ["-o,--install_ros2"]="install ros2 dev environment (flag)"
+  ["-g,--download_gz_models"]="download gazebo models (flag)"
   ["-m,--enable_mppi_fix"]="enable mppi fix (flag)"
   ["-r,--enable_rmf"]="enable rmf environment (flag)"
   ["-h,--help"]="help"
@@ -23,10 +25,14 @@ parse_args "$@"
 
 declare -A default_flags=(
   ["--verbose"]=false
+  ["--install_ros2"]=false
+  ["--download_gz_models"]=false
   ["--enable_mppi_fix"]=false
   ["--enable_rmf"]=false
 )
 VERBOSE=$(parse_flag "verbose")
+ROS2_DEV=$(parse_flag "install_ros2")
+DOWNLOAD_GZ=$(parse_flag "download_gz_models")
 MPPI=$(parse_flag "enable_mppi_fix")
 RMF=$(parse_flag "enable_rmf")
 
@@ -54,13 +60,14 @@ fi
 
 export UBUNTU_CODENAME ROSDISTRO WORKSPACE TOKEN
 
-
 print_args() {
   echo ===============================
   echo "UBUNTU_CODENAME: $UBUNTU_CODENAME"
   echo "ROSDISTRO: $ROSDISTRO"
   echo "WORKSPACE: $WORKSPACE"
   echo "ROS_INSTALL_TYPE: $ROS_INSTALL_TYPE"
+  echo "ROS2_DEV: $ROS2_DEV"
+  echo "DOWNLOAD_GZ: $DOWNLOAD_GZ"
   echo "MPPI: $MPPI"
   echo "RMF: $RMF"
   echo "TOKEN: $TOKEN"

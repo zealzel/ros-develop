@@ -1,6 +1,5 @@
 #!/bin/bash
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
-source "$script_dir/../../scripts/utils.sh"
 source "$script_dir/../../scripts/argparse_ros.sh"
 
 echo

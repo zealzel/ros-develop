@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
-install_from_source_sh="$(readlink -f $script_dir/../scripts/install_from_source.sh)"
-install_from_apt_sh="$(readlink -f $script_dir/../scripts/install_from_apt.sh)"
+script_dir="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
+install_from_source_sh="$(realpath $script_dir/../scripts/install_from_source.sh)"
+install_from_apt_sh="$(realpath $script_dir/../scripts/install_from_apt.sh)"
 source "$script_dir/../scripts/argparse_ros.sh"
 parse_args "$@"
 WORKSPACE=${parsed_args["workspace"]-simulations}
@@ -15,24 +15,27 @@ if [[ $exit_code -ne 0 ]]; then
   exit
 fi
 
-echo ===============================================
-echo Prepare ROS2 development environment
-echo ===============================================
-"$(realpath $script_dir/../ros2/scripts/prepare_ros2_workspace.sh)" -w $WORKSPACE
-source /opt/ros/${ROSDISTRO}/setup.bash >/dev/null 2>&1 || exit_code=$?
-if [[ $exit_code -ne 0 ]]; then
-  echo "/opt/ros/$ROSDISTRO/setup.sh does not exist."
-  print_usage
-  exit
+if [ $ROS2_DEV == true ]; then
+  echo ===============================================
+  echo Prepare ROS2 development environment
+  echo ===============================================
+  "$(realpath $script_dir/../ros2/scripts/prepare_ros2_workspace.sh)" -w $WORKSPACE
+  source /opt/ros/${ROSDISTRO}/setup.bash >/dev/null 2>&1 || exit_code=$?
+  if [[ $exit_code -ne 0 ]]; then
+    echo "/opt/ros/$ROSDISTRO/setup.sh does not exist."
+    print_usage
+    exit
+  fi
 fi
 
-# Added temporarily for testing
 [ $MPPI == true ] && ../ros2/scripts/install_mppi_controllers.sh -w $WORKSPACE
 
-echo ===============================================
-echo Download gazebo classic models
-echo ===============================================
-./download_gazebo_models.sh
+if [ $DOWNLOAD_GZ == true ]; then
+  echo ===============================================
+  echo Download gazebo classic models
+  echo ===============================================
+  "$(realpath $script_dir/download_gazebo_models.sh)"
+fi
 
 echo ===============================================
 echo 1. Install robots from package manager
