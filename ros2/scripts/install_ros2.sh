@@ -1,14 +1,12 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # galactic: https://docs.ros.org/en/galactic/Installation/Ubuntu-Install-Debians.html
 # foxy: https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html
 # humble: https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
 
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
-install_from_source_sh="$(readlink -f $script_dir/../../scripts/install_from_source.sh)"
+source "$script_dir/../../scripts/utils.sh"
 source "$(readlink -f "$script_dir/../../scripts/argparse_ros.sh")"
-parse_args "$@"
-WORKSPACE=${parsed_args["workspace"]-simulations}
 
 ensure_sudo
 sudo apt-get update && sudo apt-get install -y curl gnupg
