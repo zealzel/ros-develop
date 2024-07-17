@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+echo "setup zbot artic simulation"
 script_dir="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 install_from_source_sh="$(realpath $script_dir/../../scripts/install_from_source.sh)"
 source "$script_dir/../../scripts/argparse_ros.sh"
