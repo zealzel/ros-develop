@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
-install_from_source_sh="$(readlink -f $script_dir/../../scripts/install_from_source.sh)"
 source "$(readlink -f "$script_dir/../../scripts/argparse_ros.sh")"
-parse_args "$@"
-WORKSPACE=${parsed_args["workspace"]-simulations}
 
 # LATEST_WORKED_COMMIT="1.1.12"
 #a45b151ceb3aa9edebad8a528cd672935f0c668d
