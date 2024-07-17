@@ -20,7 +20,7 @@ if [[ $exit_code -ne 0 ]]; then
 fi
 
 # Added temporarily for testing
-../ros2/scripts/install_mppi_controllers.sh -w $WORKSPACE
+[ $MPPI == true ] && ../ros2/scripts/install_mppi_controllers.sh -w $WORKSPACE
 
 echo ===============================================
 echo Download gazebo classic models

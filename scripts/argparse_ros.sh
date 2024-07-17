@@ -10,6 +10,8 @@ declare -A arg_desc=(
   ["-t,--token"]="github token"
   ["-i,--ros_install_type"]="the type of ROS installation (desktop|ros-base) (default: desktop)"
   ["-v,--verbose"]="verbose (flag)"
+  ["-m,--enable_mppi_fix"]="enable mppi fix (flag)"
+  ["-r,--enable_rmf"]="enable rmf environment (flag)"
   ["-h,--help"]="help"
 )
 
@@ -21,8 +23,12 @@ parse_args "$@"
 
 declare -A default_flags=(
   ["--verbose"]=false
+  ["--enable_mppi_fix"]=false
+  ["--enable_rmf"]=false
 )
 VERBOSE=$(parse_flag "verbose")
+MPPI=$(parse_flag "enable_mppi_fixi")
+RMF=$(parse_flag "enable_rmf")
 
 # UBUNTU_CODENAME=${parsed_args["ubuntu_codename"]-focal}
 # ROSDISTRO=${parsed_args["rosdistro"]-galactic}
@@ -51,6 +57,8 @@ print_args() {
   echo "ROSDISTRO: $ROSDISTRO"
   echo "WORKSPACE: $WORKSPACE"
   echo "ROS_INSTALL_TYPE: $ROS_INSTALL_TYPE"
+  echo "MPPI: $MPPI"
+  echo "RMF: $RMF"
   echo "TOKEN: $TOKEN"
 }
 
