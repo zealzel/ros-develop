@@ -21,9 +21,3 @@ if [ -n "$TOKEN" ]; then
 fi
 
 "$install_from_source_sh" -w $WORKSPACE -v "$script_dir/zbot_artic_$ROSDISTRO.repos.token" $([ $FORCE == true ] && echo "-f") -i linorobot2_bringup
-
-# if [ $FORCE == true ]; then
-#   "$install_from_source_sh" -w $WORKSPACE -v "$script_dir/zbot_artic_$ROSDISTRO.repos.token" --force -i linorobot2_bringup
-# else
-#   "$install_from_source_sh" -w $WORKSPACE -v "$script_dir/zbot_artic_$ROSDISTRO.repos.token" -i linorobot2_bringup
-# fi

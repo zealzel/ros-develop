@@ -7,13 +7,13 @@ parse_args "$@"
 WORKSPACE=${parsed_args["workspace"]-simulations}
 [ $VERBOSE == true ] && print_args
 
-#echo ===============================================
-#echo Prepare workspace
-#echo ===============================================
-#"$(realpath $script_dir/../scripts/create_workspace.sh)" $WORKSPACE || exit_code=$?
-#if [[ $exit_code -ne 0 ]]; then
-#  exit
-#fi
+echo ===============================================
+echo Prepare workspace
+echo ===============================================
+"$(realpath $script_dir/../scripts/create_workspace.sh)" $WORKSPACE || exit_code=$?
+if [[ $exit_code -ne 0 ]]; then
+  exit
+fi
 
 if [ $ROS2_DEV == true ]; then
   echo ===============================================
@@ -37,10 +37,10 @@ if [ $DOWNLOAD_GZ == true ]; then
   "$(realpath $script_dir/download_gazebo_models.sh)"
 fi
 
-#echo ===============================================
-#echo 1. Install robots from package manager
-#echo ===============================================
-#"$install_from_apt_sh" $WORKSPACE $ROSDISTRO "$script_dir/simulations_turtlebot3/ros_packages.sh"
+echo ===============================================
+echo 1. Install robots from package manager
+echo ===============================================
+"$install_from_apt_sh" $WORKSPACE $ROSDISTRO "$script_dir/simulations_turtlebot3/ros_packages.sh"
 
 echo ===============================================
 echo 2. Build/Install robots/worlds from source
