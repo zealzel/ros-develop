@@ -45,8 +45,8 @@ echo ===============================================
 echo ===============================================
 echo 2. Build/Install robots/worlds from source
 echo ===============================================
-"$script_dir/simulations_zbot_lino/setup_zbot_lino.sh" -w "$WORKSPACE" ${TOKEN:+-t $TOKEN} ${FORCE:+-f}
-"$script_dir/simulations_zbot_artic/setup_zbot_artic.sh" -w $WORKSPACE ${TOKEN:+-t $TOKEN} ${FORCE:+-f}
+"$script_dir/simulations_zbot_lino/setup_zbot_lino.sh" -w "$WORKSPACE" ${TOKEN:+-t $TOKEN} $([ $FORCE == true ] && echo "-f")
+"$script_dir/simulations_zbot_artic/setup_zbot_artic.sh" -w $WORKSPACE ${TOKEN:+-t $TOKEN} $([ $FORCE == true ] && echo "-f")
 # "$install_from_source_sh" $WORKSPACE "$script_dir/simulations_neobotix/neobotix.repos"
 # "$install_from_source_sh" $WORKSPACE "$script_dir/world_aws_robotmaker/deps.repos"
 
