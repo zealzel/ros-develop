@@ -2,16 +2,23 @@
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 install_from_source_sh="$(readlink -f $script_dir/../scripts/install_from_source.sh)"
 install_from_apt_sh="$(readlink -f $script_dir/../scripts/install_from_apt.sh)"
-source "$(readlink -f "$script_dir/../scripts/argparse_ros.sh")"
+source "$script_dir/../scripts/argparse_ros.sh"
 parse_args "$@"
 WORKSPACE=${parsed_args["workspace"]-simulations}
 [ "$VERBOSE" == true ] && print_args
 
 echo ===============================================
-echo Prepare workspace for ROS2 development
+echo Prepare workspace
 echo ===============================================
-../ros2/scripts/prepare_ros2_workspace.sh -w $WORKSPACE
+"$(realpath $script_dir/../../scripts/create_workspace.sh)" $WORKSPACE || exit_code=$?
+if [[ $exit_code -ne 0 ]]; then
+  exit
+fi
 
+echo ===============================================
+echo Prepare ROS2 development environment
+echo ===============================================
+"$(realpath $script_dir/../ros2/scripts/prepare_ros2_workspace.sh)" -w $WORKSPACE
 source /opt/ros/${ROSDISTRO}/setup.bash >/dev/null 2>&1 || exit_code=$?
 if [[ $exit_code -ne 0 ]]; then
   echo "/opt/ros/$ROSDISTRO/setup.sh does not exist."

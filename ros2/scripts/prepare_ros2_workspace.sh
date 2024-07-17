@@ -3,11 +3,6 @@ script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 source "$script_dir/../../scripts/utils.sh"
 source "$script_dir/../../scripts/argparse_ros.sh"
 
-"$script_dir/../../scripts/create_workspace.sh" $WORKSPACE || exit_code=$?
-if [[ $exit_code -ne 0 ]]; then
-  exit
-fi
-
 echo
 echo ====================================================================
 echo Install ROS2
