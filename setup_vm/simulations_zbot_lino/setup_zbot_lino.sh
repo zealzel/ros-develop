@@ -22,8 +22,7 @@ if [ -n "$TOKEN" ]; then
   echo "Replace github with $TOKEN@github"
   sed -i "s/github/$TOKEN@github/g" "$script_dir/zbot_lino_$ROSDISTRO.repos.token"
 else
-  echo "Please provide a github token."
-  print_usage
+  echo "Please provide a github token in order to download the repositories."
   exit
 fi
 
