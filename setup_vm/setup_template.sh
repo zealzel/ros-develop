@@ -10,7 +10,7 @@ WORKSPACE=${parsed_args["workspace"]-simulations}
 echo ===============================================
 echo Prepare workspace
 echo ===============================================
-"$(realpath $script_dir/../../scripts/create_workspace.sh)" $WORKSPACE || exit_code=$?
+"$(realpath $script_dir/../scripts/create_workspace.sh)" $WORKSPACE || exit_code=$?
 if [[ $exit_code -ne 0 ]]; then
   exit
 fi
