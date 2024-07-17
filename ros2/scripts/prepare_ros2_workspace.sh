@@ -12,8 +12,8 @@ echo
 echo ====================================================================
 echo Install ROS2
 echo ====================================================================
-"$script_dir/install_ros2.sh" -u $UBUNTU_CODENAME -r $ROS_DISTRO
-"$script_dir/install_ros2_packages.sh" -u $UBUNTU_CODENAME -r $ROS_DISTRO
+"$script_dir/install_ros2.sh"
+"$script_dir/install_ros2_packages.sh"
 
 echo
 echo ====================================================================
