@@ -13,8 +13,8 @@ if [[ $exit_code -ne 0 ]]; then
   exit
 fi
 
-../../ros2/scripts/install_mppi_controllers.sh -r $ROSDISTRO -w $WORKSPACE
-../install_rmf.sh -w $WORKSPACE -r $ROSDISTRO
+../../ros2/scripts/install_mppi_controllers.sh -w $WORKSPACE
+../install_rmf.sh -w $WORKSPACE
 
 cp "$script_dir/zbot_lino_$ROSDISTRO.repos" "$script_dir/zbot_lino_$ROSDISTRO.repos.token"
 
