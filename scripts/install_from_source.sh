@@ -51,7 +51,7 @@ echo Build from source
 echo ====================================================================
 WORKSPACEPATH="$HOME/$WORKSPACE"
 cd "$WORKSPACEPATH"
-if [ $FORCE == true]; then
+if [ $FORCE == true ]; then
   vcs import --force src <"$VCS_REPOS"
 else
   vcs import src <"$VCS_REPOS"

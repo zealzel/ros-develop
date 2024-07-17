@@ -5,7 +5,7 @@ install_from_apt_sh="$(realpath $script_dir/../scripts/install_from_apt.sh)"
 source "$script_dir/../scripts/argparse_ros.sh"
 parse_args "$@"
 WORKSPACE=${parsed_args["workspace"]-simulations}
-[ "$VERBOSE" == true ] && print_args
+[ $VERBOSE == true ] && print_args
 
 echo ===============================================
 echo Prepare workspace
@@ -28,7 +28,7 @@ if [ $ROS2_DEV == true ]; then
   fi
 fi
 
-[ $MPPI == true ] && ../ros2/scripts/install_mppi_controllers.sh -w $WORKSPACE
+[ $MPPI == true ] && "$(realpath $script_dir/../ros2/scripts/install_mppi_controllers.sh)" -w $WORKSPACE
 
 if [ $DOWNLOAD_GZ == true ]; then
   echo ===============================================
@@ -45,15 +45,15 @@ echo ===============================================
 echo ===============================================
 echo 2. Build/Install robots/worlds from source
 echo ===============================================
-"$script_dir/simulations_zbot_lino/setup_zbot_lino.sh" -w "$WORKSPACE" ${TOKEN:+-t $TOKEN}
-"$script_dir/simulations_zbot_artic/setup_zbot_artic.sh" -w $WORKSPACE ${TOKEN:+-t $TOKEN}
+"$script_dir/simulations_zbot_lino/setup_zbot_lino.sh" -w "$WORKSPACE" ${TOKEN:+-t $TOKEN} ${FORCE:+-f}
+"$script_dir/simulations_zbot_artic/setup_zbot_artic.sh" -w $WORKSPACE ${TOKEN:+-t $TOKEN} ${FORCE:+-f}
 # "$install_from_source_sh" $WORKSPACE "$script_dir/simulations_neobotix/neobotix.repos"
 # "$install_from_source_sh" $WORKSPACE "$script_dir/world_aws_robotmaker/deps.repos"
 
 echo ===============================================
 echo 3. Build/Install robots by customed scripts
 echo ===============================================
-[ $RMF == true ] && ./install_rmf.sh -w $WORKSPACE
+[ $RMF == true ] && "$(readpath $script_dir/install_rmf.sh)" -w $WORKSPACE
 
 WORKSPACEPATH="$HOME/$WORKSPACE"
 rm -f $WORKSPACEPATH/*.repos
@@ -62,4 +62,4 @@ rm -f $WORKSPACEPATH/*.rosinstall
 echo ===============================================
 echo Set env variables
 echo ===============================================
-./ros2_append_bashrc.sh
+[ $APPENDBASHRC == true ] && "$(realpath $script_dir/ros2_append_bashrc.sh)"
