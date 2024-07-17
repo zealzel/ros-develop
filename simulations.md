@@ -1,7 +1,7 @@
 #### From scratch
 
 ```bash
-setup_vm/setup_template.sh -t <token>
+setup_vm/setup_simulations.sh -t <token>
 ```
 
 It will do the following:
