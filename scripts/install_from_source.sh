@@ -24,6 +24,7 @@ VCS_REPOS=$(readlink -f $VCS_REPOS)
 IGNORES=${parsed_args["IGNORES"]}
 IFS=',' read -ra ignored_ros_packages <<<"$IGNORES"
 
+echo ====== install_from_source ======
 echo "WORKSPACE: $WORKSPACE"
 echo "VCS_REPOS: $VCS_REPOS"
 echo "FORCE: $FORCE"
