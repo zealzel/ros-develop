@@ -4,14 +4,11 @@
 # foxy: https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html
 # humble: https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
 
-source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
-source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/argparse_ros.sh"
-
+script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+install_from_source_sh="$(readlink -f $script_dir/../../scripts/install_from_source.sh)"
+source "$(readlink -f "$script_dir/../../scripts/argparse_ros.sh")"
 parse_args "$@"
-
-echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
-echo "ROS_DISTRO=$ROS_DISTRO"
-echo "ROS_INSTALL_TYPE=$ROS_INSTALL_TYPE"
+WORKSPACE=${parsed_args["workspace"]-simulations}
 
 ensure_sudo
 sudo apt-get update && sudo apt-get install -y curl gnupg
@@ -46,11 +43,11 @@ echo Install ROS 2 packages
 echo =============================
 sudo apt update
 sudo apt upgrade -y
-sudo apt install -y ros-"$ROS_DISTRO-$ROS_INSTALL_TYPE"
+sudo apt install -y ros-"$ROSDISTRO-$ROS_INSTALL_TYPE"
 sudo apt install -y ros-dev-tools
 
 echo
 echo ====================================================================
 echo Sourcing the setup script
 echo ====================================================================
-append_bashrc "source /opt/ros/${ROS_DISTRO}/setup.bash"
+append_bashrc "source /opt/ros/${ROSDISTRO}/setup.bash"

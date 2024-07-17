@@ -1,25 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
-install_from_source_sh="$(readlink -f "$script_dir"/../scripts/install_from_source.sh)"
-install_from_apt_sh="$(readlink -f "$script_dir"/../scripts/install_from_apt.sh)"
-source "$script_dir/../scripts/utils.sh"
-source "$script_dir/../scripts/argparse_ros.sh"
-
-WORKSPACE="simulations"
-UBUNTU_CODENAME=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d"=" -f2)
-if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
-  ROS_DISTRO="galactic"
-elif [[ "$UBUNTU_CODENAME" == "jammy" ]]; then
-  ROS_DISTRO="humble"
-else
-  echo "Ubuntu $UBUNTU_CODENAME is not supported"
-  exit 1
-fi
-
+install_from_source_sh="$(readlink -f $script_dir/../../scripts/install_from_source.sh)"
+source "$(readlink -f "$script_dir/../../scripts/argparse_ros.sh")"
 parse_args "$@"
-# echo "UBUNTU_CODENAME=$UBUNTU_CODENAME"
-# echo "ROS_DISTRO=$ROS_DISTRO"
-# echo "WORKSPACE=$WORKSPACE"
+WORKSPACE=${parsed_args["workspace"]-simulations}
 
 ros_packages=(
   # rmf

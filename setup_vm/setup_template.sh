@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 install_from_source_sh="$(readlink -f $script_dir/../scripts/install_from_source.sh)"
 install_from_apt_sh="$(readlink -f $script_dir/../scripts/install_from_apt.sh)"
@@ -10,7 +10,7 @@ WORKSPACE=${parsed_args["workspace"]-simulations}
 echo ===============================================
 echo Prepare workspace for ROS2 development
 echo ===============================================
-../ros2/scripts/prepare_ros2_workspace.sh -u $UBUNTU_CODENAME -r $ROSDISTRO -w $WORKSPACE
+../ros2/scripts/prepare_ros2_workspace.sh -w $WORKSPACE
 
 source /opt/ros/${ROSDISTRO}/setup.bash >/dev/null 2>&1 || exit_code=$?
 if [[ $exit_code -ne 0 ]]; then
@@ -20,7 +20,7 @@ if [[ $exit_code -ne 0 ]]; then
 fi
 
 # Added temporarily for testing
-../ros2/scripts/install_mppi_controllers.sh -r $ROSDISTRO -w $WORKSPACE
+../ros2/scripts/install_mppi_controllers.sh -w $WORKSPACE
 
 echo ===============================================
 echo Download gazebo classic models

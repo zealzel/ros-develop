@@ -8,6 +8,7 @@ declare -A arg_desc=(
   # ["-r,--rosdistro"]="ROS distribution (default: noetic)"
   ["-w,--workspace"]="Workspace name (default: my_ws)"
   ["-t,--token"]="github token"
+  ["-i,--ros_install_type"]="the type of ROS installation (desktop|ros-base) (default: desktop)"
   ["-v,--verbose"]="verbose (flag)"
   ["-h,--help"]="help"
 )
@@ -27,6 +28,7 @@ VERBOSE=$(parse_flag "verbose")
 # ROSDISTRO=${parsed_args["rosdistro"]-galactic}
 WORKSPACE=${parsed_args["workspace"]-ros2_ws}
 TOKEN=${parsed_args["token"]-}
+ROS_INSTALL_TYPE=${parsed_args["ros_install_type"]:-desktop}
 
 UBUNTU_CODENAME=$(cat /etc/os-release |grep VERSION_CODENAME|cut -d"=" -f2)
 if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
@@ -48,6 +50,7 @@ print_args() {
   echo "UBUNTU_CODENAME: $UBUNTU_CODENAME"
   echo "ROSDISTRO: $ROSDISTRO"
   echo "WORKSPACE: $WORKSPACE"
+  echo "ROS_INSTALL_TYPE: $ROS_INSTALL_TYPE"
   echo "TOKEN: $TOKEN"
 }
 
