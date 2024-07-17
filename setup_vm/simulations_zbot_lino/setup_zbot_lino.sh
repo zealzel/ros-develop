@@ -21,6 +21,10 @@ cp "$script_dir/zbot_lino_$ROSDISTRO.repos" "$script_dir/zbot_lino_$ROSDISTRO.re
 if [ -n "$TOKEN" ]; then
   echo "Replace github with $TOKEN@github"
   sed -i "s/github/$TOKEN@github/g" "$script_dir/zbot_lino_$ROSDISTRO.repos.token"
+else
+  echo "Please provide a github token."
+  print_usage
+  exit
 fi
 
 "$install_from_source_sh" -w $WORKSPACE -v "$script_dir/zbot_lino_$ROSDISTRO.repos.token" $([ $FORCE == true ] && echo "-f") -i linorobot2_bringup
