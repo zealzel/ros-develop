@@ -53,7 +53,7 @@ echo ===============================================
 echo ===============================================
 echo 3. Build/Install robots by customed scripts
 echo ===============================================
-[ $RMF == true ] && "$(realpath $script_dir/install_rmf.sh)" -w $WORKSPACE
+[ $RMF == true ] && "$(realpath $script_dir/install_rmf.sh)" -w $WORKSPACE $([ $FORCE == true ] && echo "-f")
 
 WORKSPACEPATH="$HOME/$WORKSPACE"
 rm -f $WORKSPACEPATH/*.repos
