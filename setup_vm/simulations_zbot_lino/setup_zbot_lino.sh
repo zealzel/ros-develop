@@ -22,4 +22,8 @@ if [ -n "$TOKEN" ]; then
   echo "Replace github with $TOKEN@github"
   sed -i "s/github/$TOKEN@github/g" "$script_dir/zbot_lino_$ROSDISTRO.repos.token"
 fi
-"$install_from_source_sh" -w $WORKSPACE -v "$script_dir/zbot_lino_$ROSDISTRO.repos.token" -i linorobot2_bringup
+if [ $FORCE == true ]; then
+  "$install_from_source_sh" -w $WORKSPACE -v "$script_dir/zbot_lino_$ROSDISTRO.repos.token" --force -i linorobot2_bringup
+else
+  "$install_from_source_sh" -w $WORKSPACE -v "$script_dir/zbot_lino_$ROSDISTRO.repos.token" -i linorobot2_bringup
+fi

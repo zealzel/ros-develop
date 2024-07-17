@@ -5,11 +5,11 @@ platform=$(uname)
 
 # 根據平台設置 getopt 二進制文件路徑
 if [[ $platform == "Darwin" ]]; then
-    # macOS
-    getopt_bin="/usr/local/opt/gnu-getopt/bin/getopt"
+  # macOS
+  getopt_bin="/usr/local/opt/gnu-getopt/bin/getopt"
 else
-    # 假定為 Linux/Ubuntu
-    getopt_bin="getopt"
+  # 假定為 Linux/Ubuntu
+  getopt_bin="getopt"
 fi
 
 function print_usage {
@@ -27,7 +27,7 @@ function print_usage {
   # Calculate the maximum length of option keys for formatting
   for key in "${sorted_keys[@]}"; do
     len=${#key}
-    if (( len > max_len )); then
+    if ((len > max_len)); then
       max_len=$len
     fi
   done
@@ -52,7 +52,8 @@ function parse_args {
       OPTIONS+="${short_opt:1:1}"
       LONGOPTIONS+="${long_opt:2},"
       continue
-    elif [[ $flag_info == *"flag"* ]]; then
+    # elif [[ $flag_info == *"flag"* ]]; then
+    elif [[ $flag_info == *"default: false"* || $flag_info == *"default: true"* ]]; then
       # 如果是布林標誌，不加 ":"
       OPTIONS+="${short_opt:1:1}"
       LONGOPTIONS+="${long_opt:2},"
@@ -74,39 +75,40 @@ function parse_args {
 
   while true; do
     case "$1" in
-      -h|--help)
-        print_usage
-        exit 0
-        ;;
-      --)
-        shift
-        break
-        ;;
-      *)
-        for key in "${!arg_desc[@]}"; do
-          short_opt=$(echo "$key" | cut -d, -f1)
-          long_opt=$(echo "$key" | cut -d, -f2)
-          flag_info=${arg_desc[$key]}
-          if [[ "$1" == "$short_opt" || "$1" == "$long_opt" ]]; then
-            var_name=$(echo "$long_opt" | sed 's/--//;s/-/_/g')
-            if [[ $flag_info == *"flag"* ]]; then
-              parsed_args["$var_name"]=true
-              shift
-            else
-              parsed_args["$var_name"]=$(echo "$2" | sed 's/^=//')
-              shift 2
-            fi
-            break
+    -h | --help)
+      print_usage
+      exit 0
+      ;;
+    --)
+      shift
+      break
+      ;;
+    *)
+      for key in "${!arg_desc[@]}"; do
+        short_opt=$(echo "$key" | cut -d, -f1)
+        long_opt=$(echo "$key" | cut -d, -f2)
+        flag_info=${arg_desc[$key]}
+        if [[ "$1" == "$short_opt" || "$1" == "$long_opt" ]]; then
+          var_name=$(echo "$long_opt" | sed 's/--//;s/-/_/g')
+          # if [[ $flag_info == *"flag"* ]]; then
+          if [[ $flag_info == *"default: false"* || $flag_info == *"default: true"* ]]; then
+            parsed_args["$var_name"]=true
+            shift
+          else
+            parsed_args["$var_name"]=$(echo "$2" | sed 's/^=//')
+            shift 2
           fi
-        done
-        ;;
+          break
+        fi
+      done
+      ;;
     esac
   done
   # 处理位置参数
   positional_args=() # 初始化一个数组来存储位置参数
   while [[ $# -gt 0 ]]; do
     positional_args+=("$1") # 将剩余的参数添加到数组中
-    shift # 移到下一个参数
+    shift                   # 移到下一个参数
   done
 }
 

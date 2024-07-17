@@ -9,11 +9,12 @@ declare -A arg_desc=(
   ["-w,--workspace"]="Workspace name (default: my_ws)"
   ["-t,--token"]="github token"
   ["-i,--ros_install_type"]="the type of ROS installation (desktop|ros-base) (default: desktop)"
-  ["-v,--verbose"]="verbose (flag)"
-  ["-o,--install_ros2"]="install ros2 dev environment (flag)"
-  ["-g,--download_gz_models"]="download gazebo models (flag)"
-  ["-m,--enable_mppi_fix"]="enable mppi fix (flag)"
-  ["-r,--enable_rmf"]="enable rmf environment (flag)"
+  ["-v,--verbose"]="verbose (default: false)"
+  ["-o,--install_ros2"]="install ros2 dev environment (default: false)"
+  ["-g,--download_gz_models"]="download gazebo models (default: false)"
+  ["-m,--enable_mppi_fix"]="enable mppi fix (default: false)"
+  ["-r,--enable_rmf"]="enable rmf environment (default: false)"
+  ["-f,--force"]="Delete workspace repositories (default: false)"
   ["-h,--help"]="help"
 )
 
@@ -29,12 +30,14 @@ declare -A default_flags=(
   ["--download_gz_models"]=false
   ["--enable_mppi_fix"]=false
   ["--enable_rmf"]=false
+  ["--force"]=false
 )
 VERBOSE=$(parse_flag "verbose")
 ROS2_DEV=$(parse_flag "install_ros2")
 DOWNLOAD_GZ=$(parse_flag "download_gz_models")
 MPPI=$(parse_flag "enable_mppi_fix")
 RMF=$(parse_flag "enable_rmf")
+FORCE=$(parse_flag "force")
 
 # UBUNTU_CODENAME=${parsed_args["ubuntu_codename"]-focal}
 # ROSDISTRO=${parsed_args["rosdistro"]-galactic}
@@ -42,7 +45,7 @@ WORKSPACE=${parsed_args["workspace"]-ros2_ws}
 TOKEN=${parsed_args["token"]-}
 ROS_INSTALL_TYPE=${parsed_args["ros_install_type"]:-desktop}
 
-UBUNTU_CODENAME=$(cat /etc/os-release |grep VERSION_CODENAME | cut -d"=" -f2 )
+UBUNTU_CODENAME=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d"=" -f2)
 if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
   echo "Ubuntu 20.04 detected. Set ROSDISTRO to galactic."
   ROSDISTRO="galactic"
@@ -70,6 +73,7 @@ print_args() {
   echo "DOWNLOAD_GZ: $DOWNLOAD_GZ"
   echo "MPPI: $MPPI"
   echo "RMF: $RMF"
+  echo "FORCE: $FORCE"
   echo "TOKEN: $TOKEN"
 }
 
