@@ -79,8 +79,9 @@ print_args() {
   echo "FORCE: $FORCE"
   echo "APPENDBASHRC: $APPENDBASHRC"
   echo "TOKEN: $TOKEN"
+  echo "VERBOSE: $VERBOSE"
 }
 
-if [ "$VERBOSE" == true ]; then
-  print_args
-fi
+# if [ "$VERBOSE" == true ]; then
+#   print_args
+# fi
