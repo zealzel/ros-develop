@@ -48,20 +48,27 @@ WORKSPACE=${parsed_args["workspace"]-ros2_ws}
 TOKEN=${parsed_args["token"]-}
 ROS_INSTALL_TYPE=${parsed_args["ros_install_type"]:-desktop}
 
-UBUNTU_CODENAME=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d"=" -f2)
-if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
-  # echo "Ubuntu 20.04 detected. Set ROSDISTRO to galactic."
-  ROSDISTRO="galactic"
-elif [[ "$UBUNTU_CODENAME" == "jammy" ]]; then
-  # echo "Ubuntu 22.04 detected. Set ROSDISTRO to humble."
-  ROSDISTRO="humble"
+platform=$(uname)
+if [[ $platform == "Darwin" ]]; then
+  # macOS
+  echo "No Ubuntu version detected"
 else
-  if [ ! -n $UBUNTU_CODENAME ]; then
-    echo "Ubuntu $UBUNTU_CODENAME is not supported"
+  # 假定為 Linux/Ubuntu
+  UBUNTU_CODENAME=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d"=" -f2)
+  if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
+    # echo "Ubuntu 20.04 detected. Set ROSDISTRO to galactic."
+    ROSDISTRO="galactic"
+  elif [[ "$UBUNTU_CODENAME" == "jammy" ]]; then
+    # echo "Ubuntu 22.04 detected. Set ROSDISTRO to humble."
+    ROSDISTRO="humble"
   else
-    echo "No Ubuntu version detected"
+    if [ ! -n $UBUNTU_CODENAME ]; then
+      echo "Ubuntu $UBUNTU_CODENAME is not supported"
+    else
+      echo "No Ubuntu version detected"
+    fi
+    exit 1
   fi
-  exit 1
 fi
 
 export UBUNTU_CODENAME ROSDISTRO WORKSPACE TOKEN
