@@ -58,7 +58,6 @@ echo ===============================================
 # "$install_from_source_sh" $WORKSPACE "$script_dir/simulations_neobotix/neobotix.repos"
 # "$install_from_source_sh" $WORKSPACE "$script_dir/world_aws_robotmaker/deps.repos"
 
-exit
 echo ===============================================
 echo 3. Build/Install robots by customed scripts
 echo ===============================================
