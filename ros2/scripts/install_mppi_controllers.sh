@@ -28,6 +28,9 @@ fi
 #   3. colcon build the nav2_mppi_controller package
 #   4. re-install ros-humble-nav2-bringup
 #
+# (2024/7/18)
+# After nav2 binary version 1.1.15, there seems no need compile mppi manually
+#
 # a45b151c worked (2024/3/3)
 # 3ed4c2 worked (11/17)
 #   we should be able build any commit from now on following above procedures
@@ -50,7 +53,7 @@ if [[ $ROSDISTRO == "humble" ]]; then
   #
   #
   echo "2. copy the nav2_mppi_controller source from navigation2 repo into workspace"
-  rm -rf /tmp/navigation2 > /dev/null 2>&1
+  rm -rf /tmp/navigation2 >/dev/null 2>&1
   git clone https://github.com/ros-planning/navigation2 /tmp/navigation2 -b "$ROSDISTRO"
   cd /tmp/navigation2 && git checkout $LATEST_WORKED_COMMIT
   cp -R /tmp/navigation2/nav2_mppi_controller "$HOME/$WORKSPACE/src"
@@ -59,7 +62,7 @@ if [[ $ROSDISTRO == "humble" ]]; then
 
   echo "3. colcon build the nav2_mppi_controller package"
   cd "$HOME/$WORKSPACE"
-  rm -rf build/nav2_mppi_controller install/nav2_mppi_controller > /dev/null 2>&1
+  rm -rf build/nav2_mppi_controller install/nav2_mppi_controller >/dev/null 2>&1
   colcon build --symlink-install --packages-select nav2_mppi_controller
   # colcon build --symlink-install --packages-select nav2_mppi_controller nav2_amcl
   #
