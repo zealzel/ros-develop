@@ -15,7 +15,6 @@ declare -A arg_desc=(
   ["-m,--enable_mppi_fix"]="enable mppi fix (default: false)"
   ["-r,--enable_rmf"]="enable rmf environment (default: false)"
   ["-f,--force"]="delete workspace repositories (default: false)"
-  ["-a,--append_bashrc"]="append bashrc (default: false)"
   ["-h,--help"]="help"
 )
 
@@ -31,7 +30,7 @@ declare -A default_flags=(
   ["--download_gz_models"]=false
   ["--enable_mppi_fix"]=false
   ["--enable_rmf"]=false
-  ["--append_bashrc"]=false
+  # ["--append_bashrc"]=false
   ["--force"]=false
 )
 VERBOSE=$(parse_flag "verbose")
@@ -40,7 +39,7 @@ DOWNLOAD_GZ=$(parse_flag "download_gz_models")
 MPPI=$(parse_flag "enable_mppi_fix")
 RMF=$(parse_flag "enable_rmf")
 FORCE=$(parse_flag "force")
-APPENDBASHRC=$(parse_flag "append_bashrc")
+# APPENDBASHRC=$(parse_flag "append_bashrc")
 
 # UBUNTU_CODENAME=${parsed_args["ubuntu_codename"]-focal}
 # ROSDISTRO=${parsed_args["rosdistro"]-galactic}
@@ -85,7 +84,7 @@ print_args() {
   echo "MPPI: $MPPI"
   echo "RMF: $RMF"
   echo "FORCE: $FORCE"
-  echo "APPENDBASHRC: $APPENDBASHRC"
+  # echo "APPENDBASHRC: $APPENDBASHRC"
   echo "TOKEN: $TOKEN"
   echo "VERBOSE: $VERBOSE"
 }
