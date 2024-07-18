@@ -31,3 +31,11 @@
 
     - nav w/ keepout zone
         ros2 launch articubot_one navigation_keepout_multi.launch.py sim:=true rviz:=true use_namespace:=true namespace:=/robot1
+
+
+  - lino2 + artic
+    ros2 launch fitrobot gazebo_artic_lino2.launch.py
+    ros2 launch articubot_one map_server.launch.py sim:=true
+    - nav w/o keepout zone
+        ros2 launch articubot_one navigation_multi.launch.py sim:=true rviz:=true use_namespace:=true namespace:=/artic
+        ros2 launch linorobot2_navigation navigation_multi.launch.py sim:=true rviz:=true use_namespace:=true namespace:=/lino2
