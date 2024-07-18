@@ -37,4 +37,19 @@ ros_packages=(
   # "ros-$ROSDISTRO-turtlebot3-simulation"
 )
 
+ros_packages_up=(
+  # ros2_control stack
+  "ros-$ROSDISTRO-ros2-control"
+  "ros-$ROSDISTRO-ros2-controllers"
+  "ros-$ROSDISTRO-control-toolbox"
+  "ros-$ROSDISTRO-control-msgs"
+  # slam/nav
+  "ros-$ROSDISTRO-slam-toolbox"
+  "ros-$ROSDISTRO-navigation2"
+  "ros-$ROSDISTRO-nav2-bringup"
+  # dds
+  "ros-$ROSDISTRO-rmw-cyclonedds-cpp"
+)
+
 install_ubuntu_packages "${ros_packages[@]}"
+upgrade_ubuntu_packages "${ros_packages_up[@]}"
