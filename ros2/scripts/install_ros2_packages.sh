@@ -39,14 +39,14 @@ ros_packages=(
 
 ros_packages_up=(
   # ros2_control stack
-  "ros-$ROSDISTRO-ros2-control"
-  "ros-$ROSDISTRO-ros2-controllers"
-  "ros-$ROSDISTRO-control-toolbox"
-  "ros-$ROSDISTRO-control-msgs"
+  # "ros-$ROSDISTRO-ros2-control"
+  # "ros-$ROSDISTRO-ros2-controllers"
+  # "ros-$ROSDISTRO-control-toolbox"
+  # "ros-$ROSDISTRO-control-msgs"
   # slam/nav
-  "ros-$ROSDISTRO-slam-toolbox"
+  # "ros-$ROSDISTRO-slam-toolbox"
   "ros-$ROSDISTRO-navigation2"
-  "ros-$ROSDISTRO-nav2-bringup"
+  # "ros-$ROSDISTRO-nav2-bringup"
   # dds
   "ros-$ROSDISTRO-rmw-cyclonedds-cpp"
 )
