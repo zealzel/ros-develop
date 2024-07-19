@@ -126,6 +126,7 @@ is_ubuntu_packages_installed() {
 }
 
 upgrade_ubuntu_packages() {
+  ensure_sudo
   packages=("$@")
   for pkg in "${packages[@]}"; do
     if ! is_ubuntu_package_installed "$pkg"; then
@@ -135,6 +136,7 @@ upgrade_ubuntu_packages() {
 }
 
 install_ubuntu_packages() {
+  ensure_sudo
   packages=("$@")
   for pkg in "${packages[@]}"; do
     if ! is_ubuntu_package_installed "$pkg"; then
@@ -159,6 +161,7 @@ ensure_sudo() {
 }
 
 disable_needrestart() {
+  ensure_sudo
   if [[ $(dpkg -l | grep needrestart) ]]; then
     echo "needrestart is installed"
     sudo sed -i 's/#$nrconf{restart} = '"'"'i'"'"';/$nrconf{restart} = '"'"'a'"'"';/g' /etc/needrestart/needrestart.conf
