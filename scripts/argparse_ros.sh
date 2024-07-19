@@ -54,15 +54,18 @@ if [[ $platform == "Darwin" ]]; then
   exit 1
 else
   # 假定為 Linux/Ubuntu
-  UBUNTU_CODENAME=$(cat /etc/os-release | grep VERSION_CODENAME | cut -d"=" -f2)
+  UBUNTU_CODENAME=$(grep VERSION_CODENAME /etc/os-release | cut -d"=" -f2)
   if [[ "$UBUNTU_CODENAME" == "focal" ]]; then
     # echo "Ubuntu 20.04 detected. Set ROSDISTRO to galactic."
     ROSDISTRO="galactic"
   elif [[ "$UBUNTU_CODENAME" == "jammy" ]]; then
     # echo "Ubuntu 22.04 detected. Set ROSDISTRO to humble."
     ROSDISTRO="humble"
+  elif [[ "$UBUNTU_CODENAME" == "noble" ]]; then
+    # echo "Ubuntu 24.04 detected. Set ROSDISTRO to jazzy."
+    ROSDISTRO="jazzy"
   else
-    if [ ! -n $UBUNTU_CODENAME ]; then
+    if [ -z "$UBUNTU_CODENAME" ]; then
       echo "Ubuntu $UBUNTU_CODENAME is not supported"
     else
       echo "No Ubuntu version detected"
