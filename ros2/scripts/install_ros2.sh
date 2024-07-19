@@ -3,10 +3,12 @@
 # galactic: https://docs.ros.org/en/galactic/Installation/Ubuntu-Install-Debians.html
 # foxy: https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html
 # humble: https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
+# jazzy: https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html
 
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 source "$script_dir/../../scripts/utils.sh"
-source "$(readlink -f "$script_dir/../../scripts/argparse_ros.sh")"
+# shellcheck source=../../scripts/argparse.sh
+source "$(realpath "$script_dir/../../scripts/argparse_ros.sh")"
 
 ensure_sudo
 sudo apt-get update && sudo apt-get install -y curl gnupg
@@ -33,7 +35,7 @@ echo =============================
 sudo apt install -y software-properties-common
 sudo add-apt-repository universe -y
 sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo "$UBUNTU_CODENAME") main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo "$UBUNTU_CODENAME") main" | sudo tee /etc/apt/sources.list.d/ros2.list >/dev/null
 
 echo
 echo =============================

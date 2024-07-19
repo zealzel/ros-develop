@@ -20,7 +20,7 @@ declare -A default_flags=(
 FORCE=$(parse_flag "force")
 WORKSPACE=${parsed_args["WORKSPACE"]-ros2_ws}
 VCS_REPOS=${parsed_args["VCS_REPOS"]}
-VCS_REPOS=$(readlink -f $VCS_REPOS)
+VCS_REPOS=$(readlink -f "$VCS_REPOS")
 IGNORES=${parsed_args["IGNORES"]}
 IFS=',' read -ra ignored_ros_packages <<<"$IGNORES"
 
@@ -39,8 +39,8 @@ echo
 echo ====================================================================
 echo Prepare VCS sources
 echo ====================================================================
-prepare_vcs_sh="$(readlink -f $script_dir/prepare_vcs.sh)"
-"$prepare_vcs_sh" $WORKSPACE $VCS_REPOS || exit_code=$?
+prepare_vcs_sh="$(realpath "$script_dir"/prepare_vcs.sh)"
+"$prepare_vcs_sh" "$WORKSPACE" "$VCS_REPOS" || exit_code=$?
 if [[ $exit_code -ne 0 ]]; then
   echo "prepare_vcs_sh failed"
   exit
@@ -51,21 +51,21 @@ echo ====================================================================
 echo Build from source
 echo ====================================================================
 WORKSPACEPATH="$HOME/$WORKSPACE"
-cd "$WORKSPACEPATH"
-if [ $FORCE == true ]; then
-  echo "vcs import --force src < "$VCS_REPOS""
+cd "$WORKSPACEPATH" || exit
+if [ "$FORCE" == true ]; then
+  echo "vcs import --force src < $VCS_REPOS"
   vcs import --force src <"$VCS_REPOS"
 else
-  echo "vcs import src < "$VCS_REPOS""
+  echo "vcs import src < $VCS_REPOS"
   vcs import src <"$VCS_REPOS"
 fi
 
 for pkg in "${ignored_ros_packages[@]}"; do
   # pkg_path=$(find src -type d -name $pkg)
-  pkg_path=$(find src -type d -name $pkg | head -n 1)
+  pkg_path=$(find src -type d -name "$pkg" | head -n 1)
   echo "$pkg --> $pkg_path"
   cd "$WORKSPACEPATH/$pkg_path" && touch COLCON_IGNORE
-  cd "$WORKSPACEPATH"
+  cd "$WORKSPACEPATH" || exit
 done
 
 rosdep install --from-paths src --ignore-src -r -y

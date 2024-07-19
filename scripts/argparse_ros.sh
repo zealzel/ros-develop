@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 current_script="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+# shellcheck source=argparse.sh
 source "$(readlink -f "$current_script/argparse.sh")"
 
 # 選項描述
