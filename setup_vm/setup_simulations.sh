@@ -71,4 +71,4 @@ echo ===============================================
 echo Set env variables
 echo ===============================================
 # [ $APPENDBASHRC == true ] && "$(realpath $script_dir/ros2_append_bashrc.sh)"
-"$(realpath $script_dir/ros2_append_bashrc.sh)"
+"$(realpath "$script_dir"/ros2_append_bashrc.sh)"
