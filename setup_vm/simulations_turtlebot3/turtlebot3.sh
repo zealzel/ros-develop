@@ -1,9 +1,10 @@
 #!/bin/bash
-source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../../scripts/utils.sh"
+script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+install_script="$(realpath "$script_dir/../../scripts/install_ros_packages.sh")"
+# shellcheck source=../../scripts/argparse.sh
+source "$(realpath "$script_dir/../../scripts/utils.sh")"
 
-ROS_DISTRO="${ROS_DISTRO-galactic}"
-CURRENT_SCRIPT_PATH="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
-WORKSPACE="${1:-colcon_ws}"
+ROS_DISTRO="${ROS_DISTRO-humble}"
 
 echo
 echo ====================================================================
@@ -15,5 +16,4 @@ ros_packages=(
   "turtlebot3-simulations"
   "turtlebot3-navigation2"
 )
-TARGET_SCRIPT_ABSOLUTE_PATH="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/../../scripts/install_ros_packages.sh")"
-"${TARGET_SCRIPT_ABSOLUTE_PATH}" "$ROS_DISTRO" "${ros_packages[@]}"
+$install_script "$ROS_DISTRO" "${ros_packages[@]}"
