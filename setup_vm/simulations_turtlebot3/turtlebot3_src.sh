@@ -9,4 +9,4 @@ echo
 echo ====================================================================
 echo Install turtlebot3 from source
 echo ====================================================================
-"$install_from_source_sh" "$WORKSPACE" "$script_dir/tb3-{ROS_DISTRO}.repos"
+"$install_from_source_sh" -w "$WORKSPACE" -v "$VCS_REPOS"
