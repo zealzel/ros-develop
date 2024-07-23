@@ -1,19 +1,24 @@
 #!/bin/bash
-script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
-install_script="$(realpath "$script_dir/../../scripts/install_ros_packages.sh")"
+script_dir="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 # shellcheck source=../../scripts/argparse.sh
-source "$(realpath "$script_dir/../../scripts/utils.sh")"
+source "$script_dir/../../scripts/argparse.sh"
 
-ROS_DISTRO="${ROS_DISTRO-humble}"
-
-echo
-echo ====================================================================
-echo Install turtlebot3 ros2 packages
-echo ====================================================================
-ros_packages=(
-  "turtlebot3"
-  "turtlebot3-msgs"
-  "turtlebot3-simulations"
-  "turtlebot3-navigation2"
+declare -A arg_desc=(
+  ["-w,--workspace"]="Workspace name (default: colcon_ws)"
+  ["-s,--install_from_source"]="install from source. false if from package (default: false)"
 )
-$install_script "$ROS_DISTRO" "${ros_packages[@]}"
+
+declare -A parsed_args
+parse_args "$@"
+
+declare -A default_flags=(
+  ["--install_from_source"]=false
+)
+FROM_SOURCE=$(parse_flag "install_from_source")
+WORKSPACE=${parsed_args["WORKSPACE"]-ros2_ws}
+
+if [ "$FROM_SOURCE" = true ]; then
+  "$script_dir/turtlebot3_src.sh" "$WORKSPACE"
+else
+  "$script_dir/turtlebot3_apt.sh" "$ROS_DISTRO"
+fi
