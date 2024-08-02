@@ -1,7 +1,9 @@
 #!/bin/bash
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
+# shellcheck source=../scripts/utils.sh
 source "$script_dir/../scripts/utils.sh"
+# shellcheck source=../scripts/argparse.sh
 source "$script_dir/../scripts/argparse.sh"
 
 declare -A arg_desc=(
