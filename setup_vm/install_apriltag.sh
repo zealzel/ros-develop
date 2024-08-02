@@ -39,6 +39,8 @@ cd "$WORKSPACEPATH" || exit
 echo "vcs import --force src \< $VCS_REPOS"
 vcs import --force src <"$VCS_REPOS"
 
+rosdep install --from-paths src --ignore-src -r -y
+
 # install apriltag
 cd "$WORKSPACEPATH/src/apriltag" || exit
 cmake -B build -DCMAKE_BUILD_TYPE=Release
