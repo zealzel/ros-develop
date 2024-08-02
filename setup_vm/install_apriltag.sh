@@ -52,4 +52,4 @@ sudo cmake --build build --target install
 
 # build the rest repos
 cd "$WORKSPACEPATH" || exit
-colcon build
+colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
