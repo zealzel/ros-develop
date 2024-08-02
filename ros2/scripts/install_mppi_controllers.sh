@@ -4,7 +4,8 @@ source "$(readlink -f "$script_dir/../../scripts/argparse_ros.sh")"
 
 # LATEST_WORKED_COMMIT="1.1.12"
 #a45b151ceb3aa9edebad8a528cd672935f0c668d
-LATEST_WORKED_COMMIT="a45b151c" # 2024/3/3
+# LATEST_WORKED_COMMIT="a45b151c" # 2024/3/3
+LATEST_WORKED_COMMIT="1.1.15" # 2024/7/30
 # LATEST_WORKED_COMMIT="3ed4c2df" # including BIG improvements in MPPI !! must have !!!
 
 echo "ROSDISTRO=$ROSDISTRO"
@@ -29,7 +30,8 @@ fi
 #   4. re-install ros-humble-nav2-bringup
 #
 # (2024/7/18)
-# After nav2 binary version 1.1.15, there seems no need compile mppi manually
+# After nav2 binary version 1.1.15, there seems no need compile mppi manually.
+# Just for simulation. Real case still crashes.
 #
 # a45b151c worked (2024/3/3)
 # 3ed4c2 worked (11/17)
@@ -62,7 +64,7 @@ if [[ $ROSDISTRO == "humble" ]]; then
 
   echo "3. colcon build the nav2_mppi_controller package"
   cd "$HOME/$WORKSPACE"
-  rm -rf build/nav2_mppi_controller install/nav2_mppi_controller >/dev/null 2>&1
+  rm -rf src/nav2_mppi_controller build/nav2_mppi_controller install/nav2_mppi_controller >/dev/null 2>&1
   colcon build --symlink-install --packages-select nav2_mppi_controller
   # colcon build --symlink-install --packages-select nav2_mppi_controller nav2_amcl
   #
