@@ -16,6 +16,7 @@ Options:
   -m,--enable_mppi_fix       enable mppi fix (default: false)
   -o,--install_ros2          install ros2 dev environment (default: false)
   -r,--enable_rmf            enable rmf environment (default: false)
+  -d,--enable_autodock       enable auto-docking environment (default: false)
   -t,--token                 github token
   -v,--verbose               verbose (default: false)
   -w,--workspace             Workspace name (default: my_ws)

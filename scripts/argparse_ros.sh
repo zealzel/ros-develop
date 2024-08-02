@@ -15,6 +15,7 @@ declare -A arg_desc=(
   ["-g,--download_gz_models"]="download gazebo models (default: false)"
   ["-m,--enable_mppi_fix"]="enable mppi fix (default: false)"
   ["-r,--enable_rmf"]="enable rmf environment (default: false)"
+  ["-d,--enable_autodock"]="enable auto-dock environment (default: false)"
   ["-f,--force"]="delete workspace repositories (default: false)"
   ["-h,--help"]="help"
 )
@@ -31,6 +32,7 @@ declare -A default_flags=(
   ["--download_gz_models"]=false
   ["--enable_mppi_fix"]=false
   ["--enable_rmf"]=false
+  ["--enable_autodock"]=false
   # ["--append_bashrc"]=false
   ["--force"]=false
 )
@@ -39,6 +41,7 @@ ROS2_DEV=$(parse_flag "install_ros2")
 DOWNLOAD_GZ=$(parse_flag "download_gz_models")
 MPPI=$(parse_flag "enable_mppi_fix")
 RMF=$(parse_flag "enable_rmf")
+DOCK=$(parse_flag "enable_autodock")
 FORCE=$(parse_flag "force")
 # APPENDBASHRC=$(parse_flag "append_bashrc")
 
