@@ -39,7 +39,11 @@ cd "$WORKSPACEPATH" || exit
 echo "vcs import --force src \< $VCS_REPOS"
 vcs import --force src <"$VCS_REPOS"
 
+# install dependencies
 rosdep install --from-paths src --ignore-src -r -y
+
+# ignore compiling no-used in opennav_docking
+touch "$WORKSPACEPATH/src/opennav_docking/nova_carter_docking"/COLCON_IGNORE
 
 # install apriltag
 cd "$WORKSPACEPATH/src/apriltag" || exit
