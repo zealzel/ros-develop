@@ -11,10 +11,6 @@ repositories:
     type: git
     url: https://github.com/zealzel/my_autodock
     version: master
-  banana:
-    type: git
-    url: https://github.com/zealzel/banana
-    version: master
   opennav_docking:
     type: git
     url: https://github.com/fitfabsw/opennav_docking
