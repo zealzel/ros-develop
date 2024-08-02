@@ -20,6 +20,17 @@ echo ====== install_from_source ======
 echo "WORKSPACE: $WORKSPACE"
 echo "VCS_REPOS: $VCS_REPOS"
 
+echo ===============================================
+echo Prepare workspace
+echo ===============================================
+"$(realpath "$script_dir"/../scripts/create_workspace.sh)" "$WORKSPACE" || exit_code=$?
+if [[ $exit_code -ne 0 ]]; then
+  exit
+fi
+
+echo ===============================================
+echo Clone repositories through vcstool
+echo ===============================================
 WORKSPACEPATH="$HOME/$WORKSPACE"
 cd "$WORKSPACEPATH" || exit
 # alway using --force flag
