@@ -15,3 +15,7 @@ repositories:
     type: git
     url: https://github.com/zealzel/banana
     version: master
+  opennav_docking:
+    type: git
+    url: https://github.com/fitfabsw/opennav_docking
+    version: main
